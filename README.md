@@ -1,5 +1,7 @@
 # Hydra Core
 
+**Status:** Research & architecture phase. Selective components published.
+
 Risk-enforced system architecture for automated decision systems.
 
 Losses are expected. Escalation is not.
