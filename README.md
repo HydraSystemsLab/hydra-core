@@ -10,7 +10,7 @@ Losses are expected. Escalation is not.
 
 Most automated trading systems fail not because of bad entries,
 but because of weak risk enforcement, poor execution discipline,
-and the ability for humans or code to escalate losses.
+and the ability for humans or code to escalate risk.
 
 Hydra is designed around a simple principle:
 
@@ -18,7 +18,7 @@ Hydra is designed around a simple principle:
 
 Hydra systems are built so that:
 - risk limits are enforced at the system level
-- execution is gated, observable, and reversible
+- execution is gated, observable, and reversible by design
 - failure modes are anticipated, not reacted to
 
 ## What This Is
