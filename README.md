@@ -1,86 +1,76 @@
 # Hydra Core
 
-**Status:** Research & architecture phase. Selective components published.
+**Status:** Pre-v1 governance and architecture repository.
 
-Risk-enforced system architecture for automated decision systems.
+Hydra Core documents a governed, risk-first trading infrastructure.
+It describes how enforcement, observability, and fail-closed operations are expected to work across the Hydra system.
 
 Losses are expected. Escalation is not.
 
----
+## Repository Scope
 
-## Philosophy
+Hydra is described publicly as three related parts:
 
-Most automated trading systems fail not because of bad entries,  
-but because of weak risk enforcement, poor execution discipline,  
-and the ability for humans or code to escalate risk.
+- **Hydra Core**: public architecture, doctrine, governance, and operating principles
+- **Hydra Quant**: private strategy and execution systems operating within those constraints
+- **Hydra Guardian**: private supervisory and enforcement layer behind Hydra Quant, responsible for veto, disarm, and recovery decisions
 
-Hydra is designed around a simple principle:
+This repository is `hydra-core` only.
+It does not publish private implementation code from Hydra Quant or Hydra Guardian.
+
+## Operating Position
+
+Hydra is designed around a simple assumption:
 
 > If a rule can be broken, it eventually will be.
 
-Hydra systems are built so that:
+That assumption drives a system model in which:
 
-- risk limits are enforced at the system level  
-- execution is gated, observable, and reversible by design  
-- failure modes are anticipated, not reacted to  
+- risk is enforced at the system boundary, not left to operator discretion
+- ambiguous state is treated as unsafe until proven otherwise
+- observability is part of control, not an afterthought
+- recovery requires verification rather than optimism
 
----
+The goal is not uninterrupted activity.
+The goal is controlled survivability under loss, latency, ambiguity, and operator error.
 
-## What This Is
+## High-Level Architecture
 
-- A reference implementation of risk-first system design  
-- Multi-engine architecture with independent failure domains  
-- Guardrails that enforce discipline, not signals  
+```mermaid
+flowchart LR
+    S[Strategies / Engines] --> G[Hydra Guardian]
+    G --> E[Execution Layer]
+    E --> M[Monitoring / Observability]
+    M --> R[Recovery / Watchdog Layer]
+    R --> G
+    M -. state, events, alerts .-> G
+    R -. veto, disarm, restart gating .-> E
+```
 
----
+This diagram is conceptual.
+It shows the control relationship, not private implementation details.
 
-## What This Is Not
+## Core Principles
 
-- A trading strategy  
-- A signal generator  
-- A plug-and-play money machine  
+- **Risk First**: exposure is constrained before execution is allowed
+- **Fail Closed**: uncertainty, stale state, or invalid constraints lead to rejection or disarm
+- **Engine Isolation**: local failures should remain local unless supervisory policy escalates them
+- **Observability**: enforcement decisions must leave enough evidence to reconstruct what happened
+- **No Escalation**: losses do not justify larger size, looser rules, or bypassed controls
 
----
+## Public Documentation
 
-## Core Concepts
-
-- **Risk First**: Exposure is constrained before any decision is allowed  
-- **Engine Isolation**: Each engine fails independently  
-- **Hard Disarms**: Systems can and will shut themselves down  
-- **Observability**: Every action is logged, auditable, and replayable  
-- **No Escalation**: Losses do not trigger larger bets  
-
----
+- [System Overview](architecture/system-overview.md)
+- [Hydra Guardian](architecture/hydra-guardian.md)
+- [Risk Doctrine](doctrine/risk-doctrine.md)
+- [Operating Principles](operations/operating-principles.md)
+- [Failure Modes](governance/failure-modes.md)
+- [Versioning Policy](governance/versioning-policy.md)
+- [Risk Event Ledger](governance/risk-event-ledger.md)
 
 ## Status
 
-Hydra Core is under active development.
+Hydra Core remains pre-v1.
 
-This repository currently documents architecture and design principles.  
-Code components will be published selectively.
-
----
-
-## Risk Event Ledger
-
-Hydra maintains a public **Risk Event Ledger** documenting system-level enforcement events.
-
-This ledger records:
-
-- Disarms  
-- Constraint violations  
-- Guardrail updates  
-- Risk-domain changes  
-- Rearms after verification  
-
-It does **not** include:
-
-- Trade outcomes  
-- Strategy logic  
-- Performance metrics  
-
-The purpose is simple:
-
-> Enforcement should leave evidence.
-
-→ [`governance/risk-event-ledger.md`](governance/risk-event-ledger.md)
+This repository is intended to stabilize public doctrine and governance before any later v1 release decision.
+It should be read as architecture and operating policy, not as a public software distribution.
