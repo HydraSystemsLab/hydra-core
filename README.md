@@ -37,21 +37,24 @@ The goal is controlled survivability under loss, latency, ambiguity, and operato
 ## High-Level Architecture
 
 ```mermaid
-flowchart TB
-    S[Strategies / Engines]
-    G[Hydra Guardian]
-    E[Execution Layer]
+flowchart TD
+    S[Strategies / Engines] -->|propose trades| G[Hydra Guardian]
+    G -->|approved execution| X[Execution Layer]
+    X -->|execution outcomes| G
+
     M[Monitoring / Observability]
     R[Recovery / Watchdog Layer]
 
-    S --> G
-    G --> E
-    E --> S
-    M -. state, events, alerts .-> G
-    M -. execution outcomes .-> E
-    R -. veto, disarm, restart gating .-> G
-    R -. recovery controls .-> E
-    R -. watchdog signals .-> S
+    S -. state / health .-> M
+    G -. decisions / events .-> M
+    X -. execution / fills / status .-> M
+
+    M -. alerts / anomalies .-> G
+    M -. watchdog signals .-> R
+
+    R -. restart / recovery controls .-> S
+    R -. restart / recovery controls .-> G
+    R -. restart / recovery controls .-> X
 ```
 
 This diagram is conceptual.
