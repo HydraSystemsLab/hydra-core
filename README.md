@@ -37,18 +37,25 @@ The goal is controlled survivability under loss, latency, ambiguity, and operato
 ## High-Level Architecture
 
 ```mermaid
-flowchart LR
-    S[Strategies / Engines] --> G[Hydra Guardian]
-    G --> E[Execution Layer]
-    E --> M[Monitoring / Observability]
-    M --> R[Recovery / Watchdog Layer]
-    R --> G
+flowchart TB
+    S[Strategies / Engines]
+    G[Hydra Guardian]
+    E[Execution Layer]
+    M[Monitoring / Observability]
+    R[Recovery / Watchdog Layer]
+
+    S --> G
+    G --> E
+    E --> S
     M -. state, events, alerts .-> G
-    R -. veto, disarm, restart gating .-> E
+    M -. execution outcomes .-> E
+    R -. veto, disarm, restart gating .-> G
+    R -. recovery controls .-> E
+    R -. watchdog signals .-> S
 ```
 
 This diagram is conceptual.
-It shows the control relationship, not private implementation details.
+It shows supervisory relationships around the system, not private implementation details.
 
 ## Core Principles
 
@@ -58,11 +65,19 @@ It shows the control relationship, not private implementation details.
 - **Observability**: enforcement decisions must leave enough evidence to reconstruct what happened
 - **No Escalation**: losses do not justify larger size, looser rules, or bypassed controls
 
-## Public Documentation
+## Start Here
+
+- [System Overview](architecture/system-overview.md): high-level public architecture and control boundaries
+- [Hydra Guardian](architecture/hydra-guardian.md): the named supervisory and enforcement layer behind Hydra Quant
+- [Risk Doctrine](doctrine/risk-doctrine.md): core operating principles for risk, disarm, and fail-closed behavior
+- [Why Most Bots Fail](doctrine/why-most-bots-fail.md): strategy-agnostic doctrine on survivability and structural failure
+
+## Documentation Map
 
 - [System Overview](architecture/system-overview.md)
 - [Hydra Guardian](architecture/hydra-guardian.md)
 - [Risk Doctrine](doctrine/risk-doctrine.md)
+- [Why Most Bots Fail](doctrine/why-most-bots-fail.md)
 - [Operating Principles](operations/operating-principles.md)
 - [Failure Modes](governance/failure-modes.md)
 - [Versioning Policy](governance/versioning-policy.md)
