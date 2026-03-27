@@ -70,21 +70,31 @@ It shows supervisory relationships around the system, not private implementation
 
 ## Start Here
 
+- [Docs Map](docs-map.md): recommended reading order for the public governance surface
 - [System Overview](architecture/system-overview.md): high-level public architecture and control boundaries
+- [Control Boundaries](architecture/control-boundaries.md): responsibilities and authority lines between engines, Guardian, execution, monitoring, and recovery
+- [State Model](architecture/state-model.md): public-safe operating states and their fail-closed meaning
 - [Hydra Guardian](architecture/hydra-guardian.md): the named supervisory and enforcement layer behind Hydra Quant
 - [Risk Doctrine](doctrine/risk-doctrine.md): core operating principles for risk, disarm, and fail-closed behavior
 - [Why Most Bots Fail](doctrine/why-most-bots-fail.md): strategy-agnostic doctrine on survivability and structural failure
 
 ## Documentation Map
 
+- [Docs Map](docs-map.md)
 - [System Overview](architecture/system-overview.md)
+- [Control Boundaries](architecture/control-boundaries.md)
+- [State Model](architecture/state-model.md)
 - [Hydra Guardian](architecture/hydra-guardian.md)
+- [Glossary](glossary.md)
 - [Risk Doctrine](doctrine/risk-doctrine.md)
 - [Why Most Bots Fail](doctrine/why-most-bots-fail.md)
 - [Operating Principles](operations/operating-principles.md)
+- [Operator Runbook](operations/operator-runbook.md)
 - [Failure Modes](governance/failure-modes.md)
+- [Release Posture](governance/release-posture.md)
 - [Versioning Policy](governance/versioning-policy.md)
 - [Risk Event Ledger](governance/risk-event-ledger.md)
+- [Risk Event Ledger Policy](governance/risk-event-ledger-policy.md)
 
 For edits that change governance meaning, enforcement expectations, or recovery semantics, review the change classification guidance in [Versioning Policy](governance/versioning-policy.md) before updating the ledger.
 
