@@ -7,6 +7,31 @@ Hydra biases toward **fail-closed behavior** when system state is ambiguous.
 
 Events are logged when the system refuses, halts, constrains execution, or updates enforcement architecture.
 
+## When To Add An Entry
+
+Add an entry when a release or operational event changes any of the following:
+
+- enforcement behavior
+- disarm, pause, or rearm semantics
+- supervisory authority or control boundaries
+- observability required to validate safe state
+- recovery gating after a material risk or integrity event
+
+Do not add an entry for purely editorial changes that leave governance meaning unchanged.
+
+## Entry Template
+
+Use this structure for new entries:
+
+```text
+## YYYY-MM-DD — SCOPE
+
+**EVENT_TYPE:** ...
+**REASON:** ...
+**ACTION:** ...
+**STATUS:** ...
+```
+
 ---
 
 ## Allowed EVENT_TYPE values

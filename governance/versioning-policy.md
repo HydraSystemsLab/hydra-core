@@ -56,6 +56,32 @@ Examples that do not belong in the ledger include:
 - day-to-day optimization that does not alter enforcement or safety posture
 - routine editorial cleanup, wording improvements, or document restructuring that does not change governance meaning
 
+## Change Classification Before Release
+
+Every change to Hydra Core should be classified before release.
+The purpose is to avoid mixing cosmetic edits with governance-bearing edits.
+
+Use the following routing rules:
+
+- **Editorial change:** wording, formatting, ordering, typo fixes, or structural cleanup that does not change doctrine, enforcement expectations, authority boundaries, or recovery semantics
+- **Clarifying governance change:** language that makes an existing rule easier to interpret without changing the underlying control model; this usually does not require a ledger entry, but the editor should be able to explain why the meaning is unchanged
+- **Governance change:** any update that changes what is enforced, what must be observed, when disarm or rearm is expected, how failure classes are treated, or where supervisory authority sits; this should be reflected in the risk event ledger
+- **Architecture-significant change:** any update that changes the public responsibility boundary between Core, Quant, Guardian, execution, monitoring, or recovery; this should be treated as governance-significant even if no code is published here
+
+If a change cannot be confidently kept in the editorial or clarifying class, it should be treated as governance-significant by default.
+
+## Release Discipline
+
+Before publishing a change set, the editor should be able to answer:
+
+- does this change alter governance meaning or only presentation
+- does this change introduce, remove, tighten, or relax an enforcement expectation
+- does this change affect disarm, veto, pause, recovery, or rearm semantics
+- does this change move a responsibility boundary between public system components
+- does this change require a corresponding risk event ledger entry
+
+If those questions cannot be answered cleanly, the change set is not yet ready for release.
+
 ## What Should Remain Stable
 
 The following should become increasingly stable as Hydra Core matures:

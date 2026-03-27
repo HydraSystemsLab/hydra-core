@@ -86,6 +86,8 @@ It shows supervisory relationships around the system, not private implementation
 - [Versioning Policy](governance/versioning-policy.md)
 - [Risk Event Ledger](governance/risk-event-ledger.md)
 
+For edits that change governance meaning, enforcement expectations, or recovery semantics, review the change classification guidance in [Versioning Policy](governance/versioning-policy.md) before updating the ledger.
+
 ## Status
 
 Hydra Core remains pre-v1.
