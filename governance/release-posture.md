@@ -17,14 +17,16 @@ It does not publish private implementation code.
 
 ## Public And Private Boundary
 
-Hydra is described publicly as related but distinct layers:
+Hydra is described publicly as related but distinct surfaces:
 
 - Hydra Core as the public governance and architecture surface
-- Hydra Quant as the private strategy and execution environment
+- Hydra Quant as private trading and research infrastructure
 - Hydra Guardian as the private supervisory and enforcement layer behind Hydra Quant
+- Hydra Predict as a private prediction-market research and execution architecture
+- Hydra Ember as a private market research and scanner pipeline
 
-Public documents in this repository describe the operating model and control expectations around those layers.
-They do not imply that Hydra Quant or Hydra Guardian are publicly available.
+Public documents in this repository describe the operating model and control expectations around those surfaces.
+They do not imply that any private Hydra system is publicly available.
 
 ## What Pre-v1 Means Here
 

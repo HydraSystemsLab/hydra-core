@@ -1,10 +1,10 @@
 # System Overview
 
 ## Concept
-Hydra is a multi-engine system:
-- multiple independent decision engines (per market / strategy type)
+Hydra is a multi-engine governed automation system:
+- multiple independent decision engines or research surfaces
 - Hydra Guardian as the supervisory and enforcement layer behind Hydra Quant
-- an execution layer that validates, normalises, and logs actions
+- execution and observability layers that validate, normalise, and log actions
 
 The system is designed so that:
 - engines can be wrong
@@ -47,5 +47,6 @@ When state becomes stale, ambiguous, or unsafe, the expected behavior is pause, 
 Related documents:
 
 - [Hydra Guardian](hydra-guardian.md)
+- [Hydra Ecosystem](hydra-ecosystem.md)
 - [Risk Doctrine](../doctrine/risk-doctrine.md)
 - [Failure Modes](../governance/failure-modes.md)

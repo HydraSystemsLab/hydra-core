@@ -2,21 +2,23 @@
 
 **Status:** Pre-v1 governance and architecture repository.
 
-Hydra Core documents a governed, risk-first trading infrastructure.
-It describes how enforcement, observability, and fail-closed operations are expected to work across the Hydra system.
+Hydra Core documents a governed, risk-first systems architecture for market and research automation.
+It describes how enforcement, observability, and fail-closed operations are expected to work across the Hydra system under supervision.
 
 Losses are expected. Escalation is not.
 
 ## Repository Scope
 
-Hydra is described publicly as three related parts:
+Hydra is described publicly as Hydra Core plus four private implementation surfaces:
 
 - **Hydra Core**: public architecture, doctrine, governance, and operating principles
-- **Hydra Quant**: private strategy and execution systems operating within those constraints
+- **Hydra Quant**: private trading and research infrastructure operating within those constraints
 - **Hydra Guardian**: private supervisory and enforcement layer behind Hydra Quant, responsible for veto, disarm, and recovery decisions
+- **Hydra Predict**: private prediction-market research and execution architecture
+- **Hydra Ember**: private market research and scanner pipeline
 
 This repository is `hydra-core` only.
-It does not publish private implementation code from Hydra Quant or Hydra Guardian.
+It does not publish private implementation code from Hydra Quant, Hydra Guardian, Hydra Predict, or Hydra Ember.
 
 ## Operating Position
 
@@ -72,6 +74,7 @@ It shows supervisory relationships around the system, not private implementation
 
 - [Docs Map](docs-map.md): recommended reading order for the public governance surface
 - [System Overview](architecture/system-overview.md): high-level public architecture and control boundaries
+- [Hydra Ecosystem](architecture/hydra-ecosystem.md): public-safe view of Core and the private implementation surfaces
 - [Control Boundaries](architecture/control-boundaries.md): responsibilities and authority lines between engines, Guardian, execution, monitoring, and recovery
 - [State Model](architecture/state-model.md): public-safe operating states and their fail-closed meaning
 - [Hydra Guardian](architecture/hydra-guardian.md): the named supervisory and enforcement layer behind Hydra Quant
@@ -82,6 +85,7 @@ It shows supervisory relationships around the system, not private implementation
 
 - [Docs Map](docs-map.md)
 - [System Overview](architecture/system-overview.md)
+- [Hydra Ecosystem](architecture/hydra-ecosystem.md)
 - [Control Boundaries](architecture/control-boundaries.md)
 - [State Model](architecture/state-model.md)
 - [Hydra Guardian](architecture/hydra-guardian.md)
