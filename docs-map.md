@@ -9,11 +9,17 @@ The sequence below is the shortest path through Hydra Core's public operating mo
 2. [Hydra Ecosystem](architecture/hydra-ecosystem.md)
 3. [Control Boundaries](architecture/control-boundaries.md)
 4. [State Model](architecture/state-model.md)
-5. [Hydra Guardian](architecture/hydra-guardian.md)
-6. [Operating Principles](operations/operating-principles.md)
-7. [Failure Modes](governance/failure-modes.md)
-8. [Risk Event Ledger](governance/risk-event-ledger.md)
-9. [Versioning Policy](governance/versioning-policy.md)
+5. [Operating Principles](operations/operating-principles.md)
+6. [Failure Modes](governance/failure-modes.md)
+7. [Risk Event Ledger](governance/risk-event-ledger.md)
+8. [Versioning Policy](governance/versioning-policy.md)
+
+## Project Surface Docs
+
+- [Hydra Quant](architecture/hydra-quant.md)
+- [Hydra Guardian](architecture/hydra-guardian.md)
+- [Hydra Predict](architecture/hydra-predict.md)
+- [Hydra Ember](architecture/hydra-ember.md)
 
 ## Optional Supporting Reading
 
@@ -27,4 +33,5 @@ The sequence below is the shortest path through Hydra Core's public operating mo
 ## Reading Intent
 
 Read the architecture, ecosystem, and state documents first if the goal is to understand authority, permission, and fail-closed behavior.
+Read the project surface docs if the goal is to understand how private systems relate to the public governance model.
 Read the governance documents first if the goal is to understand release discipline, hardening history, and what changes are considered significant.

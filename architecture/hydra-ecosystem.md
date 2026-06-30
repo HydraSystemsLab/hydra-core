@@ -6,6 +6,14 @@ Hydra is a risk-first systems architecture for building and operating market and
 Core describes how the system is meant to behave.
 Quant, Guardian, Predict, and Ember are private implementation surfaces that follow that doctrine.
 
+| Surface | Public Role |
+| --- | --- |
+| Hydra Core | Public governance layer |
+| Hydra Quant | Private trading and research infrastructure |
+| Hydra Guardian | Private supervisory and risk layer |
+| Hydra Predict | Private prediction-market research architecture |
+| Hydra Ember | Private market scanner and research pipeline |
+
 ## Why The Public/Private Boundary Exists
 
 Public docs describe how Hydra is meant to behave.
@@ -25,6 +33,7 @@ It does not publish private system code and is not a software distribution.
 ## Hydra Quant
 
 Hydra Quant is private trading and research infrastructure.
+See [Hydra Quant](hydra-quant.md) for the dedicated public-safe surface doc.
 
 Its public-safe shape is a risk-first execution stack with observation, daily briefs, control-room reporting, bridge health checks, and fail-closed rules.
 The current private posture has one approved live-money lane, `C15396`.
@@ -45,6 +54,7 @@ Forcing a bad one is not.
 ## Hydra Guardian
 
 Hydra Guardian is the supervisory and risk layer.
+See [Hydra Guardian](hydra-guardian.md) for the dedicated public-safe surface doc.
 
 It handles disarm logic, vetoes, state checks, loss protection, recovery posture, and the decision to do nothing when state is unsafe or unclear.
 Guardian is not a strategy.
@@ -53,6 +63,7 @@ It is the boundary that stops strategies from becoming uncontrolled.
 ## Hydra Predict
 
 Hydra Predict is a private prediction-market research and execution architecture.
+See [Hydra Predict](hydra-predict.md) for the dedicated public-safe surface doc.
 
 It is built around venue truth, quote reconciliation, strict paper/live separation, shadow monitoring, and operator-controlled promotion.
 The posture is research-first: reconcile what is true before acting on what looks interesting.
@@ -60,6 +71,7 @@ The posture is research-first: reconcile what is true before acting on what look
 ## Hydra Ember
 
 Hydra Ember is a private market research and scanner pipeline.
+See [Hydra Ember](hydra-ember.md) for the dedicated public-safe surface doc.
 
 It focuses on early-signal research, offline data ingestion, replay and walk-forward checks, dashboards, and review packs.
 It is a research surface, not a public trading product.
@@ -78,7 +90,7 @@ Across the private systems, the public doctrine is the same:
 
 ## What Is Intentionally Not Public
 
-Hydra Core does not publish exact strategy rules, private controls, thresholds, venue wiring, execution payloads, account details, credentials, proprietary filters, raw datasets, or live run procedures.
+Hydra Core does not publish exact strategy rules, private strategy parameters, venue wiring, account-specific operating material, credentials, private research logic, source data, or live run procedures.
 
 The public docs explain the operating model.
 They do not expose the machinery.

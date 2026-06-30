@@ -9,7 +9,9 @@ Losses are expected. Escalation is not.
 
 ## Repository Scope
 
-Hydra is described publicly as Hydra Core plus four private implementation surfaces:
+Hydra is described publicly as a governed core plus private implementation surfaces: Quant, Guardian, Predict, and Ember.
+This repository explains the doctrine and boundaries.
+It does not publish private strategy logic, execution wiring, account configuration, or live operations.
 
 - **Hydra Core**: public architecture, doctrine, governance, and operating principles
 - **Hydra Quant**: private trading and research infrastructure operating within those constraints
@@ -18,7 +20,6 @@ Hydra is described publicly as Hydra Core plus four private implementation surfa
 - **Hydra Ember**: private market research and scanner pipeline
 
 This repository is `hydra-core` only.
-It does not publish private implementation code from Hydra Quant, Hydra Guardian, Hydra Predict, or Hydra Ember.
 
 ## Operating Position
 
@@ -75,6 +76,7 @@ It shows supervisory relationships around the system, not private implementation
 - [Docs Map](docs-map.md): recommended reading order for the public governance surface
 - [System Overview](architecture/system-overview.md): high-level public architecture and control boundaries
 - [Hydra Ecosystem](architecture/hydra-ecosystem.md): public-safe view of Core and the private implementation surfaces
+- [Project Surface Docs](docs-map.md#project-surface-docs): public-safe docs for Quant, Guardian, Predict, and Ember
 - [Control Boundaries](architecture/control-boundaries.md): responsibilities and authority lines between engines, Guardian, execution, monitoring, and recovery
 - [State Model](architecture/state-model.md): public-safe operating states and their fail-closed meaning
 - [Hydra Guardian](architecture/hydra-guardian.md): the named supervisory and enforcement layer behind Hydra Quant
@@ -86,9 +88,12 @@ It shows supervisory relationships around the system, not private implementation
 - [Docs Map](docs-map.md)
 - [System Overview](architecture/system-overview.md)
 - [Hydra Ecosystem](architecture/hydra-ecosystem.md)
+- [Hydra Quant](architecture/hydra-quant.md)
+- [Hydra Guardian](architecture/hydra-guardian.md)
+- [Hydra Predict](architecture/hydra-predict.md)
+- [Hydra Ember](architecture/hydra-ember.md)
 - [Control Boundaries](architecture/control-boundaries.md)
 - [State Model](architecture/state-model.md)
-- [Hydra Guardian](architecture/hydra-guardian.md)
 - [Glossary](glossary.md)
 - [Risk Doctrine](doctrine/risk-doctrine.md)
 - [Why Most Bots Fail](doctrine/why-most-bots-fail.md)

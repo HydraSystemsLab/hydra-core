@@ -72,6 +72,7 @@ When the system cannot demonstrate safe state, the expected result is veto, paus
 
 Related documents:
 
+- [Hydra Ecosystem](hydra-ecosystem.md)
 - [System Overview](system-overview.md)
 - [Operating Principles](../operations/operating-principles.md)
 - [Failure Modes](../governance/failure-modes.md)
