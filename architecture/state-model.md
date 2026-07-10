@@ -1,152 +1,168 @@
-# State Model
+# Multi-Axis State Model
 
-Hydra uses a small set of public-safe operating states to describe whether execution is permitted, constrained, or blocked.
-These states are governance states, not market predictions.
+Hydra state is a scoped tuple of independent axes:
 
-Their purpose is to make permission legible.
+`trust × permission × lifecycle × operating mode`
 
-## State Principles
+The axes must be recorded independently for the named scope. Combining them into a single green/red label hides contradictions and can accidentally expand authority.
 
-- safe state must be demonstrable, not assumed
-- ambiguous state is treated as unsafe until resolved
-- armed and disarmed describe permission, not confidence
-- degraded state may still allow observation while blocking new exposure
-- recovery is a controlled process, not an automatic reset
+> **Execution is eligible only when trust is `SAFE`, permission is `ARMED`, lifecycle is `NORMAL`, the configured operating mode permits execution, and every required gate passes.**
 
-## Operating States
+Eligibility is not an instruction to trade, proof of edge, or public-user authorization.
 
-### Safe
-Safe means the system can presently demonstrate coherent control state, trustworthy observability, and valid enforcement conditions.
+## Trust Axis
 
-Allowed behavior:
+Trust describes whether the required control state is coherent enough for the scoped action.
 
-- supervised execution may proceed
-- normal monitoring and control checks continue
+| Value | Definition | Effect on new exposure |
+| --- | --- | --- |
+| `SAFE` | Required state, observability, and enforcement preconditions are coherent for the named scope at the stated time. | Does not block by trust alone; every other axis and gate still applies. |
+| `DEGRADED` | A known impairment reduces trust or narrows valid behavior, even if some observation remains reliable. | Blocked, except an explicitly defined containment action. |
+| `AMBIGUOUS` | State is missing, stale, contradictory, incomplete, or cannot be reconciled authoritatively. | Blocked; reconcile before restoration. |
+| `UNSAFE` | A known condition makes continued new exposure unacceptable or shows a material control-boundary failure. | Blocked; contain and enter governed recovery as required. |
 
-Blocked behavior:
+`SAFE` does not imply profitability, positive expectancy, zero risk, evidence quality, or permission.
 
-- none beyond normal risk and supervisory constraints
+## Permission Axis
 
-### Unsafe
-Unsafe means the system has identified a condition that makes continued operation unacceptable.
-Examples include breached constraints, invalid protective conditions, or supervisory failures that require immediate containment.
+Permission describes whether the named authority has conditionally allowed actions inside a defined scope and mode.
 
-Allowed behavior:
+| Value | Definition | Effect |
+| --- | --- | --- |
+| `ARMED` | Conditional permission is present for the named scope and configured mode if every other gate passes. | May allow only the actions already permitted by mode and higher-layer state. |
+| `DISARMED` | Permission has been withdrawn or cannot be proved. | Blocks new exposure and any silent resumption. |
 
-- containment actions
-- evidence preservation
-- controlled transition toward disarm or recovery-required state
+`ARMED` is never an instruction to trade. `ARMED` in `SHADOW` authorizes shadow processing only. It never authorizes live order submission.
 
-Blocked behavior:
+Internal permission and public-user permission are separate scopes. One cannot be inferred from the other.
 
-- new execution
-- optimistic continuation
-- rearm without verification
+## Lifecycle Axis
 
-### Ambiguous
-Ambiguous means the system cannot prove what state it is in with enough confidence to continue safely.
-State may be stale, contradictory, incomplete, or missing.
+Lifecycle describes whether normal operation or explicit recovery discipline applies.
 
-Allowed behavior:
+| Value | Definition | Effect |
+| --- | --- | --- |
+| `NORMAL` | No unresolved recovery condition is recorded for the scope. | Does not block by lifecycle alone. |
+| `RECOVERY_REQUIRED` | Reconciliation, repair, validation, or authority review must complete before normal operation can be restored. | Blocks automatic rearm and new exposure. |
 
-- fail-closed behavior
-- reconciliation, validation, and recovery checks
-- operator review using authoritative truth surfaces
+Restart, restored process health, operator confidence, and elapsed time cannot clear `RECOVERY_REQUIRED`. Clearing recovery and granting `ARMED` are separate decisions.
 
-Blocked behavior:
+## Operating Mode
 
-- new execution
-- automatic rearm
-- treating absence of evidence as evidence of safety
+Operating mode defines the environment and action class. It is not a trust or permission value.
 
-Ambiguous state must be treated defensively because uncertainty about exposure, constraint validity, or supervisory authority is itself a risk event.
-If the system cannot prove that it is safe, it must behave as though it is not.
+| Value | Definition | Order-submission boundary |
+| --- | --- | --- |
+| `OBSERVE_ONLY` | Collect and display permitted observations and diagnostics without generating executable activity. | No order submission. |
+| `SHADOW` | Process current inputs and record hypothetical decisions prospectively without sending orders. | No order submission to demo or live destinations. |
+| `DEMO` | Permit eligible orders only to an explicitly segregated demo or simulation domain. | Demo-domain orders only; no live route. |
+| `LIVE` | Permit eligible live-domain orders only within explicitly governed private authority. | Live-domain orders may be eligible; public-user authority is still separate. |
 
-### Armed
-Armed means the system is permitted to execute if all other active controls also agree.
-It does not mean execution is mandatory or unrestricted.
+Mode describes what kind of action could be eligible. It never proves that the other axes or required gates pass. The current public-user mode is defined only in the dated [Public Operating Posture](../status/public-operating-posture.md).
 
-Allowed behavior:
+## Gate Evaluation
 
-- supervised execution when the rest of the control model remains valid
+```mermaid
+flowchart LR
+    T{Trust SAFE?} -->|no| B[Block new exposure]
+    T -->|yes| P{Permission ARMED?}
+    P -->|no| B
+    P -->|yes| L{Lifecycle NORMAL?}
+    L -->|no| B
+    L -->|yes| M{Mode permits requested action?}
+    M -->|no| B
+    M -->|yes| G{Every required gate passes?}
+    G -->|no| B
+    G -->|yes| E[Action eligible within scope]
+```
 
-Blocked behavior:
+Observation and diagnostics may remain available while execution is blocked, provided they do not weaken containment or disclose protected information.
 
-- bypassing strategy, execution, or supervisory checks
+## Precedence And Aggregation
 
-Armed status should be read as conditional permission.
+Higher or stricter layers can narrow lower-layer authority. Lower layers cannot override a stricter higher-layer state.
 
-### Disarmed
-Disarmed means execution permission has been withdrawn.
-This may be caused by risk, integrity, observability, or recovery concerns.
+### Trust Precedence
 
-Allowed behavior:
+When multiple authoritative trust values apply to the same action, the most restrictive controls:
 
-- observation
-- investigation
-- repair and verification work
+`UNSAFE` > `AMBIGUOUS` > `DEGRADED` > `SAFE`
 
-Blocked behavior:
+### Other Axes
 
-- new execution
-- silent resumption
-- operator assumption that elapsed time clears the condition
+- `DISARMED` controls over `ARMED`.
+- `RECOVERY_REQUIRED` controls over `NORMAL`.
+- Mode conflict resolves to the intersection of permitted actions, never to a broader mode.
+- If no common permitted action can be proved, effective order execution is blocked.
+- A public-user restriction cannot be relaxed by an internal engine state.
 
-### Degraded
-Degraded means some supporting capability is impaired enough to reduce trust or shrink what the system is allowed to do, but not every function is necessarily offline.
+Contradiction always resolves toward the more restrictive posture while the contradiction is investigated.
 
-Allowed behavior:
+## Missing Or Stale State
 
-- constrained monitoring
-- bounded diagnostics
-- selective containment based on the degraded surface
+Missing state fails closed:
 
-Blocked behavior:
+| Missing value | Effective treatment |
+| --- | --- |
+| Trust | `AMBIGUOUS` |
+| Permission | `DISARMED` |
+| Lifecycle | `RECOVERY_REQUIRED` |
+| Mode | Execution blocked; expose an effective `OBSERVE_ONLY` posture until authoritative mode is restored |
 
-- any activity that depends on the degraded capability being trustworthy
-- broad resumption before the degradation is understood
+Expired state is missing state. Consumers must not extend a time-to-live silently or reuse a last-known permissive value as current.
 
-Degraded state should bias toward narrower permissions, not broader ones.
+## Allowed Transition Principles
 
-### Recovery-Required
-Recovery-required means the system cannot return to normal operation until explicit reconciliation and validation have been completed.
-This often follows disarm, restart ambiguity, execution ambiguity, or other integrity events.
+- Any authoritative layer may immediately narrow trust, disarm its scope, or require recovery when its policy permits.
+- A scope may move toward observation or containment without waiting for normal promotion review.
+- Trust restoration requires current authoritative evidence for every affected dependency.
+- `RECOVERY_REQUIRED` may become `NORMAL` only after the recorded recovery conditions are satisfied and verified by the proper authority.
+- `DISARMED` may become `ARMED` only through a separate explicit rearm decision after lifecycle normalization and gate validation.
+- Mode promotion requires explicit governance review, evidence classification, authority boundaries, and negative testing.
+- Mode demotion may occur immediately to contain risk or preserve evidence integrity.
 
-Allowed behavior:
+## Prohibited Transitions
 
-- recovery procedures
-- validation of exposure, constraints, liveness, and control state
-- governed preparation for possible rearm
+- automatic `RECOVERY_REQUIRED` → `NORMAL`
+- automatic `DISARMED` → `ARMED`
+- restart or elapsed-time-based recovery or rearm
+- result-triggered mode promotion
+- relabelling `SHADOW` as `LIVE` without a governed promotion event
+- lower-layer override of a higher-layer restriction
+- inference of `SAFE`, `ARMED`, or `NORMAL` from silence or process health
+- inference of strategy edge from runner health or `LIVE_READY`
+- inference of public-user permission from private operational permission
 
-Blocked behavior:
+## Recovery Conditions
 
-- automatic return to active execution
-- treating restart alone as recovery
+Recovery conditions are event-specific and must be recorded before normal operation is considered. At minimum, recovery must address:
 
-## State Interactions
+- the triggering cause and affected scope
+- authoritative exposure, order, and intent reconciliation where applicable
+- restoration of fresh, coherent control state
+- validation of enforcement and containment controls
+- evidence preservation and any required correction
+- unresolved residual risk
+- the authority permitted to clear the lifecycle condition
 
-These states are related but not interchangeable:
+A containment action may cancel, close, or reduce exposure only when explicitly defined for the failure class. It must not be used to introduce or enlarge exposure.
 
-- a system may be `disarmed` because it is `unsafe`
-- a system may be `disarmed` because it is `ambiguous`
-- a system may be `degraded` without being fully `unsafe`, while still blocking execution
-- a system may be technically recoverable but remain `recovery-required` until verification is complete
-- a system should only be treated as operational when it is both `safe` and `armed`
+## Rearm Conditions
 
-## Public Operating Bias
+Rearm requires all of the following for the named scope:
 
-Hydra treats permission conservatively.
-The bias is:
+- lifecycle is already `NORMAL`
+- trust is demonstrably `SAFE`
+- the configured mode and destination are verified
+- required gates pass on current state
+- no stricter higher-layer disarm applies
+- the authorized rearm decision and its evidence are recorded
 
-- prefer inactivity to unverified activity
-- prefer explicit disarm to silent drift
-- prefer verified recovery to optimistic restart
-
-In this model, fail-closed behavior is not a special mode.
-It is the expected response whenever safe state cannot be demonstrated.
+Rearm restores conditional permission only. It does not authorize a particular trade, prove edge, change public-user access, or promote operating mode.
 
 Related documents:
 
 - [Control Boundaries](control-boundaries.md)
-- [Operating Principles](../operations/operating-principles.md)
+- [Hydra Guardian](hydra-guardian.md)
+- [Operator Runbook](../operations/operator-runbook.md)
 - [Failure Modes](../governance/failure-modes.md)

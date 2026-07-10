@@ -1,130 +1,105 @@
 # Control Boundaries
 
-Hydra is designed as a governed operating system, not as a single block of trading logic.
-Its control boundaries exist so that local urgency cannot override system safety.
+Hydra is a governed system of scoped authorities. Control boundaries exist so local urgency, technical health, or promising results cannot silently expand permission.
 
-Strategies are replaceable.
-Enforcement is not.
+Strategies are replaceable. Independent enforcement remains required.
 
 ## Boundary Model
 
-### Strategies / Engines
-Strategies and engines are responsible for:
+### Research And Decision Engines
 
-- generating intents within their own market logic
-- maintaining local decision state needed to produce those intents
-- accepting supervisory constraints and stop conditions
+Engines may:
 
-Strategies and engines are not responsible for:
+- observe permitted inputs and generate research or decision intents
+- maintain local state required for those intents
+- operate only inside their configured scope and mode
+- report health, freshness, and evidence metadata
 
-- defining global permission to continue operating
-- overriding disarm, veto, or recovery gates
-- deciding system-wide risk posture
+Engines may not:
 
-Conceptual flow:
-
-- outbound: trade intents, local state, health signals
-- inbound: permission, veto, disarm, pause, recovery constraints
+- define global trust or permission
+- clear recovery or rearm themselves
+- promote their mode
+- override Guardian, execution, or public-user restrictions
 
 ### Hydra Guardian
-Hydra Guardian is the supervisory and enforcement layer behind Hydra Quant.
-It is responsible for:
 
-- evaluating whether the system remains safe enough to act
-- enforcing disarm, veto, pause, and rearm conditions
-- treating stale, contradictory, or missing state as a control problem
-- preserving authoritative control when lower layers disagree or become uncertain
+Guardian may:
 
-Hydra Guardian is not responsible for:
+- evaluate state and required supervisory gates
+- narrow trust, disarm, veto, pause, and require recovery
+- enforce the more restrictive outcome when authoritative layers disagree
+- define the evidence required for scoped recovery and rearm
 
-- generating alpha or trade ideas
-- expressing market preference
-- acting as a substitute for execution validation or observability storage
+Guardian may not:
 
-Conceptual flow:
-
-- inbound: intents, state validity signals, observability inputs, recovery status
-- outbound: approval, denial, disarm, gating, supervisory decisions
+- originate strategy direction
+- treat health as proof of edge
+- make a public product available through private permission
+- replace execution validation or canonical evidence storage
 
 ### Execution Layer
-The execution layer is responsible for:
 
-- validating executable requests against required constraints
-- normalising requests into a safe execution form
-- returning acknowledgements, rejects, and terminal outcomes
-- preserving execution evidence needed for later reconstruction
+The execution layer may:
 
-The execution layer is not responsible for:
+- validate an eligible request against constraints, state, scope, destination, and mode
+- reject invalid, duplicate, stale, or unauthorized requests
+- perform explicitly defined containment actions
+- preserve lifecycle evidence for reconciliation
 
-- deciding whether the system should remain armed
-- reinterpreting supervisory policy on its own authority
-- originating strategy direction
+The execution layer may not:
 
-Conceptual flow:
+- originate a trade
+- promote an operating mode
+- reinterpret `SHADOW` as an order-capable mode
+- infer permission from a valid payload or healthy connection
 
-- inbound: approved execution requests and required constraints
-- outbound: execution outcomes, rejects, status changes, lifecycle evidence
+### Monitoring And Observability
 
-### Monitoring / Observability
-Monitoring and observability are responsible for:
+Monitoring may expose current, sanitized evidence about state, health, decisions, and failures. It may trigger an alert or supervisory evaluation.
 
-- making system state visible enough to evaluate safety
-- exposing evidence for what happened, what was blocked, and what remains unresolved
-- surfacing liveness, anomalies, and contradiction between layers
+Monitoring may not grant permission, silently fill missing state, or present a runner-health result as a strategy or authorization result.
 
-Monitoring and observability are not responsible for:
+### Recovery And Watchdog
 
-- granting permission to trade
-- replacing enforcement with dashboards or alerts
-- assuming that visibility alone is a control mechanism
+Recovery functions may hold a scope in `RECOVERY_REQUIRED`, execute bounded recovery checks, and propose that recorded conditions have been satisfied.
 
-Conceptual flow:
+They may not clear the lifecycle condition, rearm, or resume execution merely because a process restarted or time elapsed.
 
-- inbound: state changes, decisions, execution outcomes, liveness signals
-- outbound: operator truth surfaces, anomaly signals, governance evidence
+### User-Facing Surfaces
 
-### Recovery / Watchdog
-Recovery and watchdog functions are responsible for:
+Public and alpha surfaces may display only allowlisted, sanitized state. They may not contain private operational payloads, infer private permission, or turn a display control into an execution control.
 
-- detecting when continuity has been interrupted or state trust has degraded
-- holding restart and recovery behind verification
-- restoring operation only through governed re-entry conditions
+Read-only user access and system operating mode are separate. A read-only `SHADOW` surface cannot submit orders even if a private internal scope has different authority.
 
-Recovery and watchdog functions are not responsible for:
+## Restrictive Composition
 
-- silently clearing supervisory concerns
-- treating restart as proof of safety
-- bypassing disarm or ambiguity handling
+For any requested action:
 
-Conceptual flow:
+1. identify every applicable authority and scope
+2. evaluate independent trust, permission, lifecycle, and mode values
+3. apply the intersection of permitted actions
+4. treat missing, stale, or contradictory state as restrictive
+5. evaluate every remaining required gate
 
-- inbound: liveness failures, stale state, unresolved control conditions
-- outbound: recovery-required signals, restart gating, bounded recovery actions
+Lower layers cannot override a stricter higher-layer state. A containment action may reduce or close risk only when the failure policy explicitly allows it; containment is not a path to new exposure.
 
-## Why Boundaries Matter
+## Boundary Evidence
 
-These boundaries are not organizational preferences.
-They are survivability controls.
+Every material allow, block, disarm, recovery clearance, rearm, or promotion decision should leave enough public-safe or private evidence to identify:
 
-Without them:
+- scope and authority
+- state tuple and observation time
+- requested action and mode
+- named gates and results
+- decision and reason code
+- unresolved conditions and evidence classification
 
-- strategy urgency can override supervision
-- execution can continue while control state is unresolved
-- observability becomes post-hoc explanation instead of operational truth
-- recovery can become an ungoverned path back into exposure
-
-With them:
-
-- failure domains stay smaller
-- authority remains legible
-- ambiguous state can be contained quickly
-- recovery follows verification rather than optimism
-
-The public rule is simple:
-each layer should do one class of control work clearly enough that a failure in one layer does not silently erase the safeguards of another.
+Public disclosure may withhold protected detail, but it must not replace missing support with a stronger claim.
 
 Related documents:
 
 - [System Overview](system-overview.md)
 - [State Model](state-model.md)
 - [Hydra Guardian](hydra-guardian.md)
+- [Failure Modes](../governance/failure-modes.md)

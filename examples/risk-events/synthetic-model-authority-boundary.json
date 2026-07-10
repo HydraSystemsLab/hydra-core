@@ -1,0 +1,38 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:synthetic-model-authority-boundary",
+  "schema_version": "1.0.0",
+  "event_id": "SYNTHETIC-MODEL-AUTHORITY-001",
+  "occurred_at": "2000-02-01T00:00:00Z",
+  "recorded_at": "2000-02-01T00:03:00Z",
+  "scope": "SYNTHETIC_MODEL_SCOPE",
+  "event_type": "ENGINE_PAUSED",
+  "reason_code": "MODEL_AUTHORITY_BOUNDARY_APPROACHED",
+  "action_code": "MODEL_HELD_WITHIN_SHADOW_BOUNDARY",
+  "public_summary": "Synthetic example: a model approaching its approved authority boundary is paused and retained in shadow-only processing.",
+  "historical_context": "This invented teaching record illustrates restrictive response to model-authority drift; it is not a real model, engine, or Hydra event.",
+  "before_state": {
+    "trust": "SAFE",
+    "permission": "ARMED",
+    "lifecycle": "NORMAL",
+    "mode": "SHADOW"
+  },
+  "after_state": {
+    "trust": "DEGRADED",
+    "permission": "DISARMED",
+    "lifecycle": "RECOVERY_REQUIRED",
+    "mode": "SHADOW"
+  },
+  "evidence": {
+    "tier": "FORWARD_SHADOW",
+    "disclosure": "NOT_APPLICABLE",
+    "generated_at": "2000-02-01T00:02:00Z",
+    "tested_gate": "model authority boundary",
+    "limitations": [
+      "Synthetic example with no real model features, thresholds, decisions, or performance evidence."
+    ]
+  },
+  "public_evidence_refs": [],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "x-example-only": true
+}

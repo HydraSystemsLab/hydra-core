@@ -1,98 +1,101 @@
 # Risk Event Ledger Policy
 
-This policy defines what the Hydra Risk Event Ledger is for and what it is not for.
-The ledger exists to preserve governance evidence around material risk, enforcement, and control-boundary events.
+This policy governs which events qualify for selected public governance history and how records are appended, corrected, structured, and sanitized. Release maturity belongs in [Release Posture](release-posture.md); version semantics belong in [Versioning Policy](versioning-policy.md).
 
-It is not a trade journal.
-It is not a research notebook.
-It is not a changelog for routine tuning.
+The ledger is not a trade journal, research notebook, complete incident register, or performance record.
 
-## Purpose
+## Qualifying Events
 
-The ledger should record events and changes that materially affect:
+An event generally qualifies when it materially changes or tests:
 
-- enforcement behavior
-- disarm, pause, veto, or rearm semantics
-- supervisory authority and control boundaries
-- recovery gating after risk or integrity events
-- observability required to prove safe state
+- enforcement, veto, pause, disarm, or rearm behavior
+- supervisory authority or a control boundary
+- operating-mode authority or promotion
+- recovery conditions after risk, integrity, or ambiguity
+- evidence required to prove safety-critical state
+- containment for a meaningful failure class
+- public governance interpretation of one of those controls
 
-The ledger helps show how Hydra hardens over time.
-It provides governance memory for the moments when the operating model was tested, tightened, or changed.
+Routine trades, fills, expected losses, parameter tuning, strategy optimization, ordinary maintenance, and purely editorial changes do not automatically qualify.
 
-## What Belongs In The Ledger
+The threshold is governance significance, not operational volume. When significance is uncertain, seek owner review; do not fabricate an event merely to document a repository change.
 
-Qualifying entries generally include:
+## Selected Public History
 
-- system disarms caused by meaningful risk or integrity events
-- verified fixes to enforcement gaps or control failures
-- rearm decisions following material disarm conditions
-- architecture changes that tighten supervisory authority or containment boundaries
-- observability changes required to validate safety-critical state
-- recovery policy changes after restart, ambiguity, or execution-state failures
+Public records may be a sanitized subset of private governance evidence. Each public entry must be true within its disclosed scope and must label evidence that is partial, withheld, or not applicable.
 
-The common test is whether the event changes how a serious operator should interpret Hydra's safety posture.
+- Private evidence may be withheld.
+- Absence of a public entry does not prove absence of a private incident.
+- A public entry does not prove completeness of investigation or permanent resolution.
+- Historical permission or `LIVE_*` wording is not current authorization.
+- Current public-user posture is sourced only from the dated public posture record.
 
-## What Does Not Belong
+## Append-Only Rule
 
-The ledger usually should not include:
+Once published, an event remains part of the historical record unless removal is required to contain sensitive information or comply with an overriding obligation. Normal factual correction is append-only:
 
-- ordinary trades, fills, or performance outcomes
-- normal parameter tuning within an unchanged control model
-- routine strategy optimization and research iteration
-- editorial document cleanup
-- naming, wording, or structure changes that do not alter governance meaning
-- day-to-day operational noise that does not affect supervisory interpretation
+1. publish a new structured correction record
+2. reference the earlier `event_id` through `correction_of` or `supersedes`
+3. explain the corrected public interpretation
+4. preserve the original record with an explicit annotation where practical
 
-Normal parameter tuning and routine strategy optimization usually do not belong because they adjust decision quality, not governance meaning.
-Unless they alter enforcement, containment, authority, or recovery semantics, they are not ledger events.
+Do not rewrite history to improve marketing or convert a historical state into current authorization.
 
-## Examples Of Qualifying Events
+Legacy Markdown entries have no event IDs. Do not invent IDs or timestamps for them. A future correction may cite a precise legacy heading in public evidence text without pretending that heading was a V1 identifier.
 
-Examples that usually qualify:
+## Structured V1
 
-- a new disarm class is introduced for a previously uncontained failure
-- an execution ambiguity leads to a hard fail-closed change
-- rearm is tightened so restart alone is no longer sufficient
-- observability is extended so supervisory state can be validated instead of assumed
-- control authority moves from an engine-local mechanism to a supervisory layer
-- correlated engine failure leads to stronger containment boundaries
+Structured V1 begins prospectively with the first owner-approved event recorded after schema adoption. A V1 record must:
 
-## Significance Thresholds
+- validate against [risk-event.schema.json](../schemas/risk-event.schema.json)
+- use one of the retained event types
+- use UTC date-time values for occurrence and recording
+- identify a sanitized scope, reason code, action code, and public summary
+- separate historical context from current authorization
+- classify evidence and disclosure
+- include public evidence references or explain why none are public
+- include before/after state only when supported by evidence
+- carry the required current-authorization disclaimer
 
-An event should be considered ledger-worthy when one or more of the following is true:
+The schema contract is documented in [Risk Event Schema](risk-event-schema.md).
 
-- it changes what the system will now block, halt, veto, or disarm
-- it changes what evidence is required before rearm
-- it changes which layer has authority over a safety-critical decision
-- it changes how a known failure mode is contained
-- it hardens the architecture after a material risk, integrity, or ambiguity event
+## Correction And Supersession
 
-If the editor cannot explain why an event is below these thresholds, it should be treated as governance-significant by default.
+`correction_of` means a later record corrects a factual or interpretive defect while preserving the earlier event. `supersedes` means a later governance decision replaces an earlier policy or posture for its defined scope.
 
-## Relationship To Architecture Hardening
+Neither field deletes history. Neither implies current authorization outside the later record's scope and time.
 
-The ledger is part of architecture hardening discipline.
-Hardening is not only code change.
-It is the process of making unsafe behavior harder to permit and easier to explain after the fact.
+## Public/Private Review
 
-When Hydra tightens a control boundary, strengthens fail-closed behavior, improves supervisory evidence, or narrows recovery permission, the ledger should reflect that change.
-This creates continuity between doctrine, architecture, and operational governance.
+Before publication, review each record for:
 
-## Relationship To Governance
+- credentials, secrets, accounts, balances, and broker configuration
+- private paths, hosts, endpoints, repositories, reports, or logs
+- order payloads and private execution wiring
+- protected strategy rules, parameters, thresholds, features, and schemas
+- actionable real-time entries or exits
+- unsupported performance or authorization inference
 
-The ledger supports governance by answering questions such as:
+Sanitize or withhold protected evidence. Do not replace it with invented identifiers, links, times, transitions, or stronger prose.
 
-- when did supervisory expectations materially change
-- which failures caused architecture or policy hardening
-- what must now be true before execution is considered safe again
-- which events were treated as system-level rather than local noise
+## Extension Rules
 
-Its role is historical and interpretive.
-It preserves the reasons behind enforcement changes, not just the fact that files changed.
+V1 extensions use an `x-...` property defined by the schema. Extensions must be public-safe scalar data or arrays of public-safe scalar data. They may not weaken required fields, override core semantics, carry private payloads, or become an unreviewed parallel schema.
+
+## Review Responsibilities
+
+An editor proposing a ledger event should be able to state:
+
+- why the event is governance-significant
+- which failure class, boundary, or transition it affects
+- what evidence supports every published fact
+- whether a correction or supersession relationship exists
+- what remains private or uncertain
+- why the wording cannot be read as current authorization or performance
 
 Related documents:
 
-- [Hydra Risk Event Ledger](risk-event-ledger.md)
-- [Versioning Policy](versioning-policy.md)
+- [Risk Event Ledger](risk-event-ledger.md)
+- [Risk Event Schema](risk-event-schema.md)
 - [Failure Modes](failure-modes.md)
+- [Public Evidence Policy](public-evidence-policy.md)

@@ -93,8 +93,8 @@ Escalation patterns look like:
 * Re-entering after disarm
 * Letting a bot keep trading “to recover”
 
-These behaviours are not edge cases.
-They are *guaranteed* if the system allows them.
+These behaviours are not merely theoretical edge cases.
+If a system permits them, they remain credible recurring failure risks.
 
 If a failure mode exists, it will eventually be triggered.
 
@@ -154,9 +154,9 @@ Disarms should trigger on:
 
 Once disarmed:
 
-* Trading must be impossible
-* Restarting must require intent
-* Logs must explain exactly why
+* Defined execution paths must mechanically block new exposure
+* Restarting must not clear the disarm
+* Evidence must explain the reason and scope
 
 ---
 
@@ -188,8 +188,8 @@ A survivable system:
 * Refuses to double down
 * Prioritises staying alive over being active
 
-The goal is not to avoid drawdowns.
-The goal is to make certain drawdowns *impossible*.
+The goal is not to avoid every drawdown.
+The goal is to mechanically constrain defined escalation and exposure paths while the documented controls operate as designed.
 
 ---
 
@@ -205,9 +205,9 @@ What compounds:
 * Failure containment
 * Operational discipline
 
-The edge is not prediction.
+Prediction alone is not enough.
 
-The edge is designing systems where unsafe behaviour cannot occur.
+Durable operating value comes from mechanically blocking defined unsafe actions while documented boundaries and enforcement controls are operating as designed.
 
 ---
 

@@ -1,79 +1,71 @@
 # Hydra Guardian
 
-Hydra Guardian is the private supervisory and enforcement layer behind Hydra Quant.
+Hydra Guardian is the independent supervisory and risk authority governing Hydra Quant's private implementation. It is a governed private surface, not a public product or strategy.
 
-It exists because strategy logic and execution logic are not sufficient substitutes for governance.
-Guardian is concerned with whether the system should be allowed to continue operating at all.
+## Authority
 
-## What It Is
+Guardian evaluates whether a requested action remains inside documented trust, permission, lifecycle, mode, and gate boundaries. It can:
 
-Hydra Guardian is the control layer that evaluates system health, state validity, and enforcement conditions above the level of any single engine.
+- veto a requested action
+- narrow a scoped trust posture
+- disarm a scope
+- require recovery and reconciliation
+- prevent lower-layer state from relaxing a stricter restriction
+- require evidence before lifecycle normalization or rearm
 
-Conceptually, it sits between intent generation and continued permission to execute.
-Its purpose is not to produce trades.
-Its purpose is to constrain, pause, disarm, or veto unsafe operation.
+Guardian decisions are authoritative within their defined scope when system safety or integrity is in question. They still cannot create public-user permission or override a stricter external authority.
 
-## What It Monitors
+## Inputs
 
-Guardian monitors the classes of conditions that determine whether system state is trustworthy enough to keep running, including:
+Public-safe input classes include:
 
-- engine state and whether that state remains internally consistent
-- risk state, disarm state, and whether constraints remain authoritative
-- feed liveness and whether market inputs are stale or missing
-- execution liveness and whether intents are being acknowledged, rejected, or stranded
-- restart and recovery state when the system is resuming after interruption
-- supervisory signals from monitoring and watchdog processes
+- current and prior scoped state
+- intent and decision metadata
+- feed and control freshness
+- execution acknowledgements, rejects, fills, and unresolved lifecycle events
+- constraint and loss-domain status
+- restart, recovery, and reconciliation status
+- public-safe incident and dependency signals
 
-The exact implementation is private, but the public operating model is simple: Guardian treats stale, contradictory, or missing state as a control problem, not just an observability problem.
+Missing, stale, contradictory, or untrusted inputs are control conditions, not merely dashboard defects.
 
-## What It Enforces
+## Outputs
 
-Guardian enforces system-level safety conditions such as:
+Guardian may produce:
 
-- fail-closed behavior when state cannot be validated
-- disarm or pause behavior when loss, execution, or control conditions become unsafe
-- restart gating until system state is coherent again
-- bounded recovery rather than blind resumption
-- authoritative veto when lower layers request actions that should not proceed
+- a named gate verdict and public-safe reason
+- a veto or block
+- a scoped disarm
+- a recovery requirement
+- a restriction on permitted actions
+- a separately governed recommendation for recovery clearance or rearm
 
-This makes Guardian an enforcement function, not a dashboard.
+A result such as `PASS`, `AMBER`, `RED`, or `FROZEN` must identify the gate tested. It is not a universal safety or profit verdict.
 
-## What It Can Veto
+## State Behavior
 
-Guardian may veto:
+Guardian follows the [Multi-Axis State Model](state-model.md):
 
-- new execution requests when system state is stale or ambiguous
-- continued engine activity after a hard risk or integrity event
-- restart or rearm attempts that occur before verification
-- actions that would reintroduce exposure while supervisory state is unresolved
+- `SAFE` is coherent control state, not positive expectancy
+- `ARMED` is conditional scoped permission, not an instruction
+- `RECOVERY_REQUIRED` cannot be cleared by restart or time
+- `SHADOW` cannot authorize order submission
+- `DEGRADED`, `AMBIGUOUS`, and `UNSAFE` block new exposure except defined containment
+- contradictory authority resolves to the more restrictive permitted-action set
 
-The public rule is that uncertain permission is treated as no permission.
+## Machine-Learning Boundary
 
-## Relationship To Hydra Quant
+A model may provide a bounded input to research or supervision only under explicit authority. It cannot acquire execution permission, change mode, override risk, or become an autonomous trade authority through performance, configuration, or integration side effects.
 
-Hydra Quant contains the private strategy and execution systems that operate within Hydra's rules.
-Guardian is not a strategy component inside Quant.
-It is the supervisory layer that determines whether Quant is permitted to continue acting.
+Promotion of model authority requires defined evidence, negative testing, scope, failure behavior, and governance review.
 
-Quant may generate valid intents at the strategy level and still be blocked at the Guardian level.
-That is expected behavior.
+## Non-Claims
 
-The separation matters:
-
-- Quant is responsible for acting within market logic and execution rules
-- Guardian is responsible for enforcing whether the system remains safe enough to act
-
-This separation helps preserve independent failure domains and prevents strategy urgency from overriding supervisory control.
-
-## Operating Bias
-
-Guardian is intentionally conservative.
-When the system cannot demonstrate safe state, the expected result is veto, pause, or disarm.
+Guardian does not guarantee safety, security, profitability, or loss prevention. Its defensible objective is to mechanically block defined unsafe actions while the documented boundaries and enforcement controls are operating as designed.
 
 Related documents:
 
-- [Hydra Ecosystem](hydra-ecosystem.md)
-- [System Overview](system-overview.md)
-- [Operating Principles](../operations/operating-principles.md)
+- [Control Boundaries](control-boundaries.md)
+- [Hydra Quant](hydra-quant.md)
 - [Failure Modes](../governance/failure-modes.md)
-- [Risk Event Ledger](../governance/risk-event-ledger.md)
+- [Threat Model](../governance/threat-model.md)
