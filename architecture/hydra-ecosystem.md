@@ -1,96 +1,57 @@
 # Hydra Ecosystem
 
-Hydra Core is the public map. The private systems are where implementation lives.
+Hydra Systems is the company and umbrella. Hydra Core is its public governance specification; private implementation surfaces remain separate from the public repository.
 
-Hydra is a risk-first systems architecture for building and operating market and research automation under supervision.
-Core describes how the system is meant to behave.
-Quant, Guardian, Predict, and Ember are private implementation surfaces that follow that doctrine.
+The canonical classification of named surfaces is the [Public Surface Registry](public-surface-registry.md). That registry, not the existence of private code, determines what public role may be claimed.
 
-| Surface | Public Role |
-| --- | --- |
-| Hydra Core | Public governance layer |
-| Hydra Quant | Private trading and research infrastructure |
-| Hydra Guardian | Private supervisory and risk layer |
-| Hydra Predict | Private prediction-market research architecture |
-| Hydra Ember | Private market scanner and research pipeline |
+## Public And Private Shape
 
-## Why The Public/Private Boundary Exists
+- **Hydra Core** publishes doctrine, architecture, governance, schemas, and operating expectations.
+- **Hydra Quant** is the governed trading product/system under development, backed by private implementation.
+- **Hydra Guardian** is the independent supervisory and risk authority governing private operation.
+- **Hydra Predict** and **Hydra Ember** are private research labs without public product or execution claims.
 
-Public docs describe how Hydra is meant to behave.
-Private repos contain implementation, strategy logic, execution wiring, account configuration, and live operational details.
-That split is intentional.
-The public surface should make the doctrine understandable without exposing the machinery.
+Current external availability and public-user permissions live only in the dated [Public Operating Posture](../status/public-operating-posture.md).
 
-This repository should be useful to a serious reader without turning private operating details into public material.
+## Why The Boundary Exists
+
+Public documents should make authority, evidence standards, failure handling, and user permissions verifiable without publishing protected machinery. Private repositories may contain implementation, but they are not public evidence and are not proof of product availability.
+
+Hydra Core does not publish:
+
+- private strategy rules, parameters, thresholds, or model features
+- credentials, account configuration, balances, or broker wiring
+- private execution routes, request payloads, or protected schemas
+- internal hosts, paths, logs, reports, datasets, or research artefacts
 
 ## Hydra Core
 
-Hydra Core is the public governance layer.
-
-It defines the operating language around risk, control boundaries, state, recovery, and release posture.
-It does not publish private system code and is not a software distribution.
+Hydra Core defines the durable public contract: control boundaries, state semantics, evidence classes, governance history rules, release discipline, and public/private separation. It is a specification, not a public trading implementation.
 
 ## Hydra Quant
 
-Hydra Quant is private trading and research infrastructure.
-See [Hydra Quant](hydra-quant.md) for the dedicated public-safe surface doc.
+Hydra Quant is a governed product under development. Engines may occupy research, `SHADOW`, `DEMO`, or `LIVE` modes only after explicit governed promotion within their authorized scope.
 
-Its public-safe shape is a risk-first execution stack with observation, daily briefs, control-room reporting, bridge health checks, and fail-closed rules.
-The current private posture has one approved live-money lane, `C15396`.
-Other lanes are treated as shadow, quarantined, or research-only unless evidence and controls justify promotion.
-
-ML remains shadow-only in the current posture.
-It acts as a meta-filter or supervisory signal, not as an autonomous trade generator.
-B5 remains shadow/no-send unless promoted through controls.
-
-Hydra Quant now includes operator visibility for funded-account inactivity risk.
-That visibility does not loosen the strategy.
-If an inactivity deadline approaches and no valid live-money signal occurs, account-preservation decisions remain operator-controlled.
-
-Hydra Quant does not force activity by weakening rules.
-Missing a trade is acceptable.
-Forcing a bad one is not.
+Strategy existence does not grant execution authority. Runner health does not grant strategy authority. Internal operational permission and public-user permission remain separate. See [Hydra Quant](hydra-quant.md) and the [private-alpha contract](../product/hydra-quant-private-alpha.md).
 
 ## Hydra Guardian
 
-Hydra Guardian is the supervisory and risk layer.
-See [Hydra Guardian](hydra-guardian.md) for the dedicated public-safe surface doc.
+Hydra Guardian is the independent supervisory and risk authority. It can narrow permission, veto actions, require recovery, and prevent lower layers from overriding a stricter state. See [Hydra Guardian](hydra-guardian.md).
 
-It handles disarm logic, vetoes, state checks, loss protection, recovery posture, and the decision to do nothing when state is unsafe or unclear.
-Guardian is not a strategy.
-It is the boundary that stops strategies from becoming uncontrolled.
+## Research Labs
 
-## Hydra Predict
+Hydra Predict and Hydra Ember are research surfaces. Research output, model output, replay results, and promising observations do not create execution authority. Promotion requires explicit evidence, bounded authority, and governance review.
 
-Hydra Predict is a private prediction-market research and execution architecture.
-See [Hydra Predict](hydra-predict.md) for the dedicated public-safe surface doc.
+## Shared Doctrine
 
-It is built around venue truth, quote reconciliation, strict paper/live separation, shadow monitoring, and operator-controlled promotion.
-The posture is research-first: reconcile what is true before acting on what looks interesting.
+Across governed surfaces:
 
-## Hydra Ember
+- trust, permission, lifecycle, and operating mode are independent
+- missing or contradictory state fails closed
+- observation can continue while execution is blocked
+- mode promotion is a governance event, not an automatic response to results
+- machine-learning components cannot acquire execution authority implicitly
+- public-user permission cannot be inferred from private internal posture
+- health and operability claims remain separate from edge and performance claims
 
-Hydra Ember is a private market research and scanner pipeline.
-See [Hydra Ember](hydra-ember.md) for the dedicated public-safe surface doc.
-
-It focuses on early-signal research, offline data ingestion, replay and walk-forward checks, dashboards, and review packs.
-It is a research surface, not a public trading product.
-
-## Shared Operating Doctrine
-
-Across the private systems, the public doctrine is the same:
-
-- survivability over activity
-- fail closed when state is stale, contradictory, or missing
-- separate strategy intent from supervisory permission
-- keep shadow and quarantined lanes from becoming live just because they exist
-- promote only when evidence and controls justify promotion
-- prefer a missed opportunity to an unsafe action
-- keep the operator responsible for exceptional account-preservation decisions
-
-## What Is Intentionally Not Public
-
-Hydra Core does not publish exact strategy rules, private strategy parameters, venue wiring, account-specific operating material, credentials, private research logic, source data, or live run procedures.
-
-The public docs explain the operating model.
-They do not expose the machinery.
+The dated public posture may change. These boundaries do not silently change with it.

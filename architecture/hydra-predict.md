@@ -1,56 +1,34 @@
 # Hydra Predict
 
-Hydra Predict is a private prediction-market research and execution architecture governed by Hydra Core doctrine.
-
-It is described publicly as an operating surface, not as a public implementation.
+Hydra Predict is a private prediction-domain research lab governed by Hydra Core doctrine. It has no public product, execution, or external-availability claim.
 
 ## Purpose
 
-Hydra Predict exists to study and operate prediction-market workflows under strict supervision.
+Hydra Predict studies prediction-domain workflows under strict truth and evidence boundaries. If venue state, quote state, data provenance, or promotion state cannot be reconciled, the research must not be treated as safe for promotion.
 
-Its first obligation is truth.
-If venue state, quote state, or promotion state cannot be reconciled, the system should not treat action as safe.
+## Research Boundary
 
-## What It Is
+Public-safe research concerns include:
 
-Hydra Predict focuses on:
+- venue and quote reconciliation
+- paper, replay, shadow, demo, and live evidence separation
+- forward observation
+- operator-reviewed promotion criteria
 
-- venue truth
-- quote reconciliation
-- strict paper/live separation
-- shadow monitoring
-- operator-controlled promotion
+These concerns describe research discipline. They do not state that an implementation is live, available, or authorized to execute.
 
-It is built around the idea that truth comes before action.
-A signal is not enough if the system cannot prove the venue and operating state behind it.
+## Authority
 
-## Operating Posture
-
-Hydra Predict is research-first.
-
-Paper, shadow, and live states must remain clearly separated.
-Promotion is an operator-controlled governance decision, not an automatic consequence of a promising result.
+Research output cannot create execution authority. Any future change in classification would require an explicit registry update, evidence review, authority definition, and dated posture change where external availability is affected.
 
 ## What Is Not Public
 
-Hydra Predict does not publish credentials, private venue configuration, funding-specific material, executable request formats, or live operating procedures.
-
-The public docs describe the boundary.
-They do not expose implementation wiring.
-
-## Relationship To Core
-
-Hydra Core defines the doctrine that Predict must follow:
-
-- fail closed on ambiguous state
-- reconcile truth before action
-- preserve paper/live separation
-- promote only when evidence and controls justify promotion
-- keep the operator responsible for live authority
+Hydra Predict does not publish credentials, venue configuration, executable request formats, funding details, protected research logic, or operating procedures.
 
 Related documents:
 
+- [Public Surface Registry](public-surface-registry.md)
 - [Hydra Ecosystem](hydra-ecosystem.md)
 - [Control Boundaries](control-boundaries.md)
 - [State Model](state-model.md)
-- [Risk Doctrine](../doctrine/risk-doctrine.md)
+- [Public Evidence Policy](../governance/public-evidence-policy.md)
