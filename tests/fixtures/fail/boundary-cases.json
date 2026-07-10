@@ -1,0 +1,20 @@
+{
+  "cases": [
+    {
+      "name": "private_absolute_path",
+      "parts": ["/", "ho", "me", "/operator/private-report.json"]
+    },
+    {
+      "name": "unlabelled_marker",
+      "parts": ["TO", "DO", ": replace this copy"]
+    },
+    {
+      "name": "dynamic_engine_claim",
+      "parts": ["C", "15396 is the current ", "approved ", "live", "-money lane"]
+    },
+    {
+      "name": "credential_assignment",
+      "parts": ["api_", "key = ", "abcdefghijklmnop"]
+    }
+  ]
+}

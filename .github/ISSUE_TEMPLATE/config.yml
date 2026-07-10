@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Private security report
+    url: https://hydrasystems.tech/contact.html
+    about: Do not disclose security issues publicly. Use the verified private email shown on this page with subject prefix SECURITY.
