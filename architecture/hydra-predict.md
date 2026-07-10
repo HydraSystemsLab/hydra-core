@@ -11,7 +11,7 @@ Hydra Predict studies prediction-domain workflows under strict truth and evidenc
 Public-safe research concerns include:
 
 - venue and quote reconciliation
-- paper, replay, shadow, demo, and live evidence separation
+- historical backtest, replay, forward shadow, demo execution, and verified live execution separation
 - forward observation
 - operator-reviewed promotion criteria
 

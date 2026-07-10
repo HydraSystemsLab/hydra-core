@@ -8,7 +8,7 @@ The canonical classification of named surfaces is the [Public Surface Registry](
 
 - **Hydra Core** publishes doctrine, architecture, governance, schemas, and operating expectations.
 - **Hydra Quant** is the governed trading product/system under development, backed by private implementation.
-- **Hydra Guardian** is the independent supervisory and risk authority governing private operation.
+- **Hydra Guardian** is the independent supervisory and risk authority governing Hydra Quant's private implementation.
 - **Hydra Predict** and **Hydra Ember** are private research labs without public product or execution claims.
 
 Current external availability and public-user permissions live only in the dated [Public Operating Posture](../status/public-operating-posture.md).
@@ -30,7 +30,7 @@ Hydra Core defines the durable public contract: control boundaries, state semant
 
 ## Hydra Quant
 
-Hydra Quant is a governed product under development. Engines may occupy research, `SHADOW`, `DEMO`, or `LIVE` modes only after explicit governed promotion within their authorized scope.
+Hydra Quant is a governed product under development. An engine may remain research-only or be configured in `OBSERVE_ONLY`, `SHADOW`, `DEMO`, or `LIVE` mode only within explicit governed authority.
 
 Strategy existence does not grant execution authority. Runner health does not grant strategy authority. Internal operational permission and public-user permission remain separate. See [Hydra Quant](hydra-quant.md) and the [private-alpha contract](../product/hydra-quant-private-alpha.md).
 

@@ -96,7 +96,7 @@ An item being out of public scope does not mean it is unimportant or unreviewed 
 - public-safe allowlists rather than denylist-only sanitization
 - evidence-tier metadata, provenance, and non-combination rules
 - posture expiry with `UNKNOWN/REVIEW_REQUIRED` behavior
-- least-privilege authenticated access and tested revocation
+- least-privilege authenticated access and revocation testing before promotion
 - repository validation for links, schemas, private boundaries, dynamic posture, and placeholders
 - append/correction governance history rather than silent revision
 

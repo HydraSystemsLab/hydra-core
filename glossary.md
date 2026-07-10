@@ -44,7 +44,7 @@ Resolve missing, stale, invalid, or contradictory control state toward the restr
 
 ## Forward Shadow
 
-Prospective decisions recorded as data arrives while order submission is disabled. Forward shadow is not execution evidence.
+Prospective decisions recorded as data arrive while order submission is disabled. Forward shadow is not execution evidence.
 
 ## Guardian
 

@@ -17,7 +17,7 @@ This is the only canonical location for changing public product posture. Durable
 | Hydra Core phase | Pre-v1 |
 | Hydra Quant phase | Private-alpha preparation |
 | External availability | Closed; invite-only preparation |
-| Planned initial external access | Read-only and forward-shadow only |
+| Planned initial external access | Read-only; `SHADOW` operating mode; forward-shadow evidence only |
 | Public-user broker/account connection | Disabled |
 | Public-user order submission | Disabled |
 | Public-user live execution | Disabled |

@@ -39,7 +39,7 @@ Everything in this section is **planned until the dated public posture explicitl
 - public-safe market and regime context
 - engine or research status without private logic
 - forward-shadow decisions
-- paper or shadow portfolio results labelled with their evidence class
+- paper or shadow portfolio results mapped to an exact evidence class; “paper” is not a standalone tier
 - decision and veto explanations
 - feed freshness and public-safe system health
 - evidence classification and provenance
@@ -50,7 +50,7 @@ Read-only user access and `SHADOW` operating mode are distinct controls: read-on
 
 ## Explicit Exclusions
 
-The planned initial alpha includes:
+The planned initial alpha explicitly excludes:
 
 - no public-user live trading
 - no public-user order submission
@@ -73,7 +73,7 @@ No progression from shadow to demo or live is promised.
 These are operational expectations for a controlled test. Future legal terms, privacy terms, and any other binding conditions must be reviewed separately before access is granted.
 
 - Access may be withdrawn to protect users, evidence integrity, or the system.
-- Shadow or paper results must never be represented as live execution.
+- Results described informally as shadow or paper must carry an exact canonical evidence-tier label and must never be represented as live execution.
 - Bugs, stale values, contradictions, and reconciliation failures should be reported promptly.
 - Credentials and access links must not be shared.
 - Screenshots or recordings may require review if they expose private-alpha information, other users, or protected fields.

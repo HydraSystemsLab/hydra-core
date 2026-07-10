@@ -26,7 +26,7 @@ Recovery functions detect continuity loss and hold the affected scope behind rec
 
 ### Public And Alpha Surfaces
 
-Public documents and an authenticated alpha Control Room are sanitized views over canonical state. They cannot grant private execution authority. Stale public posture becomes `UNKNOWN/REVIEW_REQUIRED` rather than remaining apparently current.
+Public documents and a planned authenticated alpha Control Room are sanitized views over canonical state. They cannot grant private execution authority. Stale public posture becomes `UNKNOWN/REVIEW_REQUIRED` rather than remaining apparently current.
 
 ## Execution Invariant
 

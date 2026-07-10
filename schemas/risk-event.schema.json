@@ -10,6 +10,30 @@
       "$ref": "#/$defs/extensionValue"
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "evidence": {
+            "properties": {
+              "disclosure": {
+                "const": "PUBLIC"
+              }
+            },
+            "required": ["disclosure"]
+          }
+        },
+        "required": ["evidence"]
+      },
+      "then": {
+        "properties": {
+          "public_evidence_refs": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ],
   "required": [
     "$schema",
     "$id",

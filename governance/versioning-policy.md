@@ -1,114 +1,99 @@
 # Versioning Policy
 
-Hydra Core is currently pre-v1.
-That status is intentional.
+Hydra Core uses semantic-style versions for the public governance contract. It remains pre-v1, so compatibility expectations are explicit and every governance-bearing change requires migration notes.
 
-This repository documents doctrine, architecture, governance, and operating expectations for a risk-first system whose public governance surface is still being stabilized.
+Release maturity and public/private scope are defined in [Release Posture](release-posture.md). Changing current product posture is defined only in the dated [Public Operating Posture](../status/public-operating-posture.md).
 
-## What Pre-v1 Means
+## Version Form
 
-Pre-v1 means the public structure and language are converging, but the project does not yet claim that its governance model is fully settled.
+Published versions use:
 
-In practice, pre-v1 means:
+`vMAJOR.MINOR.PATCH[-PRERELEASE]`
 
-- document structure may still be reorganized for clarity
-- terminology may still be tightened where ambiguity remains
-- governance coverage may expand as additional failure classes are formalized
-- public release discipline matters more than feature breadth
+The proposed first hardened candidate is:
 
-It does not mean governance is optional.
-It means the public standard is still being refined before it is declared stable.
+`v0.1.0-pre-alpha.1`
 
-## What Could Qualify Hydra Core For V1 Later
+It is proposed only. No tag or GitHub release is created by this repository change.
 
-Hydra Core would be a candidate for v1 when the public governance layer is stable enough that a serious operator can rely on it as the durable description of Hydra's control model.
+## Pre-v1 Semantics
 
-That would typically require:
+While `MAJOR` is `0`:
 
-- stable doctrine around risk, disarm, and fail-closed behavior
-- stable architectural descriptions of Core, Quant, and Guardian responsibilities
-- documented treatment of major failure classes and recovery expectations
-- a risk event ledger practice that demonstrates consistent governance evidence
-- fewer structural changes to core public concepts between releases
+- `MINOR` may contain governance- or architecture-incompatible changes
+- `PATCH` contains compatible clarification, correction, or policy hardening within the same minor contract
+- a prerelease suffix identifies a candidate that is not a stable public contract
+- every incompatible change must name affected documents and migration expectations
 
-Reaching v1 is not primarily about publishing more code.
-It is about stabilizing the public governance contract.
+Pre-v1 does not mean controls are optional. It means readers must consult the exact version or commit and review migration notes before treating a contract as compatible.
 
-V1 would not imply frozen strategies, fixed engine logic forever, or an end to parameter changes.
-It would indicate that the architecture, doctrine, and governance model have become stable enough to serve as a durable public reference.
+## Prerelease Labels
 
-## What Belongs In The Risk Event Ledger
+- `pre-alpha.N` — governance structure and initial product contract are still under active hardening
+- `alpha.N` — the public contract supports a bounded alpha posture, without implying general availability
+- `beta.N` — the public contract supports a bounded beta posture after explicit review
+- `rc.N` — candidate for a stable release with no known planned governance incompatibility
 
-The risk event ledger should record changes or events that materially affect enforcement, containment, disarm behavior, supervisory control, or the interpretation of system-level safety.
+Labels describe Hydra Core contract maturity. They do not grant Hydra Quant access, mode promotion, strategy authority, or public-user execution.
 
-Examples include:
+## Change Classification
 
-- new disarm classes or changes to disarm semantics
-- enforcement fixes after a constraint violation or integrity failure
-- changes to system-wide gating, risk-domain boundaries, or recovery controls
-- observability changes required to validate supervisory state
-- verified rearm after a material enforcement event
+Every pull request selects the highest applicable class:
 
-Examples that do not belong in the ledger include:
+| Class | Meaning | Version impact before v1 |
+| --- | --- | --- |
+| Editorial | Formatting, typo, or navigation change with no semantic effect | Usually patch or no release |
+| Clarifying governance | Makes an existing rule more precise without changing authority or required behavior | Patch |
+| Governance | Changes enforcement, evidence, recovery, permission, or operating expectations | Minor unless explicitly compatible |
+| Architecture-significant | Changes a public responsibility or authority boundary | Minor with migration notes |
+| Security hardening | Narrows exposure or strengthens validation without publishing protected detail | Patch or minor according to compatibility |
 
-- normal strategy tuning
-- parameter adjustments within an existing control model
-- day-to-day optimization that does not alter enforcement or safety posture
-- routine editorial cleanup, wording improvements, or document restructuring that does not change governance meaning
+If classification is uncertain, use the more significant class until owner review resolves it.
 
-## Change Classification Before Release
+## Compatibility
 
-Every change to Hydra Core should be classified before release.
-The purpose is to avoid mixing cosmetic edits with governance-bearing edits.
+A change is incompatible when a conforming reader, implementation, validator, or governance process must change to preserve the same meaning. Examples include:
 
-Use the following routing rules:
+- renaming or redefining a state value
+- changing the execution invariant or authority precedence
+- changing required evidence metadata
+- changing a schema-required field or enum
+- moving responsibility between Core, Guardian, execution, recovery, or user surfaces
+- changing correction or disclosure semantics
 
-- **Editorial change:** wording, formatting, ordering, typo fixes, or structural cleanup that does not change doctrine, enforcement expectations, authority boundaries, or recovery semantics
-- **Clarifying governance change:** language that makes an existing rule easier to interpret without changing the underlying control model; this usually does not require a ledger entry, but the editor should be able to explain why the meaning is unchanged
-- **Governance change:** any update that changes what is enforced, what must be observed, when disarm or rearm is expected, how failure classes are treated, or where supervisory authority sits; this should be reflected in the risk event ledger
-- **Architecture-significant change:** any update that changes the public responsibility boundary between Core, Quant, Guardian, execution, monitoring, or recovery; this should be treated as governance-significant even if no code is published here
+Adding optional explanatory prose is not automatically incompatible. Adding a required gate or narrowing permission may be intentionally incompatible even when it is safer.
 
-If a change cannot be confidently kept in the editorial or clarifying class, it should be treated as governance-significant by default.
+## Schema Versions
+
+Document release versions and schema versions are related but independent:
+
+- a schema `schema_version` changes when its machine contract changes
+- compatible optional schema additions increment the schema minor or patch according to the schema's own published rule
+- incompatible schema changes require a new major schema version or a new schema file
+- examples must declare and validate against their exact schema version
+
+Pre-v1 repository versions do not justify silently breaking a schema with the same `schema_version`.
 
 ## Release Discipline
 
-Before publishing a change set, the editor should be able to answer:
+Before proposing a version:
 
-- does this change alter governance meaning or only presentation
-- does this change introduce, remove, tighten, or relax an enforcement expectation
-- does this change affect disarm, veto, pause, recovery, or rearm semantics
-- does this change move a responsibility boundary between public system components
-- does this change require a corresponding risk event ledger entry
+- classify every change
+- identify public/private and dynamic-posture impact
+- identify state, evidence, ledger, and security impact
+- provide migration notes for incompatible semantics
+- run the documented validation suite
+- review the complete diff for protected information
+- prepare release notes without creating a tag or release until separately authorized
 
-If those questions cannot be answered cleanly, the change set is not yet ready for release.
+Ledger qualification and correction rules are defined only in the [Risk Event Ledger Policy](risk-event-ledger-policy.md). A repository release note does not fabricate a governance event.
 
-## What Should Remain Stable
+## V1 Criterion
 
-The following should become increasingly stable as Hydra Core matures:
-
-- risk-first doctrine
-- fail-closed operating bias
-- the separation of responsibilities between Core, Quant, and Guardian
-- the requirement that enforcement leave observable evidence
-- the expectation that recovery follows verification
-- the public description of supervisory authority and operating constraints
-
-## What May Evolve
-
-The following may continue to evolve during pre-v1 and, where justified, after v1:
-
-- strategy logic inside Hydra Quant
-- engine-level filters, market-specific logic, and decision heuristics
-- parameters and thresholds that do not change the underlying control model
-- how failure classes are grouped and described
-- how public architecture is presented for clarity
-- event schema refinements that improve governance visibility
-- additional governance documents covering new supervisory concerns
-
-Changes in these areas should preserve the underlying control philosophy even when the presentation becomes sharper.
+A future v1 requires owner review that the public governance contract is stable enough for durable external reliance. It would not prove private implementation completeness, strategy edge, regulatory status, or profitability.
 
 Related documents:
 
-- [Failure Modes](failure-modes.md)
-- [Risk Event Ledger](risk-event-ledger.md)
-- [System Overview](../architecture/system-overview.md)
+- [Release Posture](release-posture.md)
+- [Risk Event Ledger Policy](risk-event-ledger-policy.md)
+- [Proposed v0.1.0-pre-alpha.1 Notes](../release-notes/v0.1.0-pre-alpha.1.md)

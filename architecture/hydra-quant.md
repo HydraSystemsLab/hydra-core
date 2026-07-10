@@ -2,7 +2,7 @@
 
 Hydra Quant is the governed trading product/system under development within Hydra Systems. Its implementation is private; its public operating contract is defined by Hydra Core.
 
-Hydra Quant is preparing for a private alpha. Current public-user availability and permissions are stated only in the dated [Public Operating Posture](../status/public-operating-posture.md).
+A planned private alpha is governed by the public product contract. Current product phase, public-user availability, and permissions are stated only in the dated [Public Operating Posture](../status/public-operating-posture.md).
 
 ## Purpose
 
@@ -24,7 +24,7 @@ These classes describe architecture, not current availability. No private strate
 
 ## Authority And Promotion
 
-An engine may be evaluated in research, `SHADOW`, `DEMO`, or `LIVE` mode after governed promotion. Mode and authority are scoped; neither transfers implicitly between engines, environments, users, or layers.
+An engine may remain research-only or be configured in `OBSERVE_ONLY`, `SHADOW`, `DEMO`, or `LIVE` mode after the required governed decision. Mode and authority are scoped; neither transfers implicitly between engines, environments, users, or layers.
 
 - Strategy existence does not grant execution authority.
 - A healthy runner does not grant strategy authority or prove edge.
@@ -42,7 +42,7 @@ Hydra Control Room is the planned user-facing interface. The current public docu
 
 ## Private-Alpha Boundary
 
-The planned initial alpha is governed by the [Hydra Quant Private-Alpha Contract](../product/hydra-quant-private-alpha.md). Its intended initial external mode is read-only and forward-shadow. Public-user broker connection, order submission, and live execution remain disabled.
+The planned initial alpha is governed by the [Hydra Quant Private-Alpha Contract](../product/hydra-quant-private-alpha.md). That contract excludes public-user broker connection, order submission, and live execution; current permissions remain defined only by the dated posture.
 
 No progression from shadow to demo or live is promised. Any future change would require an explicit governance decision and an updated dated posture.
 

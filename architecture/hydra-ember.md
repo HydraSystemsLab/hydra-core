@@ -50,6 +50,7 @@ Hydra Core defines the doctrine Ember must follow:
 
 Related documents:
 
+- [Public Surface Registry](public-surface-registry.md)
 - [Hydra Ecosystem](hydra-ecosystem.md)
 - [Control Boundaries](control-boundaries.md)
 - [State Model](state-model.md)

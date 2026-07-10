@@ -13,8 +13,8 @@ The following text wireframe is a labelled design aid, not captured product outp
 | HYDRA CONTROL ROOM — CONCEPT                updated: <UTC time>   |
 +----------------------+----------------------+--------------------+
 | System posture       | Guardian verdict    | Operating mode     |
-| <trust/permission/   | <gate + reason>      | <OBSERVE/SHADOW>   |
-| lifecycle>           |                      |                    |
+| <trust/permission/   | <gate + reason>      | <OBSERVE_ONLY or   |
+| lifecycle>           |                      | SHADOW>            |
 +----------------------+----------------------+--------------------+
 | Market/regime context (public-safe, source and freshness shown)  |
 +------------------------------------------------------------------+
@@ -56,7 +56,7 @@ Shows recent forward-shadow decisions, blocks, and explanation categories with t
 
 ### Shadow Equity
 
-Shows a clearly labelled paper or forward-shadow series only when the evidence policy metadata is available. It must state that the series is not live performance and must not merge evidence tiers.
+Shows a series only when the evidence policy metadata is available. “Paper” is presentation shorthand, not an evidence tier; the display must carry an exact canonical tier, state that it is not live performance where applicable, and never merge tiers.
 
 ### Freshness, Health, Incidents, And Provenance
 
