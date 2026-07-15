@@ -1,6 +1,8 @@
 # Hydra Quant
 
-Hydra Quant is the governed trading product/system under development within Hydra Systems. Its implementation is private; its public operating contract is defined by Hydra Core.
+Hydra Quant is the proprietary systematic-trading platform under development
+within Hydra Systems. Its implementation is private; its public operating
+contract is defined by Hydra Core.
 
 A planned private alpha is governed by the public product contract. Current product phase, public-user availability, and permissions are stated only in the dated [Public Operating Posture](../status/public-operating-posture.md).
 
@@ -54,7 +56,7 @@ System operability, runner health, execution readiness, strategy edge, and publi
 
 Related documents:
 
-- [Hydra Ecosystem](hydra-ecosystem.md)
+- [Hydra Systems Hierarchy](hydra-ecosystem.md)
 - [Public Surface Registry](public-surface-registry.md)
 - [Hydra Guardian](hydra-guardian.md)
 - [Control Boundaries](control-boundaries.md)

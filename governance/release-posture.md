@@ -21,12 +21,13 @@ The proposed release candidate is `v0.1.0-pre-alpha.1`. It is not a tag or publi
 
 ## Public And Private Boundary
 
-Hydra Systems is the umbrella. Named surfaces and their approved public classifications are defined by the [Public Surface Registry](../architecture/public-surface-registry.md).
+Hydra Systems is the trading-infrastructure operation and umbrella. Named
+surfaces and their approved public roles are defined by the [Public Surface
+Registry](../architecture/public-surface-registry.md).
 
-- Hydra Core is the public governance surface.
-- Hydra Quant is a product under development with private implementation.
-- Hydra Guardian is an independent governed private supervisory surface.
-- Registered research labs make no public product or execution claim.
+- Hydra Quant is the proprietary systematic-trading platform under development.
+- Hydra Guardian is the supervisory and risk authority within the system.
+- Hydra Core is the public governance and failure-control specification.
 
 Public documentation does not imply that a private system is externally available. Internal operational permission is distinct from public-user permission and is not disclosed through the public posture record.
 

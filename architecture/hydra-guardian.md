@@ -1,6 +1,8 @@
 # Hydra Guardian
 
-Hydra Guardian is the independent supervisory and risk authority governing Hydra Quant's private implementation. It is a governed private surface, not a public product or strategy.
+Hydra Guardian is the supervisory and risk authority within Hydra Quant. Its
+implementation is private, and it is not a standalone public product or
+strategy.
 
 ## Authority
 

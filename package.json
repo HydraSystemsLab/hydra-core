@@ -2,7 +2,7 @@
   "name": "hydra-core-docs",
   "private": true,
   "version": "0.1.0-pre-alpha.1",
-  "description": "Pinned documentation-quality tooling for the Hydra Core public governance specification.",
+  "description": "Documentation-quality tooling for Hydra Systems public governance and failure-control specifications.",
   "scripts": {
     "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\""
   },
