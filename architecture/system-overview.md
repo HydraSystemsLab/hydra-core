@@ -1,52 +1,53 @@
 # System Overview
 
-## Concept
-Hydra is a multi-engine governed automation system:
-- multiple independent decision engines or research surfaces
-- Hydra Guardian as the supervisory and enforcement layer behind Hydra Quant
-- execution and observability layers that validate, normalise, and log actions
+Hydra Systems separates decision generation, supervisory authority, execution validation, observability, recovery, and user-facing truth. The separation limits what any one component can authorize.
 
-The system is designed so that:
-- engines can be wrong
-- execution can be delayed
-- markets can regime-shift
-…and the system still survives.
+## Conceptual Components
 
-## Components
-### Engines
-Engines generate intents (e.g., trade proposals) based on their own rules.
-Engines do not control global risk.
+### Research And Decision Engines
+
+Engines may propose intents within a defined research or operating scope. Strategy existence, a generated intent, or runner health does not grant execution authority or prove strategy edge.
 
 ### Hydra Guardian
-Hydra Guardian is the named supervisory and enforcement layer.
-It enforces system-level constraints, including (non-exhaustive):
-- max loss limits
-- exposure limits
-- disarm states
-- rule-based gating
 
-Guardian decisions are authoritative when system safety is in question.
+Hydra Guardian is the independent supervisory and risk authority. It evaluates scoped trust, permission, lifecycle, mode, and required gates. It may narrow permission, veto actions, disarm, or require recovery; it does not generate strategy direction.
 
 ### Execution Layer
-The execution layer:
-- validates orders against constraints
-- ensures protective parameters are present and sane
-- normalises requests
-- logs outcomes and rejects
 
-### Monitoring And Recovery
-Monitoring, observability, and watchdog functions exist to verify whether state remains trustworthy enough to continue operating.
-When state becomes stale, ambiguous, or unsafe, the expected behavior is pause, veto, disarm, or gated recovery rather than optimistic continuation.
+The execution layer validates eligible requests against current constraints, scope, destination, mode, idempotency, and lifecycle state. It preserves acknowledgements, rejects, fills, and terminal outcomes needed for authoritative reconciliation.
 
-## Design Goals
-- survivability > performance
-- enforcement > discretion
-- observability > opacity
-- simplicity at the boundaries
+### Monitoring And Observability
+
+Observability makes control state, decisions, freshness, and unresolved contradictions legible. A healthy dashboard or runner is evidence only for the named health contract; it is not permission or edge.
+
+### Recovery And Watchdog Functions
+
+Recovery functions detect continuity loss and hold the affected scope behind reconciliation. Restart and elapsed time do not clear `RECOVERY_REQUIRED` or rearm a system.
+
+### Public And Alpha Surfaces
+
+Public documents and a planned authenticated alpha Control Room are sanitized views over canonical state. They cannot grant private execution authority. Stale public posture becomes `UNKNOWN/REVIEW_REQUIRED` rather than remaining apparently current.
+
+## Execution Invariant
+
+> Execution is eligible only when trust is `SAFE`, permission is `ARMED`, lifecycle is `NORMAL`, the configured operating mode permits execution, and every required gate passes.
+
+Each condition applies to the named scope. A stricter higher-layer state controls, missing state fails closed, and public-user permission remains separate from internal permission.
+
+## Design Objectives
+
+- mechanically block defined unsafe actions while documented controls operate as designed
+- preserve narrow failure domains and independent supervisory authority
+- prefer authoritative reconciliation to optimistic continuity
+- keep observation available where safe while execution is blocked
+- separate system health, execution readiness, strategy edge, evidence class, and user permission
+- make promotion an explicit governance event
+
+This architecture reduces defined risks; it does not guarantee safety, security, or profitability.
 
 Related documents:
 
+- [Control Boundaries](control-boundaries.md)
+- [State Model](state-model.md)
 - [Hydra Guardian](hydra-guardian.md)
-- [Hydra Ecosystem](hydra-ecosystem.md)
-- [Risk Doctrine](../doctrine/risk-doctrine.md)
-- [Failure Modes](../governance/failure-modes.md)
+- [Threat Model](../governance/threat-model.md)

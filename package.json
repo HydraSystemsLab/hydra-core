@@ -1,0 +1,12 @@
+{
+  "name": "hydra-core-docs",
+  "private": true,
+  "version": "0.1.0-pre-alpha.1",
+  "description": "Documentation-quality tooling for Hydra Systems public governance and failure-control specifications.",
+  "scripts": {
+    "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\""
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "0.23.0"
+  }
+}

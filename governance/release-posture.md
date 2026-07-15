@@ -1,58 +1,48 @@
 # Release Posture
 
-Hydra Core is pre-v1 by design.
-This repository exists to stabilize the public governance surface before any later v1 decision.
+Hydra Core remains pre-v1. This document defines public release maturity and the public/private boundary; changing product availability belongs only in the dated [Public Operating Posture](../status/public-operating-posture.md).
 
-## Scope
+## Repository Scope
 
-`hydra-core` is the public repository for:
+`hydra-core` publishes:
 
-- architecture
-- doctrine
-- governance
-- operating expectations
+- architecture and control boundaries
+- doctrine and operating expectations
+- governance and evidence policy
+- public schemas and sanitized examples
 
-It is not a public software distribution.
-It does not publish private implementation code.
+It is a public specification, not a public trading-software distribution. Private strategy code, execution wiring, credentials, account material, operational logs, and protected research are outside scope.
+
+## Current Release Maturity
+
+Pre-v1 means public governance semantics are still being tightened and may require migration. It does not make the documented controls optional.
+
+The proposed release candidate is `v0.1.0-pre-alpha.1`. It is not a tag or published release. Version meaning and change classification are defined in the [Versioning Policy](versioning-policy.md).
 
 ## Public And Private Boundary
 
-Hydra is described publicly as related but distinct surfaces:
+Hydra Systems is the trading-infrastructure operation and umbrella. Named
+surfaces and their approved public roles are defined by the [Public Surface
+Registry](../architecture/public-surface-registry.md).
 
-- Hydra Core as the public governance and architecture surface
-- Hydra Quant as private trading and research infrastructure
-- Hydra Guardian as the private supervisory and enforcement layer behind Hydra Quant
-- Hydra Predict as a private prediction-market research and execution architecture
-- Hydra Ember as a private market research and scanner pipeline
+- Hydra Quant is the proprietary systematic-trading platform under development.
+- Hydra Guardian is the supervisory and risk authority within the system.
+- Hydra Core is the public governance and failure-control specification.
 
-Public documents in this repository describe the operating model and control expectations around those surfaces.
-They do not imply that any private Hydra system is publicly available.
+Public documentation does not imply that a private system is externally available. Internal operational permission is distinct from public-user permission and is not disclosed through the public posture record.
 
-## What Pre-v1 Means Here
+## Pre-v1 Stability Objective
 
-Pre-v1 means the public governance language is still being tightened and stabilized.
-It does not mean the governance model is optional.
+The repository is converging on stable meanings for:
 
-During pre-v1:
+- independent trust, permission, lifecycle, and mode axes
+- fail-closed precedence and recovery
+- public evidence classes and claim boundaries
+- historical governance recording
+- public/private information boundaries
 
-- terminology may still be refined for clarity
-- document structure may still be improved
-- governance coverage may expand where important failure classes need clearer treatment
+A future v1 would signal stability of the public governance contract. It would not mean that private strategy development is complete, that private implementation is public, or that profitability has been proved.
 
-What should remain stable even before v1:
+## Canonical Current Posture
 
-- risk-first doctrine
-- fail-closed bias
-- the separation between replaceable strategies and non-optional enforcement
-- the requirement that recovery follow verification
-
-## What V1 Would Mean Later
-
-A future v1 would mean the public governance surface has become stable enough to serve as a durable reference for serious operators and builders.
-It would not mean:
-
-- the strategy stack is finished
-- private systems have become public
-- experimentation inside private strategy environments has ended
-
-V1 would describe stability of public architecture and governance meaning, not finality of private implementation.
+For current public release stage, product stage, external access, and public-user permissions, consult the [Public Operating Posture](../status/public-operating-posture.md). If that record is stale, its consumer-facing status is `UNKNOWN/REVIEW_REQUIRED`.

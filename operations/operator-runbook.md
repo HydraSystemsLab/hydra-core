@@ -1,100 +1,95 @@
 # Operator Runbook
 
-This runbook defines the public operating expectations for human supervision around a governed Hydra system.
-It is principles-first and intentionally does not expose private implementation procedures.
+This public runbook defines supervisory expectations without exposing private commands, paths, accounts, endpoints, or execution procedures.
 
-The operator's job is not to force continuity.
-The operator's job is to preserve trustworthy control.
+The operator's job is not to force continuity. It is to preserve trustworthy control.
 
-## Safe Startup Expectations
+## Before Any Execution Becomes Eligible
 
-Before execution is allowed to resume, an operator should be able to confirm at a high level that:
+For the named scope, an operator must be able to verify:
 
-- supervisory control is present and authoritative
-- the system is not in a known disarm or recovery-required condition
-- observability surfaces are current enough to support decision-making
-- recent state is coherent enough to explain whether prior actions were completed, rejected, or left unresolved
-- execution permission, if granted, is governed rather than assumed
+- trust is currently `SAFE`
+- permission is explicitly `ARMED`
+- lifecycle is `NORMAL`
+- the configured mode permits the requested action and destination
+- every required gate passes on current state
+- no stricter higher-layer restriction applies
+- observability can reconcile recent intents, exposure, and lifecycle outcomes
 
-Startup is not merely process availability.
-It is the re-establishment of trustworthy operating state.
+A running process, green health check, restored feed, or valid strategy intent is insufficient.
 
-## What A Disarm Means
+## Safe Startup
 
-A disarm means permission to execute has been withdrawn.
-It should be treated as a safety outcome, not as an inconvenience.
+Startup establishes process availability; it does not establish execution eligibility. After interruption, treat unresolved prior intent, exposure, locks, mode, or permission as `AMBIGUOUS`, `DISARMED`, and `RECOVERY_REQUIRED` until authoritative reconciliation proves otherwise.
 
-Operationally, a disarm means:
+Diagnostics may remain available. New exposure remains blocked.
 
-- no new exposure should be introduced
-- the triggering condition must be understood before resumption is considered
-- the burden of proof has shifted from "why stop" to "why resume"
+## Responding To A Disarm
 
-Disarm is evidence that the control model is still active.
+On disarm:
 
-## When Not To Rearm
+- stop new exposure in the affected scope
+- preserve state and evidence
+- identify the triggering authority, gate, and reason
+- determine whether broader correlated scope is affected
+- permit only explicitly defined containment actions
+- record recovery conditions before considering restoration
 
-Do not rearm when:
+The burden of proof changes from “why stop” to “why resume.”
 
-- system state remains ambiguous, stale, or contradictory
-- the cause of the disarm is not yet understood
-- observability cannot explain current exposure or recent control decisions
-- a restart has occurred without full reconciliation
-- execution outcomes, rejects, or prior intents remain unresolved
-- pressure to resume is based on missed opportunity rather than validated safety
+## Contradiction And Missing State
 
-Elapsed time is not a rearm condition.
-Operator confidence is not a rearm condition.
+When sources disagree, apply the intersection of permitted actions and use the more restrictive posture. Do not average verdicts, prefer the newest permissive value without authority checks, or fill a missing value from operator expectation.
 
-## What Should Be Visible Before Execution Resumes
+Stale state is missing state. If a public posture record expires, display `UNKNOWN/REVIEW_REQUIRED` rather than its old values as current.
 
-Before execution resumes, the operator should have enough truth surfaced to answer:
+## Recovery Review
 
-- what state the system is currently in
-- why it entered that state
-- whether any exposure, intent, or constraint state remains unresolved
-- whether supervisory controls are active and authoritative
-- what changed between disarm and proposed rearm
+Before clearing `RECOVERY_REQUIRED`, verify at a public-safe conceptual level:
 
-If those answers are not available, the system is not ready to resume.
+- the cause and scope are understood
+- exposure, orders, fills, and intents reconcile where applicable
+- control, data, time, and mode state are coherent and fresh
+- enforcement and idempotency controls have been tested as required
+- evidence is preserved and corrections are recorded
+- residual risk and affected dependencies are reviewed
+- the proper authority approves lifecycle normalization
 
-## Why Operator Truth Surfaces Matter
+Restart, elapsed time, and operator confidence are not recovery evidence.
 
-Operators should not be asked to infer safety from silence.
-They need visible, current, and coherent control evidence.
+## Rearm Review
 
-Truth surfaces matter because they:
+Rearm is separate from recovery. Before changing `DISARMED` to `ARMED`, verify lifecycle is already `NORMAL`, trust is `SAFE`, the destination and mode are correct, every gate passes, and no higher-layer disarm remains.
 
-- reduce the chance of rearming into ambiguity
-- make disarm and veto behavior explainable
-- preserve accountability for supervisory decisions
-- separate verified recovery from hopeful recovery
+Record who or what authority granted rearm, its scope, its evidence, and its time. Rearm does not authorize a specific trade or mode promotion.
 
-Dashboards, logs, and alerts are useful only if they support authoritative interpretation of system state.
-Visibility that cannot support a go or no-go decision is incomplete.
+## Mode Promotion
 
-## When To Trigger Governance Recording Or Ledger Review
+Never promote mode because a target metric was reached, a testing window ended, or a runner remained healthy. Promotion requires explicit evidence classification, authority boundaries, public/private review, failure testing, and a governance decision.
 
-An operator should trigger governance recording or ledger review when an event materially affects:
+`ARMED` in `SHADOW` remains shadow-only. It cannot authorize a demo or live order.
 
-- disarm, veto, pause, or rearm semantics
-- supervisory authority or control boundaries
-- required observability for proving safe state
-- recovery expectations after a risk or integrity event
-- containment behavior for a meaningful failure class
+## Operator Truth Surfaces
 
-Examples include:
+An operator surface should show, for the disclosed scope:
 
-- a disarm caused by ambiguous execution or supervisory state
-- a recovery path that required tighter validation than before
-- a failure that exposed a gap in the public control model
-- an architecture hardening change that moved authority between layers
+- each state axis and observation time
+- effective action eligibility
+- named gate verdicts and reasons
+- freshness and provenance
+- unresolved exposure or lifecycle ambiguity
+- active incidents and recovery conditions
+- last reconciliation and decision authority
 
-Routine activity, expected losses, or ordinary strategy maintenance do not automatically belong in governance recording.
-The threshold is governance significance, not operational noise.
+Dashboards support decisions only when their values reconcile with canonical state. Visibility is not enforcement.
+
+## Governance Recording
+
+Review the [Risk Event Ledger Policy](../governance/risk-event-ledger-policy.md) when an event materially changes enforcement, authority, containment, recovery, rearm, mode promotion, or safety-critical evidence. Routine trades and strategy tuning do not automatically qualify.
 
 Related documents:
 
-- [Operating Principles](operating-principles.md)
 - [State Model](../architecture/state-model.md)
-- [Risk Event Ledger Policy](../governance/risk-event-ledger-policy.md)
+- [Failure Modes](../governance/failure-modes.md)
+- [Threat Model](../governance/threat-model.md)
+- [Operating Principles](operating-principles.md)

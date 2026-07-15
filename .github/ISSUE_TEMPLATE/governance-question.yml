@@ -1,0 +1,44 @@
+name: Governance question
+description: Ask about public authority, state, evidence, recovery, ledger, or release semantics.
+title: "governance: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Keep the question public-safe. Do not request private strategy logic or disclose sensitive implementation. Security concerns belong in the private route documented in SECURITY.md.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Governance area
+      options:
+        - Control boundaries
+        - State and transitions
+        - Public operating posture
+        - Evidence classification
+        - Risk-event ledger
+        - Release and versioning
+        - Public/private boundary
+        - Other public governance
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: State the governance question and the public documents already consulted.
+    validations:
+      required: true
+  - type: textarea
+    id: consequence
+    attributes:
+      label: Why the answer matters
+      description: Describe the ambiguity or downstream interpretation without private operational detail.
+    validations:
+      required: true
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Boundaries
+      options:
+        - label: This is not a request for strategy logic, credentials, account details, live status, or individualized financial advice.
+          required: true

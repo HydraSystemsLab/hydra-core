@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/HydraSystemsLab/hydra-core/main/schemas/risk-event.schema.json",
+  "title": "Hydra Public Risk Event V1",
+  "description": "A prospective, sanitized public governance event. Historical state is not current authorization.",
+  "type": "object",
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-[a-z0-9]+(?:-[a-z0-9]+)*$": {
+      "$ref": "#/$defs/extensionValue"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "evidence": {
+            "properties": {
+              "disclosure": {
+                "const": "PUBLIC"
+              }
+            },
+            "required": ["disclosure"]
+          }
+        },
+        "required": ["evidence"]
+      },
+      "then": {
+        "properties": {
+          "public_evidence_refs": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ],
+  "required": [
+    "$schema",
+    "$id",
+    "schema_version",
+    "event_id",
+    "occurred_at",
+    "recorded_at",
+    "scope",
+    "event_type",
+    "reason_code",
+    "action_code",
+    "public_summary",
+    "historical_context",
+    "evidence",
+    "public_evidence_refs",
+    "current_authorization_disclaimer"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "../../schemas/risk-event.schema.json"
+    },
+    "$id": {
+      "type": "string",
+      "format": "uri-reference",
+      "minLength": 1
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "event_id": {
+      "$ref": "#/$defs/eventId"
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "scope": {
+      "type": "string",
+      "pattern": "^[A-Z0-9][A-Z0-9._:-]{1,127}$"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "DISARM",
+        "FIX_COMPLETED",
+        "REARM",
+        "ENGINE_PAUSED",
+        "CONSTRAINT_VIOLATION",
+        "MANUAL_INTERVENTION",
+        "RISK_LIMIT_BREACH"
+      ]
+    },
+    "reason_code": {
+      "$ref": "#/$defs/code"
+    },
+    "action_code": {
+      "$ref": "#/$defs/code"
+    },
+    "public_summary": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 800
+    },
+    "historical_context": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 1200
+    },
+    "before_state": {
+      "$ref": "#/$defs/state"
+    },
+    "after_state": {
+      "$ref": "#/$defs/state"
+    },
+    "evidence": {
+      "$ref": "#/$defs/evidence"
+    },
+    "public_evidence_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri-reference",
+        "minLength": 1
+      }
+    },
+    "correction_of": {
+      "$ref": "#/$defs/eventId"
+    },
+    "supersedes": {
+      "$ref": "#/$defs/eventId"
+    },
+    "current_authorization_disclaimer": {
+      "type": "string",
+      "const": "Historical event only; not current authorization."
+    }
+  },
+  "$defs": {
+    "eventId": {
+      "type": "string",
+      "pattern": "^[A-Z0-9][A-Z0-9._:-]{2,127}$"
+    },
+    "code": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)*$",
+      "maxLength": 128
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "trust": {
+          "type": "string",
+          "enum": ["SAFE", "DEGRADED", "AMBIGUOUS", "UNSAFE"]
+        },
+        "permission": {
+          "type": "string",
+          "enum": ["ARMED", "DISARMED"]
+        },
+        "lifecycle": {
+          "type": "string",
+          "enum": ["NORMAL", "RECOVERY_REQUIRED"]
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["OBSERVE_ONLY", "SHADOW", "DEMO", "LIVE"]
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tier", "disclosure", "generated_at", "tested_gate", "limitations"],
+      "properties": {
+        "tier": {
+          "type": "string",
+          "enum": [
+            "HISTORICAL_BACKTEST",
+            "REPLAY",
+            "FORWARD_SHADOW",
+            "DEMO_EXECUTION",
+            "VERIFIED_LIVE_EXECUTION",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "disclosure": {
+          "type": "string",
+          "enum": ["PUBLIC", "PARTIAL", "WITHHELD", "NOT_APPLICABLE"]
+        },
+        "generated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "tested_gate": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "limitations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        }
+      }
+    },
+    "extensionScalar": {
+      "type": ["string", "number", "integer", "boolean", "null"]
+    },
+    "extensionValue": {
+      "description": "Public-safe extension only. It must not carry private payloads or override core semantics.",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/extensionScalar"
+        },
+        {
+          "type": "array",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/$defs/extensionScalar"
+          }
+        }
+      ]
+    }
+  }
+}

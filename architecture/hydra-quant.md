@@ -1,79 +1,63 @@
 # Hydra Quant
 
-Hydra Quant is private trading and research infrastructure governed by Hydra Core doctrine.
+Hydra Quant is the proprietary systematic-trading platform under development
+within Hydra Systems. Its implementation is private; its public operating
+contract is defined by Hydra Core.
 
-It is not public strategy code.
-It is a private implementation surface that must stay inside public control boundaries.
+A planned private alpha is governed by the public product contract. Current product phase, public-user availability, and permissions are stated only in the dated [Public Operating Posture](../status/public-operating-posture.md).
 
 ## Purpose
 
-Hydra Quant exists to make market automation observable, constrained, and recoverable.
+Hydra Quant is intended to make market-system decisions observable, constrained, recoverable, and honestly evidenced. It does not promise constant activity, profitability, or progression to execution.
 
-The aim is not constant activity.
-The aim is supervised operation where unsafe state is blocked, ambiguous state fails closed, and promotion requires evidence.
+## Durable Architecture
 
-## What It Is
+Public-safe component classes may include:
 
-Hydra Quant is a risk-first execution and research stack.
+- market and regime observation
+- research and decision engines
+- supervisory evaluation through Hydra Guardian
+- execution validation within explicitly authorized modes
+- canonical ledgers and evidence provenance
+- feed, state, and lifecycle health checks
+- operator and user-facing truth surfaces
 
-Public-safe components include:
+These classes describe architecture, not current availability. No private strategy logic, protected parameters, broker wiring, account configuration, or operational path is published here.
 
-- observation stack
-- operator brief
-- live control room
-- feed and freshness checks
-- proof and recovery visibility
-- fail-closed checks around live posture
-- supervisory boundaries through Hydra Guardian and Hydra Core
+## Authority And Promotion
 
-These surfaces help an operator understand whether the system is safe enough to act.
-They do not replace enforcement.
+An engine may remain research-only or be configured in `OBSERVE_ONLY`, `SHADOW`, `DEMO`, or `LIVE` mode after the required governed decision. Mode and authority are scoped; neither transfers implicitly between engines, environments, users, or layers.
 
-## Current Public-Safe Posture
+- Strategy existence does not grant execution authority.
+- A healthy runner does not grant strategy authority or prove edge.
+- `SAFE` control state does not prove profitability.
+- `ARMED` is conditional permission within the configured mode, never an instruction.
+- `ARMED` in `SHADOW` permits shadow processing only and never order submission.
+- A private internal permission does not grant public-user permission.
+- A private implementation does not prove that an external product is available.
 
-The current private posture has one approved live-money lane, `C15396`.
-That statement describes current governance state, not a permanent promise.
+Machine-learning or statistical components may inform research or bounded supervisory context. They cannot generate, enlarge, or inherit execution authority implicitly. Any promotion requires explicit evidence, defined authority boundaries, negative testing, and governance review.
 
-Other lanes are shadow, quarantined, or research-only unless evidence and controls justify promotion.
-B5 remains shadow/no-send in the current posture.
-Non-approved lanes are not live just because they exist.
+## Hydra Control Room
 
-ML remains shadow-only as a meta-filter and supervisory signal.
-ML-assisted regime detection exists as part of the context layer, used to understand market state and support supervised decision-making.
-It does not create trades, override risk controls, or carry live execution authority on its own.
+Hydra Control Room is the planned user-facing interface. The current public document is a [conceptual placeholder](../product/control-room-concept.md), not a production screenshot and not evidence of live account state or performance.
 
-Funded-account inactivity risk is visible to the operator through a sentinel.
-That visibility does not loosen C15396.
-Hydra Quant does not force activity by weakening rules.
+## Private-Alpha Boundary
 
-## What Is Not Public
+The planned initial alpha is governed by the [Hydra Quant Private-Alpha Contract](../product/hydra-quant-private-alpha.md). That contract excludes public-user broker connection, order submission, and live execution; current permissions remain defined only by the dated posture.
 
-Hydra Quant does not publish private strategy rules, private parameters, execution wiring, account-specific operating material, live configuration, private evidence files, or operational procedures.
+No progression from shadow to demo or live is promised. Any future change would require an explicit governance decision and an updated dated posture.
 
-The public docs describe behavior and boundaries.
-They do not expose the machinery.
+## Evidence Boundary
 
-## Relationship To Guardian/Core
+Historical backtest, replay, forward shadow, demo execution, and verified live execution are separate evidence classes under the [Public Evidence Policy](../governance/public-evidence-policy.md). They cannot be combined into one track record.
 
-Hydra Core defines the public doctrine.
-Hydra Guardian enforces supervisory permission.
-Hydra Quant operates inside those constraints.
-
-Quant may produce a valid local intent and still be blocked by Guardian or Core-level controls.
-That is expected behavior.
-
-## Current Boundaries
-
-- C15396 is the current approved live-money lane.
-- ML is shadow/meta-filter only unless separately promoted under governance.
-- ML-assisted regime detection is context, not independent execution authority.
-- B5 is shadow/no-send in the current posture.
-- Quarantined and research lanes require evidence and controls before promotion.
-- Activity pressure does not justify weaker rules.
+System operability, runner health, execution readiness, strategy edge, and public-user permission are separate claims.
 
 Related documents:
 
-- [Hydra Ecosystem](hydra-ecosystem.md)
+- [Hydra Systems Hierarchy](hydra-ecosystem.md)
+- [Public Surface Registry](public-surface-registry.md)
 - [Hydra Guardian](hydra-guardian.md)
 - [Control Boundaries](control-boundaries.md)
-- [Risk Doctrine](../doctrine/risk-doctrine.md)
+- [State Model](state-model.md)

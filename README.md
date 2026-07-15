@@ -1,115 +1,70 @@
 # Hydra Core
 
-**Status:** Pre-v1 governance and architecture repository.
+Hydra Core is the public governance and failure-control specification for Hydra
+Systems trading infrastructure.
 
-Hydra Core documents a governed, risk-first systems architecture for market and research automation.
-It describes how enforcement, observability, and fail-closed operations are expected to work across the Hydra system under supervision.
+**Hydra Systems builds trading infrastructure for independent traders and small
+prop desks.** Core documents how that infrastructure constrains authority,
+contains failure, preserves evidence, and returns to service deliberately.
 
-Losses are expected. Escalation is not.
+[Formal specifications](docs-map.md) · [Current public posture](status/public-operating-posture.md) · [Private-alpha contract](product/hydra-quant-private-alpha.md) · [Security](SECURITY.md) · [Hydra Systems](https://hydrasystems.tech)
 
-## Repository Scope
+## Why Controlled Failure Matters
 
-Hydra is described publicly as a governed core plus private implementation surfaces: Quant, Guardian, Predict, and Ember.
-This repository explains the doctrine and boundaries.
-It does not publish private strategy logic, execution wiring, account configuration, or live operations.
+Automated trading systems fail through stale state, duplicate action, ambiguous
+authority, broken continuity, and unsafe recovery as well as through incorrect
+decisions. Hydra Core defines the boundaries that keep those failures narrow,
+observable, and recoverable.
 
-- **Hydra Core**: public architecture, doctrine, governance, and operating principles
-- **Hydra Quant**: private trading and research infrastructure operating within those constraints
-- **Hydra Guardian**: private supervisory and enforcement layer behind Hydra Quant, responsible for veto, disarm, and recovery decisions
-- **Hydra Predict**: private prediction-market research and execution architecture
-- **Hydra Ember**: private market research and scanner pipeline
+The central invariant is:
 
-This repository is `hydra-core` only.
+> Execution is eligible only when trust is `SAFE`, permission is `ARMED`,
+> lifecycle is `NORMAL`, the configured operating mode permits execution, and
+> every required gate passes.
 
-## Operating Position
+Eligibility is conditional, never an instruction. Missing or contradictory
+state fails closed.
 
-Hydra is designed around a simple assumption:
+## System Hierarchy
 
-> If a rule can be broken, it eventually will be.
+- **Hydra Systems** — the infrastructure operation and umbrella.
+- **Hydra Quant** — the proprietary systematic-trading platform under
+  development.
+- **Hydra Guardian** — the supervisory and risk authority within the system.
+- **Hydra Core** — the public governance and failure-control specification.
 
-That assumption drives a system model in which:
+The [Public Surface Registry](architecture/public-surface-registry.md) is the
+canonical classification of these named surfaces.
 
-- risk is enforced at the system boundary, not left to operator discretion
-- ambiguous state is treated as unsafe until proven otherwise
-- observability is part of control, not an afterthought
-- recovery requires verification rather than optimism
+## Formal Specifications
 
-The goal is not uninterrupted activity.
-The goal is controlled survivability under loss, latency, ambiguity, and operator error.
-
-## High-Level Architecture
-
-```mermaid
-flowchart TD
-    S[Strategies / Engines] -->|propose trades| G[Hydra Guardian]
-    G -->|approved execution| X[Execution Layer]
-    X -->|execution outcomes| G
-
-    M[Monitoring / Observability]
-    R[Recovery / Watchdog Layer]
-
-    S -. state / health .-> M
-    G -. decisions / events .-> M
-    X -. execution / fills / status .-> M
-
-    M -. alerts / anomalies .-> G
-    M -. watchdog signals .-> R
-
-    R -. restart / recovery controls .-> S
-    R -. restart / recovery controls .-> G
-    R -. restart / recovery controls .-> X
-```
-
-This diagram is conceptual.
-It shows supervisory relationships around the system, not private implementation details.
-
-## Core Principles
-
-- **Risk First**: exposure is constrained before execution is allowed
-- **Fail Closed**: uncertainty, stale state, or invalid constraints lead to rejection or disarm
-- **Engine Isolation**: local failures should remain local unless supervisory policy escalates them
-- **Observability**: enforcement decisions must leave enough evidence to reconstruct what happened
-- **No Escalation**: losses do not justify larger size, looser rules, or bypassed controls
-
-## Start Here
-
-- [Docs Map](docs-map.md): recommended reading order for the public governance surface
-- [System Overview](architecture/system-overview.md): high-level public architecture and control boundaries
-- [Hydra Ecosystem](architecture/hydra-ecosystem.md): public-safe view of Core and the private implementation surfaces
-- [Project Surface Docs](docs-map.md#project-surface-docs): public-safe docs for Quant, Guardian, Predict, and Ember
-- [Control Boundaries](architecture/control-boundaries.md): responsibilities and authority lines between engines, Guardian, execution, monitoring, and recovery
-- [State Model](architecture/state-model.md): public-safe operating states and their fail-closed meaning
-- [Hydra Guardian](architecture/hydra-guardian.md): the named supervisory and enforcement layer behind Hydra Quant
-- [Risk Doctrine](doctrine/risk-doctrine.md): core operating principles for risk, disarm, and fail-closed behavior
-- [Why Most Bots Fail](doctrine/why-most-bots-fail.md): strategy-agnostic doctrine on survivability and structural failure
-
-## Documentation Map
-
-- [Docs Map](docs-map.md)
-- [System Overview](architecture/system-overview.md)
-- [Hydra Ecosystem](architecture/hydra-ecosystem.md)
-- [Hydra Quant](architecture/hydra-quant.md)
-- [Hydra Guardian](architecture/hydra-guardian.md)
-- [Hydra Predict](architecture/hydra-predict.md)
-- [Hydra Ember](architecture/hydra-ember.md)
 - [Control Boundaries](architecture/control-boundaries.md)
-- [State Model](architecture/state-model.md)
-- [Glossary](glossary.md)
-- [Risk Doctrine](doctrine/risk-doctrine.md)
-- [Why Most Bots Fail](doctrine/why-most-bots-fail.md)
-- [Operating Principles](operations/operating-principles.md)
-- [Operator Runbook](operations/operator-runbook.md)
+- [Multi-Axis State Model](architecture/state-model.md)
 - [Failure Modes](governance/failure-modes.md)
-- [Release Posture](governance/release-posture.md)
-- [Versioning Policy](governance/versioning-policy.md)
-- [Risk Event Ledger](governance/risk-event-ledger.md)
-- [Risk Event Ledger Policy](governance/risk-event-ledger-policy.md)
+- [Threat Model](governance/threat-model.md)
+- [Public Evidence Policy](governance/public-evidence-policy.md)
+- [Risk Event Ledger and Schema](governance/risk-event-ledger.md)
+- [Operator and Recovery Expectations](operations/operator-runbook.md)
+- [Complete Documentation Index](docs-map.md)
 
-For edits that change governance meaning, enforcement expectations, or recovery semantics, review the change classification guidance in [Versioning Policy](governance/versioning-policy.md) before updating the ledger.
+## Current Public Boundary
 
-## Status
+Hydra Core remains pre-v1. Hydra Quant is in private-alpha preparation. Planned
+initial external access is read-only and shadow-only; public-user broker
+connection, order submission, and live execution remain disabled.
 
-Hydra Core remains pre-v1.
+The dated [Public Operating Posture](status/public-operating-posture.md) is the
+only source for changing availability and permission. When it expires,
+consumers must report `UNKNOWN/REVIEW_REQUIRED` rather than assume continuity.
 
-This repository is intended to stabilize public doctrine and governance before any later v1 release decision.
-It should be read as architecture and operating policy, not as a public software distribution.
+Public documents do not expose strategy logic, parameters, credentials,
+accounts, broker wiring, operational paths, logs, or protected research. They
+also do not establish profitability, availability, certification, or regulatory
+approval.
+
+## Repository Status
+
+No software release, tag, or reuse licence has been published. See the
+[Release Posture](governance/release-posture.md), [Versioning Policy](governance/versioning-policy.md),
+and [Contributing Guide](CONTRIBUTING.md) before relying on or proposing changes
+to this pre-v1 contract.

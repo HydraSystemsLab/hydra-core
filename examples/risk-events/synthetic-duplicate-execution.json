@@ -1,0 +1,38 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:synthetic-duplicate-execution",
+  "schema_version": "1.0.0",
+  "event_id": "SYNTHETIC-DUPLICATE-EXECUTION-001",
+  "occurred_at": "2000-01-01T00:00:00Z",
+  "recorded_at": "2000-01-01T00:05:00Z",
+  "scope": "SYNTHETIC_DEMO_SCOPE",
+  "event_type": "CONSTRAINT_VIOLATION",
+  "reason_code": "DUPLICATE_EXECUTION_DETECTED",
+  "action_code": "AFFECTED_SCOPE_DISARMED",
+  "public_summary": "Synthetic example: duplicate execution evidence causes the affected demonstration scope to disarm and enter recovery.",
+  "historical_context": "This is an invented schema example showing how a duplicate execution would be described at a recorded time; it is not a Hydra event.",
+  "before_state": {
+    "trust": "SAFE",
+    "permission": "ARMED",
+    "lifecycle": "NORMAL",
+    "mode": "DEMO"
+  },
+  "after_state": {
+    "trust": "UNSAFE",
+    "permission": "DISARMED",
+    "lifecycle": "RECOVERY_REQUIRED",
+    "mode": "DEMO"
+  },
+  "evidence": {
+    "tier": "DEMO_EXECUTION",
+    "disclosure": "NOT_APPLICABLE",
+    "generated_at": "2000-01-01T00:04:00Z",
+    "tested_gate": "single-execution integrity",
+    "limitations": [
+      "Synthetic example with no real orders, account, broker, or performance data."
+    ]
+  },
+  "public_evidence_refs": [],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "x-example-only": true
+}

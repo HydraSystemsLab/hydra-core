@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/HydraSystemsLab/hydra-core/main/schemas/public-operating-posture.schema.json",
+  "title": "Hydra Core Public Operating Posture",
+  "description": "A dated public-user posture record. It must not disclose private engine-level permission.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "as_of",
+    "review_due_at",
+    "stale_after",
+    "release_stage",
+    "product_stage",
+    "external_access",
+    "public_user_mode",
+    "public_user_broker_connection",
+    "public_user_order_submission",
+    "public_user_live_execution",
+    "control_room_status",
+    "evidence_policy_ref",
+    "alpha_contract_ref",
+    "source_commit",
+    "notes"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "../schemas/public-operating-posture.schema.json"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "review_due_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "stale_after": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "release_stage": {
+      "type": "string",
+      "enum": ["PRE_V1"]
+    },
+    "product_stage": {
+      "type": "string",
+      "enum": ["PRIVATE_ALPHA_PREPARATION"]
+    },
+    "external_access": {
+      "type": "string",
+      "enum": ["CLOSED_INVITE_ONLY_PREPARATION"]
+    },
+    "public_user_mode": {
+      "type": "string",
+      "enum": ["READ_ONLY_FORWARD_SHADOW"]
+    },
+    "public_user_broker_connection": {
+      "$ref": "#/$defs/disabledPermission"
+    },
+    "public_user_order_submission": {
+      "$ref": "#/$defs/disabledPermission"
+    },
+    "public_user_live_execution": {
+      "$ref": "#/$defs/disabledPermission"
+    },
+    "control_room_status": {
+      "type": "string",
+      "enum": ["CONCEPTUAL_IN_DEVELOPMENT"]
+    },
+    "evidence_policy_ref": {
+      "type": "string",
+      "const": "governance/public-evidence-policy.md"
+    },
+    "alpha_contract_ref": {
+      "type": "string",
+      "const": "product/hydra-quant-private-alpha.md"
+    },
+    "source_commit": {
+      "description": "Full SHA of the source snapshot reviewed when the posture was prepared; not the impossible self-hash of the containing commit.",
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "notes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "$defs": {
+    "disabledPermission": {
+      "type": "string",
+      "const": "DISABLED"
+    }
+  }
+}

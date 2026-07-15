@@ -1,9 +1,9 @@
-# Why Most Trading Bots Fail
+# Why Trading Bots Fail
 
-> Profitable ideas are common. Survivable systems are rare.
+> A promising idea is not evidence of a survivable system.
 
-Most automated trading systems don’t fail because the entries are bad.
-They fail because the system allows *failure modes* to exist.
+Automated trading systems can fail even when their entry logic appears promising.
+Uncontained system-level *failure modes* are a separate source of risk.
 
 This document explains why.
 
@@ -13,22 +13,22 @@ This document explains why.
 
 A system can be profitable and still be structurally unsafe.
 
-Backtests reward:
+Backtest optimization often favors:
 
 * High win rates
 * Smooth equity curves
 * Optimised parameters
 
-Markets punish:
+Live conditions can expose:
 
 * Escalation
 * Fragility
 * Undefined behaviour under stress
 
-Most bots die *after* they prove they can make money.
+Favorable historical results do not prove operational survivability.
 
-The failure doesn’t come from the strategy.
-It comes from what the system allows to happen when things go wrong.
+Failure may come from strategy weakness, operational weakness, or both.
+This doctrine focuses on what the surrounding system permits when things go wrong.
 
 ---
 
@@ -42,24 +42,24 @@ Discipline:
 * Degrades under pressure
 * Fails silently
 
-If a system depends on discipline, it is already unsafe.
+If a system depends only on discipline, its control model is incomplete and may be unsafe.
 
-A rule that can be overridden is not a rule.
-A limit that can be ignored is not a limit.
+A rule that relies solely on overrideable discretion is not an enforced control.
+A limit that can be silently ignored is not an enforced limit.
 
-Human operators and automated code both fail the same way:
-They escalate risk when under stress unless physically prevented from doing so.
+Human operators and automated code can both escalate risk under stress.
+Defined escalation paths should be mechanically blocked within documented control boundaries.
 
 ---
 
 ## 3. Risk Rules vs Risk Enforcement
 
-Most systems *define* risk rules.
-Very few systems *enforce* them.
+Many systems document risk rules.
+Documentation alone does not enforce them.
 
 Examples of defined (but unenforced) rules:
 
-* “Max daily loss: -2%”
+* “Max daily loss: `<defined limit>`”
 * “No trading after X losses”
 * “Reduce size after drawdown”
 
@@ -69,21 +69,21 @@ If these rules live:
 * In strategy code only
 * In a human’s head
 
-They are optional.
+They do not by themselves control behavior.
 
-Enforcement means:
+Enforcement means the documented controls can:
 
-* The system cannot place the trade
-* The system disarms itself
-* The system halts execution
+* Reject a defined ineligible request
+* Disarm the affected scope
+* Halt the affected execution path
 
-No debate. No override. No exception.
+Discretionary bypass is not permitted. Any exceptional containment authority must be explicit, narrower than normal execution, and recorded.
 
 ---
 
-## 4. Escalation Is the Real Enemy
+## 4. Escalation Amplifies Loss
 
-Most catastrophic losses come from escalation, not bad trades.
+Escalation can turn ordinary losses or operational defects into catastrophic losses.
 
 Escalation patterns look like:
 
@@ -93,28 +93,28 @@ Escalation patterns look like:
 * Re-entering after disarm
 * Letting a bot keep trading “to recover”
 
-These behaviours are not edge cases.
-They are *guaranteed* if the system allows them.
+These behaviours are not merely theoretical edge cases.
+If a system permits them, they remain credible recurring failure risks.
 
-If a failure mode exists, it will eventually be triggered.
+An identified failure mode remains a credible risk until its likelihood and impact are reduced by tested controls.
 
 ---
 
-## 5. The Myth of the Smart Bot
+## 5. Signals Do Not Replace Controls
 
-AI did not fix trading.
-It made idea generation cheap.
+AI can make idea generation cheaper.
+It does not make a trading system governed or survivable.
 
-What it didn’t solve:
+It does not replace:
 
 * Risk governance
 * Execution discipline
 * Failure containment
 * Operational maturity
 
-A smarter signal inside a fragile system increases risk.
+A more complex signal inside a fragile system can increase risk.
 
-Complexity without enforcement accelerates collapse.
+Complexity without enforcement can accelerate failure.
 
 ---
 
@@ -122,28 +122,25 @@ Complexity without enforcement accelerates collapse.
 
 Single-system designs concentrate failure.
 
-When one strategy breaks:
-
-* Everything breaks
+When one strategy breaks, a poorly isolated design can propagate the failure widely.
 
 Isolated engines:
 
-* Fail independently
-* Stop independently
-* Cannot contaminate each other
+* Are intended to fail independently
+* Can be stopped within a narrower scope
+* Reduce, but do not eliminate, cross-engine contamination
 
 Survivable systems assume components will fail.
-They are designed so the failure stops locally.
+They are designed to contain a failure to the narrowest practical domain while accounting for shared dependencies.
 
 ---
 
-## 7. Disarms Are Not Optional
+## 7. Trade Stops And System Disarms
 
-Most bots have stops.
-Few have disarms.
+Trade stops and system disarms address different scopes.
 
-A stop limits *one trade*.
-A disarm limits *the system*.
+A trade stop is intended to constrain one position or trade.
+A disarm withdraws permission from a broader governed scope.
 
 Disarms should trigger on:
 
@@ -154,9 +151,9 @@ Disarms should trigger on:
 
 Once disarmed:
 
-* Trading must be impossible
-* Restarting must require intent
-* Logs must explain exactly why
+* Defined execution paths must mechanically block new exposure
+* Restarting must not clear the disarm
+* Evidence must explain the reason and scope
 
 ---
 
@@ -168,12 +165,12 @@ If you cannot answer:
 * Why a trade was blocked
 * Why the system stopped
 
-Then the system is unsafe.
+Then the relevant state is `AMBIGUOUS`, and new exposure should be blocked until authoritative explanation and reconciliation are restored.
 
-Logs are not debugging tools.
-They are governance records.
+Logs are not only debugging tools.
+Safety-relevant records also support governance and recovery.
 
-Opacity hides failure until it becomes unrecoverable.
+Opacity can hide failure until recovery becomes materially harder.
 
 ---
 
@@ -188,26 +185,28 @@ A survivable system:
 * Refuses to double down
 * Prioritises staying alive over being active
 
-The goal is not to avoid drawdowns.
-The goal is to make certain drawdowns *impossible*.
+The goal is not to avoid every drawdown.
+The goal is to mechanically constrain defined escalation and exposure paths while the documented controls operate as designed.
 
 ---
 
-## 10. The Real Edge
+## 10. Operational Resilience
+
+Operational resilience is not evidence of strategy edge or profitability.
 
 Strategies decay.
 Execution environments change.
 Rulesets evolve.
 
-What compounds:
+What can improve over time:
 
 * Constraint enforcement
 * Failure containment
 * Operational discipline
 
-The edge is not prediction.
+Prediction alone is not enough.
 
-The edge is designing systems where unsafe behaviour cannot occur.
+Durable operating value comes from mechanically blocking defined unsafe actions while documented boundaries and enforcement controls are operating as designed.
 
 ---
 

@@ -1,0 +1,49 @@
+name: Documentation correction
+description: Report a public documentation, navigation, schema, or evidence-labelling defect.
+title: "docs: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include secrets, accounts, private paths, logs, strategy logic, or security vulnerabilities. Report security concerns through SECURITY.md.
+  - type: input
+    id: location
+    attributes:
+      label: Document location
+      description: Provide the repository-relative file and heading.
+      placeholder: architecture/state-model.md — Permission Axis
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Explain what is inaccurate, ambiguous, broken, or inconsistent.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Public-safe correction
+      description: Suggest wording or behavior without private implementation detail.
+    validations:
+      required: false
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Suspected impact
+      options:
+        - Editorial
+        - Clarifying governance
+        - Governance
+        - Architecture-significant
+        - Unsure
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public/private check
+      options:
+        - label: I have not included credentials, accounts, private paths, logs, protected strategy details, or security-sensitive content.
+          required: true

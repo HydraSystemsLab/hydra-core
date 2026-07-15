@@ -1,11 +1,12 @@
 # Hydra Risk Event Ledger
 
-This ledger records system-level risk enforcement events.
-It does not include trades, strategies, or performance.
+> **Selected public governance history — not current authorization.**
 
-Hydra biases toward **fail-closed behavior** when system state is ambiguous.
+This ledger is not a trade journal and not a performance record. Entries describe governance posture at the recorded time. Historical `LIVE_*` wording is not current authorization. Current public posture lives only in the dated [Public Operating Posture](../status/public-operating-posture.md).
 
-Events are logged when the system refuses, halts, constrains execution, or updates enforcement architecture.
+Corrections are appended or explicitly annotated; history is not silently rewritten. Private evidence may be withheld, and absence of a public entry does not prove absence of a private incident.
+
+The entries below are preserved legacy Markdown records. They do not disclose current engine permission, public-user permission, a complete incident history, or a track record.
 
 ## When To Add An Entry
 
@@ -19,22 +20,17 @@ Add an entry when a release or operational event changes any of the following:
 
 Do not add an entry for purely editorial changes that leave governance meaning unchanged.
 
-## Entry Template
+## Format Transition
 
-Use this structure for new entries:
+All existing entries below remain in legacy Markdown format. Their missing event identifiers, exact timestamps, state axes, and evidence references must not be invented.
 
-```text
-## YYYY-MM-DD — SCOPE
+Structured V1 begins prospectively with the first owner-approved event recorded under the [Risk Event Schema](risk-event-schema.md). Adoption of the schema does not fabricate a start event. New structured records must validate against [risk-event.schema.json](../schemas/risk-event.schema.json).
 
-**EVENT_TYPE:** ...
-**REASON:** ...
-**ACTION:** ...
-**STATUS:** ...
-```
+Synthetic examples are documentation fixtures only and never ledger history.
 
 ---
 
-## Allowed EVENT_TYPE values
+## Legacy Allowed EVENT_TYPE Values
 
 `DISARM | FIX_COMPLETED | REARM | ENGINE_PAUSED | CONSTRAINT_VIOLATION | MANUAL_INTERVENTION | RISK_LIMIT_BREACH`
 
