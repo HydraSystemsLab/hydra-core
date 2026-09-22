@@ -15,7 +15,10 @@ This file records repository-level public contract changes. Version semantics ar
 - expanded failure modes and public threat model
 - repository security and contribution policies, issue and pull request templates
 - documentation validator, tests, and read-only quality workflow
-- proposed `v0.1.0-pre-alpha.1` release notes
+- proposed `v0.1.0-pre-alpha.2` release notes
+- validated `risk-events/YYYY/` publication store and 18 reviewed structured events
+- material-change and monthly risk-event review process with sanitized issue coordination
+- weekly dated-posture freshness enforcement
 
 ### Changed
 
@@ -24,6 +27,8 @@ This file records repository-level public contract changes. Version semantics ar
 - contextualized the preserved legacy risk-event ledger as historical and non-authorizing
 - replaced absolute safety language with bounded enforcement language
 - separated release posture, versioning semantics, and ledger policy responsibilities
+- added advisory-authority and maintenance-transport recovery contracts
+- renewed the public-user posture through its next dated review boundary
 
 ### Not Changed
 

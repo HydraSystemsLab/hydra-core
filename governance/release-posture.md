@@ -17,7 +17,7 @@ It is a public specification, not a public trading-software distribution. Privat
 
 Pre-v1 means public governance semantics are still being tightened and may require migration. It does not make the documented controls optional.
 
-The proposed release candidate is `v0.1.0-pre-alpha.1`. It is not a tag or published release. Version meaning and change classification are defined in the [Versioning Policy](versioning-policy.md).
+The proposed release candidate is `v0.1.0-pre-alpha.2`. It is not a tag or published release. Version meaning and change classification are defined in the [Versioning Policy](versioning-policy.md).
 
 ## Public And Private Boundary
 

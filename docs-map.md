@@ -57,7 +57,7 @@ public-user permission.
 - [Release Posture](governance/release-posture.md)
 - [Versioning Policy](governance/versioning-policy.md)
 - [Changelog](CHANGELOG.md)
-- [Proposed v0.1.0-pre-alpha.1 Notes](release-notes/v0.1.0-pre-alpha.1.md)
+- [Proposed v0.1.0-pre-alpha.2 Notes](release-notes/v0.1.0-pre-alpha.2.md)
 - [Security Policy](SECURITY.md)
 - [Contributing Guide](CONTRIBUTING.md)
 

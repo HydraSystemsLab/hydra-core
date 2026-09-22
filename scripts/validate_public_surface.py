@@ -71,6 +71,7 @@ CANONICAL_FILES = (
     "examples/risk-events/synthetic-model-authority-boundary.json",
     "risk-events/README.md",
     "release-notes/v0.1.0-pre-alpha.1.md",
+    "release-notes/v0.1.0-pre-alpha.2.md",
     ".github/PULL_REQUEST_TEMPLATE.md",
     ".github/ISSUE_TEMPLATE/config.yml",
     ".github/ISSUE_TEMPLATE/documentation.yml",

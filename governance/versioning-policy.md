@@ -12,7 +12,7 @@ Published versions use:
 
 The proposed first hardened candidate is:
 
-`v0.1.0-pre-alpha.1`
+`v0.1.0-pre-alpha.2`
 
 It is proposed only. No tag or GitHub release is created by this repository change.
 
@@ -96,4 +96,4 @@ Related documents:
 
 - [Release Posture](release-posture.md)
 - [Risk Event Ledger Policy](risk-event-ledger-policy.md)
-- [Proposed v0.1.0-pre-alpha.1 Notes](../release-notes/v0.1.0-pre-alpha.1.md)
+- [Proposed v0.1.0-pre-alpha.2 Notes](../release-notes/v0.1.0-pre-alpha.2.md)
