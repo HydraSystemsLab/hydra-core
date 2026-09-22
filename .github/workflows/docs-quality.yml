@@ -6,6 +6,8 @@ on:
     branches:
       - main
   workflow_dispatch:
+  schedule:
+    - cron: "17 6 * * 1"
 
 permissions:
   contents: read
@@ -40,6 +42,9 @@ jobs:
 
       - name: Validate public surface, links, JSON, schemas, and workflow syntax
         run: python scripts/validate_public_surface.py --check all
+
+      - name: Enforce dated public-posture freshness
+        run: python scripts/validate_public_surface.py --check freshness --as-of now
 
       - name: Set up Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0

@@ -2,11 +2,11 @@
 
 > Dated public summary — not a real-time execution authorization.
 
-**As of:** 2026-07-11 00:00 UTC
+**As of:** 2026-09-22 08:02:19 UTC
 
-**Review due:** 2026-08-10 00:00 UTC, or earlier if any review trigger below occurs
+**Review due:** 2026-10-22 08:02:19 UTC, or earlier if any review trigger below occurs
 
-**Stale after:** 2026-08-10 00:00 UTC
+**Stale after:** 2026-10-22 08:02:19 UTC
 
 This is the only canonical location for changing public product posture. Durable architecture explains what the system is designed to permit; this page says only what Hydra Systems currently approves for public communication.
 

@@ -1,9 +1,9 @@
 {
   "$schema": "../schemas/public-operating-posture.schema.json",
   "schema_version": "1.0.0",
-  "as_of": "2026-07-11T00:00:00Z",
-  "review_due_at": "2026-08-10T00:00:00Z",
-  "stale_after": "2026-08-10T00:00:00Z",
+  "as_of": "2026-09-22T08:02:19Z",
+  "review_due_at": "2026-10-22T08:02:19Z",
+  "stale_after": "2026-10-22T08:02:19Z",
   "release_stage": "PRE_V1",
   "product_stage": "PRIVATE_ALPHA_PREPARATION",
   "external_access": "CLOSED_INVITE_ONLY_PREPARATION",
@@ -14,7 +14,7 @@
   "control_room_status": "CONCEPTUAL_IN_DEVELOPMENT",
   "evidence_policy_ref": "governance/public-evidence-policy.md",
   "alpha_contract_ref": "product/hydra-quant-private-alpha.md",
-  "source_commit": "046325e1120583ca82a517d11e8d29ef8027151f",
+  "source_commit": "c25d381b8c3ec247e4142211f6dde6900f6cb187",
   "notes": [
     "This record discloses public-user permission only.",
     "After stale_after, consumers must display UNKNOWN/REVIEW_REQUIRED.",

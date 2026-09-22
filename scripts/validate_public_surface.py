@@ -11,7 +11,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable
 
@@ -501,6 +501,22 @@ def check_posture_contract(root: Path = ROOT) -> list[str]:
     return errors
 
 
+def check_posture_freshness(root: Path = ROOT, now: datetime | None = None) -> list[str]:
+    """Fail after the published posture's inclusive freshness boundary."""
+    path = root / "status/public-operating-posture.json"
+    try:
+        posture = load_json(path)
+        stale_after = parse_utc(str(posture["stale_after"]))
+    except (OSError, json.JSONDecodeError, KeyError, TypeError, ValueError):
+        return ["status/public-operating-posture.json: cannot evaluate posture freshness"]
+    instant = now or datetime.now(timezone.utc)
+    if instant.tzinfo is None:
+        return ["freshness evaluation time must include a timezone"]
+    if instant > stale_after:
+        return ["status/public-operating-posture.json: public posture is stale"]
+    return []
+
+
 def check_yaml_and_workflow(root: Path = ROOT) -> list[str]:
     errors: list[str] = []
     if yaml is None:
@@ -525,14 +541,18 @@ def check_yaml_and_workflow(root: Path = ROOT) -> list[str]:
         return errors
 
     triggers = policy.get("on")
-    expected_triggers = {"pull_request", "push", "workflow_dispatch"}
+    expected_triggers = {"pull_request", "push", "workflow_dispatch", "schedule"}
     if not isinstance(triggers, dict) or set(triggers) != expected_triggers:
-        errors.append(".github/workflows/docs-quality.yml: triggers must be PR, main push, and manual dispatch only")
+        errors.append(
+            ".github/workflows/docs-quality.yml: triggers must be PR, main push, manual dispatch, and fixed weekly schedule only"
+        )
     else:
         push_policy = triggers.get("push")
         branches = push_policy.get("branches") if isinstance(push_policy, dict) else None
         if branches != ["main"]:
             errors.append(".github/workflows/docs-quality.yml: push scope must be exactly main")
+        if triggers.get("schedule") != [{"cron": "17 6 * * 1"}]:
+            errors.append(".github/workflows/docs-quality.yml: weekly freshness schedule must be fixed")
 
     if policy.get("permissions") != {"contents": "read"}:
         errors.append(".github/workflows/docs-quality.yml: top-level permissions must be contents read only")
@@ -627,15 +647,33 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--check",
-        choices=("all", *OFFLINE_CHECKS.keys(), "external"),
+        choices=("all", *OFFLINE_CHECKS.keys(), "freshness", "external"),
         default="all",
         help="Run all deterministic checks or one check family.",
     )
+    parser.add_argument(
+        "--as-of",
+        help="UTC ISO timestamp for freshness checks, or 'now' for current UTC.",
+    )
     args = parser.parse_args(argv)
+
+    evaluation_time: datetime | None = None
+    if args.as_of:
+        try:
+            evaluation_time = datetime.now(timezone.utc) if args.as_of == "now" else parse_utc(args.as_of)
+        except ValueError:
+            parser.error("--as-of must be 'now' or an ISO date-time with timezone")
+        if evaluation_time.tzinfo is None:
+            parser.error("--as-of must include a timezone")
 
     if args.check == "all":
         errors = run_offline_checks(ROOT)
+        if evaluation_time is not None:
+            errors.extend(check_posture_freshness(ROOT, evaluation_time))
         label = "offline public-surface validation"
+    elif args.check == "freshness":
+        errors = check_posture_freshness(ROOT, evaluation_time)
+        label = "public posture freshness"
     elif args.check == "external":
         errors = check_external_links(ROOT)
         label = f"external links ({len(external_links(ROOT))} checked)"

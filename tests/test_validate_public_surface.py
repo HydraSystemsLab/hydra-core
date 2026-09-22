@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import tempfile
 import unittest
+from datetime import datetime
 from pathlib import Path
 
 from scripts import validate_public_surface as validator
@@ -109,6 +110,29 @@ class PublicSurfaceValidatorTests(unittest.TestCase):
             workflow_path.write_text(workflow, encoding="utf-8")
             findings = validator.check_yaml_and_workflow(root)
         self.assertTrue(any("must not override permissions" in finding for finding in findings))
+
+    def test_posture_freshness_fails_after_stale_after(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "status").mkdir()
+            (root / "status/public-operating-posture.json").write_text(
+                json.dumps({"stale_after": "2026-08-10T00:00:00Z"}),
+                encoding="utf-8",
+            )
+            now = datetime.fromisoformat("2026-08-10T00:00:01+00:00")
+            findings = validator.check_posture_freshness(root, now)
+        self.assertIn("public posture is stale", "\n".join(findings))
+
+    def test_posture_freshness_passes_at_stale_boundary(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "status").mkdir()
+            (root / "status/public-operating-posture.json").write_text(
+                json.dumps({"stale_after": "2026-08-10T00:00:00Z"}),
+                encoding="utf-8",
+            )
+            now = datetime.fromisoformat("2026-08-10T00:00:00+00:00")
+            self.assertEqual(validator.check_posture_freshness(root, now), [])
 
     def test_recovery_contract_names_required_interval_evidence(self) -> None:
         runbook = (ROOT / "operations/operator-runbook.md").read_text(encoding="utf-8")
