@@ -1,0 +1,34 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-09-heartbeat-continuity-invalidation",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-09-HEARTBEAT-CONTINUITY-INVALIDATION",
+  "occurred_at": "2026-09-15T07:38:11Z",
+  "recorded_at": "2026-09-22T08:02:19Z",
+  "scope": "PRIVATE_NATIVE_CONTINUITY",
+  "event_type": "FIX_COMPLETED",
+  "reason_code": "SOURCE_LOSS_COULD_LEAVE_STALE_READINESS",
+  "action_code": "CONTINUITY_GAPS_INVALIDATE_READINESS",
+  "public_summary": "Source loss and observation gaps began invalidating same-day readiness while retaining their causes for recovery.",
+  "historical_context": "The repair makes continuity an evidence requirement; it does not assert uninterrupted observation before or after the event.",
+  "evidence": {
+    "tier": "NOT_APPLICABLE",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-09-15T07:38:11Z",
+    "tested_gate": "native heartbeat continuity invalidation",
+    "limitations": [
+      "Protected operational evidence is withheld; this record states only the reviewed governance outcome."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "after_state": {
+    "trust": "DEGRADED",
+    "lifecycle": "RECOVERY_REQUIRED"
+  }
+}

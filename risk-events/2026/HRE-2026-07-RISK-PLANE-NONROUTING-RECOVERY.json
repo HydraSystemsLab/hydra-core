@@ -1,0 +1,35 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-07-risk-plane-nonrouting-recovery",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-07-RISK-PLANE-NONROUTING-RECOVERY",
+  "occurred_at": "2026-07-25T09:08:11Z",
+  "recorded_at": "2026-09-22T08:02:19Z",
+  "scope": "PRIVATE_RISK_PLANE",
+  "event_type": "FIX_COMPLETED",
+  "reason_code": "RISK_PLANE_RECOVERY_AMBIGUITY",
+  "action_code": "NONROUTING_RECOVERY_ENFORCED",
+  "public_summary": "Risk-plane recovery was constrained to a non-routing state ineligible for execution and promotion.",
+  "historical_context": "Repeated implementation activity was adjudicated as one recovery episode. Evidence supports containment, not a separate rearm.",
+  "evidence": {
+    "tier": "NOT_APPLICABLE",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-07-25T09:08:11Z",
+    "tested_gate": "non-routing recovery boundary",
+    "limitations": [
+      "Protected operational evidence is withheld; this record states only the reviewed governance outcome."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "after_state": {
+    "permission": "DISARMED",
+    "lifecycle": "RECOVERY_REQUIRED",
+    "mode": "OBSERVE_ONLY"
+  }
+}

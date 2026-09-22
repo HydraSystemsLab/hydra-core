@@ -1,0 +1,36 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-09-supervisory-enforcement-promotion",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-09-SUPERVISORY-ENFORCEMENT-PROMOTION",
+  "occurred_at": "2026-09-18T15:59:31Z",
+  "recorded_at": "2026-09-22T08:02:19Z",
+  "scope": "PRIVATE_METALS_ADMISSION",
+  "event_type": "MANUAL_INTERVENTION",
+  "reason_code": "SUPERVISORY_EVALUATOR_SHADOW_ONLY",
+  "action_code": "SUPERVISORY_VETO_ENFORCED",
+  "public_summary": "A supervisory evaluator moved from shadow observation to enforced admission veto while native sizing authority remained separate.",
+  "historical_context": "A later authority-boundary defect showed that one shadow sizing output could still reach this gate; that defect is recorded separately.",
+  "evidence": {
+    "tier": "NOT_APPLICABLE",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-09-18T15:59:31Z",
+    "tested_gate": "supervisory admission veto",
+    "limitations": [
+      "Promotion evidence does not erase the later sizing-boundary violation or establish broker execution."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "before_state": {
+    "mode": "SHADOW"
+  },
+  "after_state": {
+    "mode": "LIVE"
+  }
+}

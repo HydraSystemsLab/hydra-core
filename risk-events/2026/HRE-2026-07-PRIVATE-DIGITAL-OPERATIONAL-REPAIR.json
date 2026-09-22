@@ -1,0 +1,30 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-07-private-digital-operational-repair",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-07-PRIVATE-DIGITAL-OPERATIONAL-REPAIR",
+  "occurred_at": "2026-07-11T09:39:48Z",
+  "recorded_at": "2026-09-22T08:02:19Z",
+  "scope": "PRIVATE_DIGITAL_EXECUTION",
+  "event_type": "FIX_COMPLETED",
+  "reason_code": "EXECUTION_PROVENANCE_AND_AMBIGUITY_GAPS",
+  "action_code": "EXECUTION_BOUNDARIES_HARDENED",
+  "public_summary": "Execution provenance, single-writer behavior, idempotency, and ambiguous-outcome retention were hardened.",
+  "historical_context": "Evidence supports the repair at this time but does not independently prove a permission restoration, so no rearm is recorded.",
+  "evidence": {
+    "tier": "NOT_APPLICABLE",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-07-11T09:39:48Z",
+    "tested_gate": "execution provenance and idempotency",
+    "limitations": [
+      "Deployment evidence supports the repair; an authoritative rearm receipt was not available for publication."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization."
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-07-stale-runtime-artifact-retirement",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-07-STALE-RUNTIME-ARTIFACT-RETIREMENT",
+  "occurred_at": "2026-07-09T20:14:28Z",
+  "recorded_at": "2026-09-22T08:02:19Z",
+  "scope": "PRIVATE_INDEX_RUNTIME",
+  "event_type": "FIX_COMPLETED",
+  "reason_code": "STALE_RUNTIME_ARTIFACTS_RETAINED_AUTHORITY",
+  "action_code": "STALE_RUNTIME_ARTIFACTS_RETIRED",
+  "public_summary": "Stale runtime artifacts were removed from operational authority and retained only as historical material.",
+  "historical_context": "The occurrence time is the evidenced completion of the retirement change, not the later date on which this public record was prepared.",
+  "evidence": {
+    "tier": "NOT_APPLICABLE",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-07-09T20:14:28Z",
+    "tested_gate": "runtime authority inventory",
+    "limitations": [
+      "Protected operational evidence is withheld; this record states only the reviewed governance outcome."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "after_state": {
+    "trust": "SAFE",
+    "permission": "DISARMED"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-09-risk-policy-constraint-correction",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-09-RISK-POLICY-CONSTRAINT-CORRECTION",
+  "occurred_at": "2026-09-20T15:47:13Z",
+  "recorded_at": "2026-09-22T08:02:19Z",
+  "scope": "PRIVATE_ACCOUNT_RISK_POLICY",
+  "event_type": "MANUAL_INTERVENTION",
+  "reason_code": "OBSOLETE_FIXED_CONSTRAINTS_REMAINED_ACTIVE",
+  "action_code": "APPROVED_PROPORTIONAL_LIMITS_RESTORED",
+  "public_summary": "Obsolete fixed constraints were retired while applicable proportional limits and historical risk latches remained enforced.",
+  "historical_context": "The occurrence time comes from the explicit operator policy record. Protected account class, amounts, and thresholds are not published.",
+  "evidence": {
+    "tier": "NOT_APPLICABLE",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-09-20T15:47:13Z",
+    "tested_gate": "approved risk-policy identity",
+    "limitations": [
+      "This record does not disclose or relax any numeric risk limit."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization."
+}

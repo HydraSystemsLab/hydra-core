@@ -1,0 +1,30 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-09-account-bound-guardian-admission",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-09-ACCOUNT-BOUND-GUARDIAN-ADMISSION",
+  "occurred_at": "2026-09-12T00:54:11Z",
+  "recorded_at": "2026-09-22T08:02:19Z",
+  "scope": "PRIVATE_EXECUTION_ADMISSION",
+  "event_type": "FIX_COMPLETED",
+  "reason_code": "ADMISSION_LACKED_ACCOUNT_BOUND_GUARDIAN_CONTEXT",
+  "action_code": "ACCOUNT_BOUND_ADMISSION_REQUIRED",
+  "public_summary": "Admission began requiring account-bound Guardian state, inventory, durable reservations, and explicit operator controls.",
+  "historical_context": "The record captures the evidenced policy activation and does not disclose account identity, inventory, thresholds, or private permission.",
+  "evidence": {
+    "tier": "NOT_APPLICABLE",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-09-12T00:54:11Z",
+    "tested_gate": "account-bound admission provenance",
+    "limitations": [
+      "Protected operational evidence is withheld; this record states only the reviewed governance outcome."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization."
+}

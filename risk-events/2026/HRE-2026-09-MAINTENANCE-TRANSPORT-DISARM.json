@@ -1,0 +1,41 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-09-maintenance-transport-disarm",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-09-MAINTENANCE-TRANSPORT-DISARM",
+  "occurred_at": "2026-09-21T23:23:25Z",
+  "recorded_at": "2026-09-22T08:02:19Z",
+  "scope": "PRIVATE_NATIVE_CONTINUITY",
+  "event_type": "DISARM",
+  "reason_code": "AUTHORIZED_LISTENER_PAUSE_INTERRUPTED_TRANSPORT",
+  "action_code": "READINESS_DISARMED",
+  "public_summary": "An authorized listener pause caused a transport timeout and correctly forced evidence-bound recovery.",
+  "historical_context": "This was classified as a maintenance transport interruption rather than a broker disconnect. The UTC incident date precedes its local operational date.",
+  "evidence": {
+    "tier": "NOT_APPLICABLE",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-09-21T23:23:25Z",
+    "tested_gate": "maintenance transport continuity",
+    "limitations": [
+      "Protected operational evidence is withheld; this record states only the reviewed governance outcome."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "before_state": {
+    "trust": "SAFE",
+    "permission": "ARMED",
+    "lifecycle": "NORMAL"
+  },
+  "after_state": {
+    "trust": "AMBIGUOUS",
+    "permission": "DISARMED",
+    "lifecycle": "RECOVERY_REQUIRED"
+  },
+  "x-operational-date": "2026-09-22"
+}

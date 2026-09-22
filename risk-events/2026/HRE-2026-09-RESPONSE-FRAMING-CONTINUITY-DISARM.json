@@ -1,0 +1,40 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-09-response-framing-continuity-disarm",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-09-RESPONSE-FRAMING-CONTINUITY-DISARM",
+  "occurred_at": "2026-09-21T14:07:41Z",
+  "recorded_at": "2026-09-22T08:02:19Z",
+  "scope": "PRIVATE_NATIVE_CONTINUITY",
+  "event_type": "DISARM",
+  "reason_code": "RESPONSE_FRAMING_BECAME_AMBIGUOUS",
+  "action_code": "READINESS_DISARMED",
+  "public_summary": "Response-framing ambiguity created a separate continuity incident and invalidated current readiness.",
+  "historical_context": "This causal episode is distinct from the earlier connection-continuity incident and is dated from its sealed incident record.",
+  "evidence": {
+    "tier": "NOT_APPLICABLE",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-09-21T14:07:41Z",
+    "tested_gate": "response framing continuity",
+    "limitations": [
+      "Protected operational evidence is withheld; this record states only the reviewed governance outcome."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "before_state": {
+    "trust": "SAFE",
+    "permission": "ARMED",
+    "lifecycle": "NORMAL"
+  },
+  "after_state": {
+    "trust": "AMBIGUOUS",
+    "permission": "DISARMED",
+    "lifecycle": "RECOVERY_REQUIRED"
+  }
+}

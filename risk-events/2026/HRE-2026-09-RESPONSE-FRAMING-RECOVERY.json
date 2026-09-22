@@ -1,0 +1,34 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-09-response-framing-recovery",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-09-RESPONSE-FRAMING-RECOVERY",
+  "occurred_at": "2026-09-21T15:27:29Z",
+  "recorded_at": "2026-09-22T08:02:19Z",
+  "scope": "PRIVATE_NATIVE_CONTINUITY",
+  "event_type": "FIX_COMPLETED",
+  "reason_code": "RESPONSE_FRAMING_RECOVERY_REQUIRED_RECONCILIATION",
+  "action_code": "RECOVERY_RECEIPT_VERIFIED",
+  "public_summary": "A sealed receipt verified reconciliation and continuity recovery for the response-framing incident.",
+  "historical_context": "The receipt supports recovery completion at this time. It does not infer an execution outcome or independently publish a rearm decision.",
+  "evidence": {
+    "tier": "NOT_APPLICABLE",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-09-21T15:27:29Z",
+    "tested_gate": "response framing recovery receipt",
+    "limitations": [
+      "No broker execution, missed fill, or profit-and-loss outcome is inferred."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "after_state": {
+    "trust": "SAFE",
+    "lifecycle": "NORMAL"
+  }
+}

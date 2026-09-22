@@ -1,0 +1,34 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-09-maintenance-transport-recovery",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-09-MAINTENANCE-TRANSPORT-RECOVERY",
+  "occurred_at": "2026-09-22T07:02:21Z",
+  "recorded_at": "2026-09-22T08:02:19Z",
+  "scope": "PRIVATE_NATIVE_CONTINUITY",
+  "event_type": "FIX_COMPLETED",
+  "reason_code": "MAINTENANCE_TRANSPORT_RECOVERY_REQUIRED_INTERVAL_PROOF",
+  "action_code": "EVIDENCED_RECOVERY_VERIFIED",
+  "public_summary": "Exact outage, inventory, complete history, terminal-request, risk-anchor, identity, and fresh-acknowledgment evidence supported same-day recovery.",
+  "historical_context": "The recovery decision preserved the separate broker-disconnect contract and did not reset accumulated risk accounting or claim continuous observation.",
+  "evidence": {
+    "tier": "NOT_APPLICABLE",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-09-22T07:02:21Z",
+    "tested_gate": "maintenance transport recovery contract",
+    "limitations": [
+      "Protected broker, ledger, source, and Guardian evidence is withheld; recovery qualification is not proof of a trade."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "after_state": {
+    "trust": "SAFE",
+    "lifecycle": "NORMAL"
+  }
+}

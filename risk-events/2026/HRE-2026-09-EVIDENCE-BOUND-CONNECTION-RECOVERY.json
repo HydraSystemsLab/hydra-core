@@ -1,0 +1,34 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-09-evidence-bound-connection-recovery",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-09-EVIDENCE-BOUND-CONNECTION-RECOVERY",
+  "occurred_at": "2026-09-21T07:57:39Z",
+  "recorded_at": "2026-09-22T08:02:19Z",
+  "scope": "PRIVATE_NATIVE_CONTINUITY",
+  "event_type": "FIX_COMPLETED",
+  "reason_code": "CONNECTION_RECOVERY_REQUIRED_AUTHORITATIVE_EVIDENCE",
+  "action_code": "RECOVERY_EVIDENCE_QUALIFIED",
+  "public_summary": "Flat inventory, complete interval history, preserved risk anchors, identity, and a fresh native acknowledgment qualified the recovery decision.",
+  "historical_context": "The occurrence time is the creation time of the sealed qualified decision. Recovery qualification and trading rearm remain separate decisions.",
+  "evidence": {
+    "tier": "NOT_APPLICABLE",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-09-21T07:57:39Z",
+    "tested_gate": "evidence-bound connection recovery",
+    "limitations": [
+      "Protected recovery packet contents are withheld; this record does not assert broker execution."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "after_state": {
+    "trust": "SAFE",
+    "lifecycle": "NORMAL"
+  }
+}

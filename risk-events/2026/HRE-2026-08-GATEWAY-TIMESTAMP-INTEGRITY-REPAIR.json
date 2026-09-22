@@ -1,0 +1,35 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-08-gateway-timestamp-integrity-repair",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-08-GATEWAY-TIMESTAMP-INTEGRITY-REPAIR",
+  "occurred_at": "2026-08-27T11:43:13.799408Z",
+  "recorded_at": "2026-09-22T08:02:19Z",
+  "scope": "MARKET_DATA_GATEWAY",
+  "event_type": "FIX_COMPLETED",
+  "reason_code": "BACKWARD_SOURCE_TIME_INVALIDATED_PROCESSING",
+  "action_code": "POISON_INPUT_QUARANTINED",
+  "public_summary": "Invalid backward source time was quarantined and normalized inside a read-only market-data scope.",
+  "historical_context": "The occurrence time is the evidenced controlled start. A bounded observation followed with execution capability disabled and no order sends.",
+  "evidence": {
+    "tier": "NOT_APPLICABLE",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-08-27T11:43:13.799408Z",
+    "tested_gate": "timestamp monotonicity and quarantine",
+    "limitations": [
+      "The observation ended at 2026-08-27T11:59:27.288Z and does not imply trading rearm."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "after_state": {
+    "trust": "SAFE",
+    "permission": "DISARMED",
+    "mode": "OBSERVE_ONLY"
+  }
+}

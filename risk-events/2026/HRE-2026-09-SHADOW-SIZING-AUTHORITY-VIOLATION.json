@@ -1,0 +1,33 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-09-shadow-sizing-authority-violation",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-09-SHADOW-SIZING-AUTHORITY-VIOLATION",
+  "occurred_at": "2026-09-21T16:00:00Z",
+  "recorded_at": "2026-09-22T08:02:19Z",
+  "scope": "PRIVATE_METALS_ADMISSION",
+  "event_type": "CONSTRAINT_VIOLATION",
+  "reason_code": "SHADOW_VALUE_REPLACED_LIVE_CANDIDATE",
+  "action_code": "AFFECTED_REQUESTS_TERMINALLY_REJECTED",
+  "public_summary": "A shadow sizing suggestion incorrectly replaced the native candidate presented to an enforced admission identity check.",
+  "historical_context": "Seven historical requests in the episode were preserved as terminal rejections. They were proposals from distinct strategy states rather than outstanding work.",
+  "evidence": {
+    "tier": "REPLAY",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-09-21T16:00:00Z",
+    "tested_gate": "live volume authority identity",
+    "limitations": [
+      "No broker sends, acknowledgments, or fills were identified. A rejected request alone cannot establish a missed fill or hypothetical profit and loss."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "after_state": {
+    "trust": "DEGRADED"
+  }
+}

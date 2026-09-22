@@ -1,0 +1,33 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-09-native-sizing-boundary-repair",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-09-NATIVE-SIZING-BOUNDARY-REPAIR",
+  "occurred_at": "2026-09-22T07:07:21Z",
+  "recorded_at": "2026-09-22T08:02:19Z",
+  "scope": "PRIVATE_METALS_ADMISSION",
+  "event_type": "FIX_COMPLETED",
+  "reason_code": "SHADOW_SIZING_CROSSED_LIVE_AUTHORITY_BOUNDARY",
+  "action_code": "NATIVE_CANDIDATE_IDENTITY_PRESERVED",
+  "public_summary": "The enforced supervisor was corrected to evaluate the exact native volume candidate while a separate sizing suggestion remained shadow-only.",
+  "historical_context": "The occurrence time is the evidenced running-code identity cutover. Offline replay verified the boundary without a forced or test trade.",
+  "evidence": {
+    "tier": "REPLAY",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-09-22T07:07:21Z",
+    "tested_gate": "native sizing candidate preserved through admission",
+    "limitations": [
+      "Deployed code and offline replay were verified; no natural broker execution occurred during the bounded verification."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "after_state": {
+    "trust": "SAFE"
+  }
+}

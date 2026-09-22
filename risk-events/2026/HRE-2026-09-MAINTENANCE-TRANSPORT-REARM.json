@@ -1,0 +1,41 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-09-maintenance-transport-rearm",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-09-MAINTENANCE-TRANSPORT-REARM",
+  "occurred_at": "2026-09-22T07:07:36Z",
+  "recorded_at": "2026-09-22T08:02:19Z",
+  "scope": "PRIVATE_EXECUTION_ADMISSION",
+  "event_type": "REARM",
+  "reason_code": "EVIDENCED_MAINTENANCE_RECOVERY_COMPLETED",
+  "action_code": "INTENDED_CONTROLS_RESTORED",
+  "public_summary": "Following evidenced recovery, intended entry, management, and operator controls were restored with normal lifecycle and armed permission.",
+  "historical_context": "The occurrence time is the authoritative control-restoration receipt. This is a historical state transition and does not convey current authorization.",
+  "evidence": {
+    "tier": "NOT_APPLICABLE",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-09-22T07:07:36Z",
+    "tested_gate": "post-recovery control restoration",
+    "limitations": [
+      "No test or catch-up trade was placed, and broker execution was not demonstrated during verification."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "before_state": {
+    "trust": "SAFE",
+    "permission": "DISARMED",
+    "lifecycle": "NORMAL"
+  },
+  "after_state": {
+    "trust": "SAFE",
+    "permission": "ARMED",
+    "lifecycle": "NORMAL",
+    "mode": "LIVE"
+  }
+}

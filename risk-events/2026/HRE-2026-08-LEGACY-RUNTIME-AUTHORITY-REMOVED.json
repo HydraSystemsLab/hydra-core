@@ -1,0 +1,33 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-08-legacy-runtime-authority-removed",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-08-LEGACY-RUNTIME-AUTHORITY-REMOVED",
+  "occurred_at": "2026-08-26T11:02:17.026052Z",
+  "recorded_at": "2026-09-22T08:02:19Z",
+  "scope": "PRIVATE_EXECUTION_RUNTIME",
+  "event_type": "MANUAL_INTERVENTION",
+  "reason_code": "LEGACY_RUNTIME_RETAINED_EXECUTION_AUTHORITY",
+  "action_code": "LEGACY_RUNTIME_DISABLED",
+  "public_summary": "A legacy execution-capable runtime was disabled and removed from operational authority.",
+  "historical_context": "The timestamp identifies the final disable action. A bounded later observation found no resurrection; observer-only remnants did not regain authority.",
+  "evidence": {
+    "tier": "NOT_APPLICABLE",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-08-26T11:02:17.026052Z",
+    "tested_gate": "legacy runtime no-resurrection control",
+    "limitations": [
+      "A bounded post-action observation supports non-resurrection; this is not a claim of perpetual observation."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "after_state": {
+    "permission": "DISARMED"
+  }
+}
