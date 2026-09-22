@@ -49,7 +49,7 @@ No profit guarantee is made, and no progression from shadow to demo or live is p
 
 Review is required by the review-due time or earlier if Hydra Core maturity, Hydra Quant phase, external availability, public-user mode, a public-user permission, Control Room availability, or a referenced policy materially changes.
 
-Once `stale_after` is reached without a reviewed replacement, consumers must display `UNKNOWN/REVIEW_REQUIRED`. They must not present the last recorded values as current, infer continuity, or silently extend the expiry. A review may confirm the same posture, but confirmation must update the dated Markdown and JSON records together.
+After `stale_after` passes without a reviewed replacement, consumers must display `UNKNOWN/REVIEW_REQUIRED`. They must not present the last recorded values as current, infer continuity, or silently extend the expiry. A review may confirm the same posture, but confirmation must update the dated Markdown and JSON records together.
 
 The next review is triggered by time or material change. It is not a launch date.
 

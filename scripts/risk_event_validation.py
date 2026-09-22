@@ -136,6 +136,15 @@ def validate_event_collection(
             event_ids.add(event_id)
             if path.stem != event_id:
                 errors.append(f"{display}: filename must equal event_id")
+        for field in ("occurred_at", "recorded_at"):
+            timestamp = instance.get(field)
+            if isinstance(timestamp, str) and not timestamp.endswith("Z"):
+                errors.append(f"{display}: {field} must use UTC Z notation")
+        evidence = instance.get("evidence")
+        if isinstance(evidence, dict):
+            generated_at = evidence.get("generated_at")
+            if isinstance(generated_at, str) and not generated_at.endswith("Z"):
+                errors.append(f"{display}: evidence.generated_at must use UTC Z notation")
         try:
             occurred = _parse_utc(instance["occurred_at"])
             recorded = _parse_utc(instance["recorded_at"])

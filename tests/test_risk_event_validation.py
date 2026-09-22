@@ -102,6 +102,20 @@ class PublishedRiskEventTests(unittest.TestCase):
 
         self.assertIn("recorded_at precedes occurred_at", "\n".join(self.findings()))
 
+    def test_rejects_non_utc_event_and_evidence_timestamps(self) -> None:
+        event = valid_event("HRE-2026-NON-UTC")
+        event["occurred_at"] = "2026-07-01T11:00:00+01:00"
+        event["recorded_at"] = "2026-09-22T14:00:00+02:00"
+        evidence = event["evidence"]
+        assert isinstance(evidence, dict)
+        evidence["generated_at"] = "2026-09-22T13:55:00+02:00"
+        self.write_published(event)
+
+        findings = "\n".join(self.findings())
+        self.assertIn("occurred_at must use UTC Z notation", findings)
+        self.assertIn("recorded_at must use UTC Z notation", findings)
+        self.assertIn("evidence.generated_at must use UTC Z notation", findings)
+
     def test_rejects_event_stored_outside_occurrence_year(self) -> None:
         event = valid_event("HRE-2026-YEAR")
         event["occurred_at"] = "2025-12-31T23:59:59Z"
