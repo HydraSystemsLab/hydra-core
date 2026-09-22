@@ -172,6 +172,50 @@ Unless a narrower policy applies, unresolved integrity or lifecycle ambiguity re
 
 **Residual risk:** Misconfiguration outside the evaluated boundary can recreate a route.
 
+## Shadow Advisory Authority Escape
+
+**Failure:** An observe-only or shadow recommendation replaces, resizes, or
+otherwise changes the authoritative candidate evaluated by a live admission
+gate.
+
+**Detection:** Candidate provenance or exact call-path tracing shows different
+values at the authority boundary, even when the live gate itself behaves as
+implemented.
+
+**Enforcement action:** Reject and contain the affected request, preserve both
+values and identities, and keep the advisory component outside live authority.
+
+**Expected safe outcome:** No request whose live candidate lost authoritative
+identity proceeds to submission.
+
+**Recovery requirement:** Restore the declared authority boundary and repeat
+positive identity and negative provenance tests with the advisory component
+remaining in its approved mode.
+
+**Residual risk:** A terminal rejection proves only the gate outcome. It does
+not prove broker execution, a missed fill, or profit and loss.
+
+## Maintenance Transport Interruption
+
+**Failure:** An authorized listener or transport pause interrupts native
+continuity while the broker connection may remain available.
+
+**Detection:** Retained transport, process, source, and broker evidence binds
+the exact outage interval and distinguishes the pause from a broker disconnect.
+
+**Enforcement action:** Disarm the affected scope, require recovery, and retain
+the incident's actual classification and code and source identities.
+
+**Expected safe outcome:** Restart or a healthy transport cannot silently reuse
+same-day readiness after an observation gap.
+
+**Recovery requirement:** Reconcile complete broker and durable-ledger history
+across the interval, account for manual or unrelated activity, preserve risk
+anchors, and obtain a new source acknowledgment bound to the recovery decision.
+
+**Residual risk:** Missing history or an unknown submission outcome prevents
+safe same-day recovery even when current inventory is flat.
+
 ## Manual Bypass
 
 **Failure:** A person attempts to override disarm, constraints, lifecycle, mode, or evidence requirements outside authorized containment.

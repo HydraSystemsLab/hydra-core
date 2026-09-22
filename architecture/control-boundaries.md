@@ -60,6 +60,19 @@ Monitoring may expose current, sanitized evidence about state, health, decisions
 
 Monitoring may not grant permission, silently fill missing state, or present a runner-health result as a strategy or authorization result.
 
+### Advisory And Shadow Values
+
+An advisory component may calculate and record a recommendation for comparison,
+but it does not acquire the authority assigned to the component that creates the
+live candidate. A shadow advisory value cannot replace or resize an authoritative live candidate.
+An enforced gate must evaluate the candidate produced by the named live
+authority while preserving the advisory value as a separate observation.
+
+If provenance shows that an advisory value changed the live candidate, reject
+and contain the affected request, preserve both values and their identities,
+trace the exact call path, and exercise negative authority-boundary tests before
+restoration.
+
 ### Recovery And Watchdog
 
 Recovery functions may hold a scope in `RECOVERY_REQUIRED`, execute bounded recovery checks, and propose that recorded conditions have been satisfied.

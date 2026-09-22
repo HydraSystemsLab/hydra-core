@@ -57,6 +57,26 @@ Before clearing `RECOVERY_REQUIRED`, verify at a public-safe conceptual level:
 
 Restart, elapsed time, and operator confidence are not recovery evidence.
 
+### Interval-Bound Recovery
+
+For a transport or observation interruption, bind the exact outage interval,
+incident, scope, account authority, source identity, and code identities. Across
+that interval, reconcile positions, pending orders, orders, and deals between
+the broker's authoritative history, durable ledger, Guardian records, and
+source evidence. Account for manual and unrelated activity as well as
+strategy-owned activity.
+
+Distinguish historical terminal records from outstanding work. Every affected
+intent must have a known terminal outcome or remain unresolved; current flat
+inventory alone cannot prove that no execution occurred. Preserve accumulated
+losses, applicable high-water marks, limits, and anchors rather than resetting
+or reconstructing a more permissive day.
+
+Recovery requires a fresh source acknowledgment that binds the validated
+decision and identities. Do not reuse another incident's receipt or substitute
+a fabricated broker reconnect. A maintenance transport interruption retains
+its own classification and does not alter the broker-disconnect contract.
+
 ## Rearm Review
 
 Rearm is separate from recovery. Before changing `DISARMED` to `ARMED`, verify lifecycle is already `NORMAL`, trust is `SAFE`, the destination and mode are correct, every gate passes, and no higher-layer disarm remains.

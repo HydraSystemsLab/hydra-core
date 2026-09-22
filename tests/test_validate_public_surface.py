@@ -110,6 +110,23 @@ class PublicSurfaceValidatorTests(unittest.TestCase):
             findings = validator.check_yaml_and_workflow(root)
         self.assertTrue(any("must not override permissions" in finding for finding in findings))
 
+    def test_recovery_contract_names_required_interval_evidence(self) -> None:
+        runbook = (ROOT / "operations/operator-runbook.md").read_text(encoding="utf-8")
+        for phrase in (
+            "outage interval",
+            "positions, pending orders, orders, and deals",
+            "historical terminal records",
+            "fresh source acknowledgment",
+        ):
+            self.assertIn(phrase, runbook)
+
+    def test_shadow_advice_cannot_change_live_candidate(self) -> None:
+        boundaries = (ROOT / "architecture/control-boundaries.md").read_text(encoding="utf-8")
+        self.assertIn(
+            "A shadow advisory value cannot replace or resize an authoritative live candidate",
+            boundaries,
+        )
+
     def test_repository_offline_contract_passes(self) -> None:
         self.assertEqual(validator.run_offline_checks(ROOT), [])
 
