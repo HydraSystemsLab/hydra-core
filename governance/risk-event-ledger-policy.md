@@ -59,6 +59,17 @@ Structured V1 begins prospectively with the first owner-approved event recorded 
 
 The schema contract is documented in [Risk Event Schema](risk-event-schema.md).
 
+Approved V1 records live under `risk-events/YYYY/`. The occurrence timestamp
+comes from evidence for the historical event; the recording timestamp states
+when the public record was prepared. A catch-up publication therefore retains
+the original supported event day instead of presenting every event as newly
+occurring on the publication day.
+
+Repeated proposals, retries, process restarts, and repair commits are
+deduplicated by the causal episode and supported state transition. Separate
+failure classes, authority boundaries, scopes, or lifecycle transitions remain
+separate records even when one deployment exposed more than one issue.
+
 ## Correction And Supersession
 
 `correction_of` means a later record corrects a factual or interpretive defect while preserving the earlier event. `supersedes` means a later governance decision replaces an earlier policy or posture for its defined scope.

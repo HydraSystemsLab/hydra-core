@@ -40,6 +40,20 @@ An empty `public_evidence_refs` array is valid only when the evidence disclosure
 
 Use `correction_of` to correct a prior structured record and `supersedes` when a later governance decision replaces an earlier one in its stated scope. Both preserve history.
 
+## Published Record Storage
+
+An approved record is stored at `risk-events/YYYY/<event_id>.json`, where
+`YYYY` is the UTC year in `occurred_at` and the filename stem exactly matches
+`event_id`. `recorded_at` is the publication time and may be later than the
+event; it must never be used to replace the supported occurrence time.
+
+Event identifiers are unique across the published collection. A
+`correction_of` or `supersedes` relationship may identify only an earlier
+published record and one record cannot use both relationship meanings.
+Repository-relative public evidence references resolve from the event file,
+must stay inside this repository, and must exist. HTTP and HTTPS references
+remain subject to the bounded external-link check.
+
 ## Extensions
 
 Extension names must match `x-...`. Values are limited to public-safe scalars or arrays of scalars. Extensions cannot override core fields, loosen validation, or carry private implementation, credentials, accounts, paths, endpoints, payloads, schemas, or research details.
