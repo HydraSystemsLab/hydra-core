@@ -1,0 +1,66 @@
+name: Risk event ledger review
+description: Coordinate a sanitized material-change or monthly ledger review.
+title: "governance: risk event review "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include protected evidence values, credentials, accounts, balances, private paths, hosts, endpoints, logs, payloads, strategy details, actionable prices, or current private permission. Keep protected evidence in approved private storage.
+  - type: input
+    id: review-interval
+    attributes:
+      label: Review interval
+      description: Give the UTC start and end of the interval being adjudicated.
+      placeholder: 2026-09-01T00:00:00Z through 2026-09-30T23:59:59Z
+    validations:
+      required: true
+  - type: textarea
+    id: source-identities
+    attributes:
+      label: Source identities
+      description: List public-safe source categories and version identities only.
+    validations:
+      required: true
+  - type: textarea
+    id: candidate-episodes
+    attributes:
+      label: Candidate episodes
+      description: List sanitized causal episodes and proposed event types.
+    validations:
+      required: true
+  - type: textarea
+    id: exclusions
+    attributes:
+      label: Exclusions
+      description: List excluded or merged candidates and the public policy reason.
+    validations:
+      required: true
+  - type: dropdown
+    id: evidence-status
+    attributes:
+      label: Evidence status
+      options:
+        - Adjudication pending
+        - Evidence complete for public review
+        - Evidence incomplete; defer affected events
+    validations:
+      required: true
+  - type: checkboxes
+    id: redaction-review
+    attributes:
+      label: Redaction review
+      options:
+        - label: Public text contains only sanitized facts and references; protected evidence remains private.
+          required: true
+  - type: dropdown
+    id: owner-disposition
+    attributes:
+      label: Owner disposition
+      options:
+        - Pending owner review
+        - Publish approved records
+        - Defer pending evidence
+        - Exclude under policy
+        - Mixed disposition documented above
+    validations:
+      required: true

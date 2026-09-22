@@ -104,9 +104,18 @@ An editor proposing a ledger event should be able to state:
 - what remains private or uncertain
 - why the wording cannot be read as current authorization or performance
 
+Review is required after a material disarm, rearm, mode promotion,
+authority-boundary change, recovery-contract use, risk-policy change,
+governance-significant evidence correction, or retirement of a legacy runtime.
+A catch-up review is also required at least monthly. Public coordination stays
+sanitized; protected source evidence remains in approved private storage. The
+[Risk Event Review Process](risk-event-review-process.md) defines the review
+inputs, dispositions, deduplication rules, and publication checks.
+
 Related documents:
 
 - [Risk Event Ledger](risk-event-ledger.md)
 - [Risk Event Schema](risk-event-schema.md)
+- [Risk Event Review Process](risk-event-review-process.md)
 - [Failure Modes](failure-modes.md)
 - [Public Evidence Policy](public-evidence-policy.md)

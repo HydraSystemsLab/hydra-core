@@ -151,6 +151,24 @@ class PublicSurfaceValidatorTests(unittest.TestCase):
             boundaries,
         )
 
+    def test_risk_event_review_assets_are_canonical(self) -> None:
+        self.assertIn("governance/risk-event-review-process.md", validator.CANONICAL_FILES)
+        self.assertIn(".github/ISSUE_TEMPLATE/risk-event-review.yml", validator.CANONICAL_FILES)
+
+    def test_risk_event_review_form_requests_sanitized_adjudication(self) -> None:
+        form = (ROOT / ".github/ISSUE_TEMPLATE/risk-event-review.yml").read_text(encoding="utf-8")
+        for phrase in (
+            "Review interval",
+            "Source identities",
+            "Candidate episodes",
+            "Exclusions",
+            "Evidence status",
+            "Redaction review",
+            "Owner disposition",
+            "Do not include protected evidence values",
+        ):
+            self.assertIn(phrase, form)
+
     def test_repository_offline_contract_passes(self) -> None:
         self.assertEqual(validator.run_offline_checks(ROOT), [])
 

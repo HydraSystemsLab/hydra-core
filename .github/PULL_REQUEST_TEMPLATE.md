@@ -39,6 +39,18 @@ Describe the public contract change and why it is needed.
 - [ ] Ledger impact was assessed under the ledger policy.
 - [ ] No event facts, identifiers, timestamps, transitions, or evidence were invented.
 
+**Reviewed interval:**
+
+Choose exactly one disposition:
+
+- [ ] Event drafted
+- [ ] Event deferred with reason
+- [ ] Event excluded by policy
+- [ ] No ledger impact
+
+Keep protected event facts out of the pull request until public/private review
+is complete.
+
 ### Security Impact
 
 - [ ] Security and disclosure impact was reviewed.

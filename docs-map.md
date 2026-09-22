@@ -32,6 +32,7 @@ public-user permission.
 - [Public Evidence Policy](governance/public-evidence-policy.md)
 - [Risk Event Ledger](governance/risk-event-ledger.md)
 - [Risk Event Ledger Policy](governance/risk-event-ledger-policy.md)
+- [Risk Event Review Process](governance/risk-event-review-process.md)
 - [Risk Event Schema Contract](governance/risk-event-schema.md)
 - [Risk Event JSON Schema](schemas/risk-event.schema.json)
 - [Synthetic Risk Event Examples](examples/risk-events/README.md)
