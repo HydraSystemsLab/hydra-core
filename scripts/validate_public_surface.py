@@ -16,9 +16,9 @@ from pathlib import Path
 from typing import Iterable
 
 try:
-    from scripts.risk_event_validation import validate_published_events
+    from scripts.risk_event_validation import check_structured_event_index, validate_published_events
 except ModuleNotFoundError:  # direct script execution
-    from risk_event_validation import validate_published_events
+    from risk_event_validation import check_structured_event_index, validate_published_events
 
 try:
     import yaml
@@ -78,6 +78,8 @@ CANONICAL_FILES = (
     ".github/ISSUE_TEMPLATE/governance-question.yml",
     ".github/ISSUE_TEMPLATE/risk-event-review.yml",
     ".github/workflows/docs-quality.yml",
+    "scripts/risk_event_validation.py",
+    "scripts/render_risk_event_index.py",
     "scripts/validate_public_surface.py",
     "tests/test_validate_public_surface.py",
     "requirements-docs.txt",
@@ -636,6 +638,7 @@ OFFLINE_CHECKS = {
     "boundary": check_public_boundary,
     "posture": check_posture_contract,
     "workflow": check_yaml_and_workflow,
+    "ledger-index": check_structured_event_index,
 }
 
 

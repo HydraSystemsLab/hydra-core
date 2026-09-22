@@ -169,6 +169,12 @@ class PublicSurfaceValidatorTests(unittest.TestCase):
         ):
             self.assertIn(phrase, form)
 
+    def test_structured_event_index_freshness_is_an_offline_gate(self) -> None:
+        self.assertIs(
+            validator.OFFLINE_CHECKS.get("ledger-index"),
+            validator.check_structured_event_index,
+        )
+
     def test_repository_offline_contract_passes(self) -> None:
         self.assertEqual(validator.run_offline_checks(ROOT), [])
 

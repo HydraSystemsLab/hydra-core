@@ -6,7 +6,7 @@ This ledger is not a trade journal and not a performance record. Entries describ
 
 Corrections are appended or explicitly annotated; history is not silently rewritten. Private evidence may be withheld, and absence of a public entry does not prove absence of a private incident.
 
-The entries below are preserved legacy Markdown records. They do not disclose current engine permission, public-user permission, a complete incident history, or a track record.
+This page contains published Structured V1 records backed by authoritative JSON and a preserved legacy Markdown archive. Neither format discloses current engine permission, public-user permission, a complete incident history, or a track record.
 
 ## When To Add An Entry
 
@@ -22,48 +22,63 @@ Do not add an entry for purely editorial changes that leave governance meaning u
 
 ## Format Transition
 
-All existing entries below remain in legacy Markdown format. Their missing event identifiers, exact timestamps, state axes, and evidence references must not be invented.
+The first section contains published Structured V1 records generated from the
+authoritative JSON files under [`risk-events/YYYY/`](../risk-events/README.md).
+Each JSON record retains its event ID and complete public fields.
 
-Structured V1 begins prospectively with the first owner-approved event recorded under the [Risk Event Schema](risk-event-schema.md). Adoption of the schema does not fabricate a start event. New structured records must validate against [risk-event.schema.json](../schemas/risk-event.schema.json).
-
-Synthetic examples are documentation fixtures only and never ledger history.
+The later legacy archive preserves the original February–June 2026 Markdown
+entries. Those entries predate Structured V1 and lack event IDs, exact
+timestamps, state axes, and evidence references; none of those missing facts
+are inferred or invented here. Synthetic examples remain documentation fixtures
+and never become ledger history.
 
 ## Structured V1 Records
 
-These records are ordered by when each event happened. `occurred_at` is the
-evidence-supported event or transition time in UTC; `recorded_at` is the later
-publication time. The two dates are intentionally different.
+Records are ordered chronologically from oldest to newest by `occurred_at`,
+with `recorded_at` and `event_id` as deterministic tie-breakers. `occurred_at`
+is the evidence-supported UTC time of the event or transition. `recorded_at` is
+when the public record was prepared and may be later.
 
-| Event | Occurred at (UTC) | Scope | Type | Reason | Action | Disclosure |
-| --- | --- | --- | --- | --- | --- | --- |
-| [`HRE-2026-07-STALE-RUNTIME-ARTIFACT-RETIREMENT`](../risk-events/2026/HRE-2026-07-STALE-RUNTIME-ARTIFACT-RETIREMENT.json) | `2026-07-09T20:14:28Z` | `PRIVATE_INDEX_RUNTIME` | `FIX_COMPLETED` | `STALE_RUNTIME_ARTIFACTS_RETAINED_AUTHORITY` | `STALE_RUNTIME_ARTIFACTS_RETIRED` | `PARTIAL` |
-| [`HRE-2026-07-PRIVATE-DIGITAL-OPERATIONAL-REPAIR`](../risk-events/2026/HRE-2026-07-PRIVATE-DIGITAL-OPERATIONAL-REPAIR.json) | `2026-07-11T09:39:48Z` | `PRIVATE_DIGITAL_EXECUTION` | `FIX_COMPLETED` | `EXECUTION_PROVENANCE_AND_AMBIGUITY_GAPS` | `EXECUTION_BOUNDARIES_HARDENED` | `PARTIAL` |
-| [`HRE-2026-07-RISK-PLANE-NONROUTING-RECOVERY`](../risk-events/2026/HRE-2026-07-RISK-PLANE-NONROUTING-RECOVERY.json) | `2026-07-25T09:08:11Z` | `PRIVATE_RISK_PLANE` | `FIX_COMPLETED` | `RISK_PLANE_RECOVERY_AMBIGUITY` | `NONROUTING_RECOVERY_ENFORCED` | `PARTIAL` |
-| [`HRE-2026-08-LEGACY-RUNTIME-AUTHORITY-REMOVED`](../risk-events/2026/HRE-2026-08-LEGACY-RUNTIME-AUTHORITY-REMOVED.json) | `2026-08-26T11:02:17.026052Z` | `PRIVATE_EXECUTION_RUNTIME` | `MANUAL_INTERVENTION` | `LEGACY_RUNTIME_RETAINED_EXECUTION_AUTHORITY` | `LEGACY_RUNTIME_DISABLED` | `PARTIAL` |
-| [`HRE-2026-08-GATEWAY-TIMESTAMP-INTEGRITY-REPAIR`](../risk-events/2026/HRE-2026-08-GATEWAY-TIMESTAMP-INTEGRITY-REPAIR.json) | `2026-08-27T11:43:13.799408Z` | `MARKET_DATA_GATEWAY` | `FIX_COMPLETED` | `BACKWARD_SOURCE_TIME_INVALIDATED_PROCESSING` | `POISON_INPUT_QUARANTINED` | `PARTIAL` |
-| [`HRE-2026-09-ACCOUNT-BOUND-GUARDIAN-ADMISSION`](../risk-events/2026/HRE-2026-09-ACCOUNT-BOUND-GUARDIAN-ADMISSION.json) | `2026-09-12T00:54:11Z` | `PRIVATE_EXECUTION_ADMISSION` | `FIX_COMPLETED` | `ADMISSION_LACKED_ACCOUNT_BOUND_GUARDIAN_CONTEXT` | `ACCOUNT_BOUND_ADMISSION_REQUIRED` | `PARTIAL` |
-| [`HRE-2026-09-HEARTBEAT-CONTINUITY-INVALIDATION`](../risk-events/2026/HRE-2026-09-HEARTBEAT-CONTINUITY-INVALIDATION.json) | `2026-09-15T07:38:11Z` | `PRIVATE_NATIVE_CONTINUITY` | `FIX_COMPLETED` | `SOURCE_LOSS_COULD_LEAVE_STALE_READINESS` | `CONTINUITY_GAPS_INVALIDATE_READINESS` | `PARTIAL` |
-| [`HRE-2026-09-SUPERVISORY-ENFORCEMENT-PROMOTION`](../risk-events/2026/HRE-2026-09-SUPERVISORY-ENFORCEMENT-PROMOTION.json) | `2026-09-18T15:59:31Z` | `PRIVATE_METALS_ADMISSION` | `MANUAL_INTERVENTION` | `SUPERVISORY_EVALUATOR_SHADOW_ONLY` | `SUPERVISORY_VETO_ENFORCED` | `PARTIAL` |
-| [`HRE-2026-09-RISK-POLICY-CONSTRAINT-CORRECTION`](../risk-events/2026/HRE-2026-09-RISK-POLICY-CONSTRAINT-CORRECTION.json) | `2026-09-20T15:47:13Z` | `PRIVATE_ACCOUNT_RISK_POLICY` | `MANUAL_INTERVENTION` | `OBSOLETE_FIXED_CONSTRAINTS_REMAINED_ACTIVE` | `APPROVED_PROPORTIONAL_LIMITS_RESTORED` | `PARTIAL` |
-| [`HRE-2026-09-CONNECTION-CONTINUITY-DISARM`](../risk-events/2026/HRE-2026-09-CONNECTION-CONTINUITY-DISARM.json) | `2026-09-21T02:07:41Z` | `PRIVATE_NATIVE_CONTINUITY` | `DISARM` | `CONNECTION_CONTINUITY_BECAME_AMBIGUOUS` | `READINESS_DISARMED` | `PARTIAL` |
-| [`HRE-2026-09-EVIDENCE-BOUND-CONNECTION-RECOVERY`](../risk-events/2026/HRE-2026-09-EVIDENCE-BOUND-CONNECTION-RECOVERY.json) | `2026-09-21T07:57:39Z` | `PRIVATE_NATIVE_CONTINUITY` | `FIX_COMPLETED` | `CONNECTION_RECOVERY_REQUIRED_AUTHORITATIVE_EVIDENCE` | `RECOVERY_EVIDENCE_QUALIFIED` | `PARTIAL` |
-| [`HRE-2026-09-RESPONSE-FRAMING-CONTINUITY-DISARM`](../risk-events/2026/HRE-2026-09-RESPONSE-FRAMING-CONTINUITY-DISARM.json) | `2026-09-21T14:07:41Z` | `PRIVATE_NATIVE_CONTINUITY` | `DISARM` | `RESPONSE_FRAMING_BECAME_AMBIGUOUS` | `READINESS_DISARMED` | `PARTIAL` |
-| [`HRE-2026-09-RESPONSE-FRAMING-RECOVERY`](../risk-events/2026/HRE-2026-09-RESPONSE-FRAMING-RECOVERY.json) | `2026-09-21T15:27:29Z` | `PRIVATE_NATIVE_CONTINUITY` | `FIX_COMPLETED` | `RESPONSE_FRAMING_RECOVERY_REQUIRED_RECONCILIATION` | `RECOVERY_RECEIPT_VERIFIED` | `PARTIAL` |
-| [`HRE-2026-09-SHADOW-SIZING-AUTHORITY-VIOLATION`](../risk-events/2026/HRE-2026-09-SHADOW-SIZING-AUTHORITY-VIOLATION.json) | `2026-09-21T16:00:00Z` | `PRIVATE_METALS_ADMISSION` | `CONSTRAINT_VIOLATION` | `SHADOW_VALUE_REPLACED_LIVE_CANDIDATE` | `AFFECTED_REQUESTS_TERMINALLY_REJECTED` | `PARTIAL` |
-| [`HRE-2026-09-MAINTENANCE-TRANSPORT-DISARM`](../risk-events/2026/HRE-2026-09-MAINTENANCE-TRANSPORT-DISARM.json) | `2026-09-21T23:23:25Z` | `PRIVATE_NATIVE_CONTINUITY` | `DISARM` | `AUTHORIZED_LISTENER_PAUSE_INTERRUPTED_TRANSPORT` | `READINESS_DISARMED` | `PARTIAL` |
-| [`HRE-2026-09-MAINTENANCE-TRANSPORT-RECOVERY`](../risk-events/2026/HRE-2026-09-MAINTENANCE-TRANSPORT-RECOVERY.json) | `2026-09-22T07:02:21Z` | `PRIVATE_NATIVE_CONTINUITY` | `FIX_COMPLETED` | `MAINTENANCE_TRANSPORT_RECOVERY_REQUIRED_INTERVAL_PROOF` | `EVIDENCED_RECOVERY_VERIFIED` | `PARTIAL` |
-| [`HRE-2026-09-NATIVE-SIZING-BOUNDARY-REPAIR`](../risk-events/2026/HRE-2026-09-NATIVE-SIZING-BOUNDARY-REPAIR.json) | `2026-09-22T07:07:21Z` | `PRIVATE_METALS_ADMISSION` | `FIX_COMPLETED` | `SHADOW_SIZING_CROSSED_LIVE_AUTHORITY_BOUNDARY` | `NATIVE_CANDIDATE_IDENTITY_PRESERVED` | `PARTIAL` |
-| [`HRE-2026-09-MAINTENANCE-TRANSPORT-REARM`](../risk-events/2026/HRE-2026-09-MAINTENANCE-TRANSPORT-REARM.json) | `2026-09-22T07:07:36Z` | `PRIVATE_EXECUTION_ADMISSION` | `REARM` | `EVIDENCED_MAINTENANCE_RECOVERY_COMPLETED` | `INTENDED_CONTROLS_RESTORED` | `PARTIAL` |
+<!-- BEGIN GENERATED STRUCTURED EVENT INDEX -->
+
+| Date (UTC) | Event | Public summary | Details |
+| --- | --- | --- | --- |
+| `2026-07-09 20:14:28` | Stale runtime artifact retirement | Stale runtime artifacts were removed from operational authority and retained only as historical material. | [JSON](../risk-events/2026/HRE-2026-07-STALE-RUNTIME-ARTIFACT-RETIREMENT.json) |
+| `2026-07-11 09:39:48` | Private digital operational repair | Execution provenance, single-writer behavior, idempotency, and ambiguous-outcome retention were hardened. | [JSON](../risk-events/2026/HRE-2026-07-PRIVATE-DIGITAL-OPERATIONAL-REPAIR.json) |
+| `2026-07-25 09:08:11` | Risk plane nonrouting recovery | Risk-plane recovery was constrained to a non-routing state ineligible for execution and promotion. | [JSON](../risk-events/2026/HRE-2026-07-RISK-PLANE-NONROUTING-RECOVERY.json) |
+| `2026-08-26 11:02:17.026052` | Legacy runtime authority removed | A legacy execution-capable runtime was disabled and removed from operational authority. | [JSON](../risk-events/2026/HRE-2026-08-LEGACY-RUNTIME-AUTHORITY-REMOVED.json) |
+| `2026-08-27 11:43:13.799408` | Gateway timestamp integrity repair | Invalid backward source time was quarantined and normalized inside a read-only market-data scope. | [JSON](../risk-events/2026/HRE-2026-08-GATEWAY-TIMESTAMP-INTEGRITY-REPAIR.json) |
+| `2026-09-12 00:54:11` | Account bound guardian admission | Admission began requiring account-bound Guardian state, inventory, durable reservations, and explicit operator controls. | [JSON](../risk-events/2026/HRE-2026-09-ACCOUNT-BOUND-GUARDIAN-ADMISSION.json) |
+| `2026-09-15 07:38:11` | Heartbeat continuity invalidation | Source loss and observation gaps began invalidating same-day readiness while retaining their causes for recovery. | [JSON](../risk-events/2026/HRE-2026-09-HEARTBEAT-CONTINUITY-INVALIDATION.json) |
+| `2026-09-18 15:59:31` | Supervisory enforcement promotion | A supervisory evaluator moved from shadow observation to enforced admission veto while native sizing authority remained separate. | [JSON](../risk-events/2026/HRE-2026-09-SUPERVISORY-ENFORCEMENT-PROMOTION.json) |
+| `2026-09-20 15:47:13` | Risk policy constraint correction | Obsolete fixed constraints were retired while applicable proportional limits and historical risk latches remained enforced. | [JSON](../risk-events/2026/HRE-2026-09-RISK-POLICY-CONSTRAINT-CORRECTION.json) |
+| `2026-09-21 02:07:41` | Connection continuity disarm | Connection continuity ambiguity invalidated current readiness and required evidence-bound recovery. | [JSON](../risk-events/2026/HRE-2026-09-CONNECTION-CONTINUITY-DISARM.json) |
+| `2026-09-21 07:57:39` | Evidence bound connection recovery | Flat inventory, complete interval history, preserved risk anchors, identity, and a fresh native acknowledgment qualified the recovery decision. | [JSON](../risk-events/2026/HRE-2026-09-EVIDENCE-BOUND-CONNECTION-RECOVERY.json) |
+| `2026-09-21 14:07:41` | Response framing continuity disarm | Response-framing ambiguity created a separate continuity incident and invalidated current readiness. | [JSON](../risk-events/2026/HRE-2026-09-RESPONSE-FRAMING-CONTINUITY-DISARM.json) |
+| `2026-09-21 15:27:29` | Response framing recovery | A sealed receipt verified reconciliation and continuity recovery for the response-framing incident. | [JSON](../risk-events/2026/HRE-2026-09-RESPONSE-FRAMING-RECOVERY.json) |
+| `2026-09-21 16:00:00` | Shadow sizing authority violation | A shadow sizing suggestion incorrectly replaced the native candidate presented to an enforced admission identity check. | [JSON](../risk-events/2026/HRE-2026-09-SHADOW-SIZING-AUTHORITY-VIOLATION.json) |
+| `2026-09-21 23:23:25` | Maintenance transport disarm | An authorized listener pause caused a transport timeout and correctly forced evidence-bound recovery. | [JSON](../risk-events/2026/HRE-2026-09-MAINTENANCE-TRANSPORT-DISARM.json) |
+| `2026-09-22 07:02:21` | Maintenance transport recovery | Exact outage, inventory, complete history, terminal-request, risk-anchor, identity, and fresh-acknowledgment evidence supported same-day recovery. | [JSON](../risk-events/2026/HRE-2026-09-MAINTENANCE-TRANSPORT-RECOVERY.json) |
+| `2026-09-22 07:07:21` | Native sizing boundary repair | The enforced supervisor was corrected to evaluate the exact native volume candidate while a separate sizing suggestion remained shadow-only. | [JSON](../risk-events/2026/HRE-2026-09-NATIVE-SIZING-BOUNDARY-REPAIR.json) |
+| `2026-09-22 07:07:36` | Maintenance transport rearm | Following evidenced recovery, intended entry, management, and operator controls were restored with normal lifecycle and armed permission. | [JSON](../risk-events/2026/HRE-2026-09-MAINTENANCE-TRANSPORT-REARM.json) |
+
+<!-- END GENERATED STRUCTURED EVENT INDEX -->
+
+Run `python scripts/render_risk_event_index.py` after changing authoritative
+event JSON. The public-surface validator fails when this generated index is
+stale.
 
 ---
 
-## Legacy Allowed EVENT_TYPE Values
+## Legacy archive: February–June 2026
+
+### Legacy Allowed EVENT_TYPE Values
 
 `DISARM | FIX_COMPLETED | REARM | ENGINE_PAUSED | CONSTRAINT_VIOLATION | MANUAL_INTERVENTION | RISK_LIMIT_BREACH`
 
 ---
 
-## 2026-02-01 — BTCUSD_D
+### 2026-02-01 — BTCUSD_D
 
 **EVENT_TYPE:** DISARM
 **REASON:** TRAILING_STOP_VALIDATION_INCOMPLETE
@@ -72,7 +87,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-04 — BTCUSD_D
+### 2026-02-04 — BTCUSD_D
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** TRAILING_STOP_VALIDATION_VERIFIED
@@ -81,7 +96,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-05 — BTCUSD_D
+### 2026-02-05 — BTCUSD_D
 
 **EVENT_TYPE:** REARM
 **REASON:** TRAILING_STOP_FIX_DEPLOYED
@@ -90,7 +105,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-05 — AUDJPY_E
+### 2026-02-05 — AUDJPY_E
 
 **EVENT_TYPE:** ENGINE_PAUSED
 **REASON:** VALIDATION_FAILURE_IN_RESEARCH
@@ -99,7 +114,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-09 — BTCUSD_D
+### 2026-02-09 — BTCUSD_D
 
 **EVENT_TYPE:** CONSTRAINT_VIOLATION
 **REASON:** MULTIPLE_EXECUTIONS_FROM_SINGLE_SIGNAL
@@ -108,7 +123,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-10 — BTCUSD_D
+### 2026-02-10 — BTCUSD_D
 
 **EVENT_TYPE:** MANUAL_INTERVENTION
 **REASON:** MANUAL_EXIT_DETECTED
@@ -117,7 +132,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-11 — BTCUSD_D
+### 2026-02-11 — BTCUSD_D
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** SINGLE_EXECUTION_GUARDRAIL_IMPLEMENTED
@@ -126,7 +141,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-11 — BTCUSD_D
+### 2026-02-11 — BTCUSD_D
 
 **EVENT_TYPE:** REARM
 **REASON:** SINGLE_EXECUTION_GUARDRAIL_DEPLOYED
@@ -135,7 +150,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-13 — BTCUSD_D
+### 2026-02-13 — BTCUSD_D
 
 **EVENT_TYPE:** RISK_LIMIT_BREACH
 **REASON:** LOT_SIZE_OVERRIDE
@@ -144,7 +159,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-15 — BTCUSD_D
+### 2026-02-15 — BTCUSD_D
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** LOT_SIZE_ENFORCEMENT_MOVED_TO_SYSTEM_LAYER
@@ -153,7 +168,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-15 — BTCUSD_D
+### 2026-02-15 — BTCUSD_D
 
 **EVENT_TYPE:** REARM
 **REASON:** LOT_SIZE_ENFORCEMENT_DEPLOYED
@@ -162,7 +177,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-17 — SYSTEM
+### 2026-02-17 — SYSTEM
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** PER_ENGINE_LOSS_GUARDIAN_IMPLEMENTED
@@ -171,7 +186,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-17 — SYSTEM
+### 2026-02-17 — SYSTEM
 
 **EVENT_TYPE:** REARM
 **REASON:** PER_ENGINE_GUARDIANS_DEPLOYED
@@ -180,7 +195,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-18 — SYSTEM
+### 2026-02-18 — SYSTEM
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** EVENT_SCHEMA_UPDATED
@@ -189,7 +204,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-18 — SYSTEM
+### 2026-02-18 — SYSTEM
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** TIMEZONE_ALIGNMENT_ACROSS_ENGINES
@@ -198,7 +213,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-19 — SYSTEM
+### 2026-02-19 — SYSTEM
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** GATING_BEHAVIOR_STANDARDIZED_ACROSS_ENGINES
@@ -207,7 +222,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-19 — SYSTEM
+### 2026-02-19 — SYSTEM
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** SESSION_BLOCKERS_VALIDATION_CORRECTED
@@ -216,7 +231,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-24 — XAUUSD_A
+### 2026-02-24 — XAUUSD_A
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** XAU_STOP_LOSS_EDGE_CASE_HANDLING_REFINED
@@ -225,7 +240,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-24 — SYSTEM
+### 2026-02-24 — SYSTEM
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** TIMEZONE_EDGE_CASE_ALIGNMENT_REFINED
@@ -234,7 +249,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-26 — SYSTEM
+### 2026-02-26 — SYSTEM
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** GATING_EDGE_CASE_VALIDATION_REFINED
@@ -243,7 +258,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-02-27 — SYSTEM
+### 2026-02-27 — SYSTEM
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** SESSION_BLOCKER_EDGE_CASE_CORRECTION
@@ -252,7 +267,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-03-03 — SYSTEM
+### 2026-03-03 — SYSTEM
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** GUARDIAN_STALE_LOCK_RESOLVED
@@ -261,7 +276,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-03-03 — SYSTEM
+### 2026-03-03 — SYSTEM
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** EVENT_SCHEMA_EXTENDED_FOR_GUARDIAN_STATE_VALIDATION
@@ -270,7 +285,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-06-03 — ML_REGIME
+### 2026-06-03 — ML_REGIME
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** REGIME_CLASSIFICATION_CONTEXT_REQUIRED
@@ -279,7 +294,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-06-20 — FEED_HEALTH
+### 2026-06-20 — FEED_HEALTH
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** STALE_FEED_COULD_BE_MISREAD_AS_NO_SIGNAL
@@ -288,7 +303,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-06-24 — ML_GUARDIAN
+### 2026-06-24 — ML_GUARDIAN
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** MODEL_AUTHORITY_BOUNDARY_REQUIRED
@@ -297,7 +312,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-06-24 — B5
+### 2026-06-24 — B5
 
 **EVENT_TYPE:** ENGINE_PAUSED
 **REASON:** PROMOTION_EVIDENCE_INSUFFICIENT
@@ -306,7 +321,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-06-25 — BTC_C15396
+### 2026-06-25 — BTC_C15396
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** LIVE_REPLAY_PARITY_WARMUP_MISMATCH
@@ -315,7 +330,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-06-26 — SYSTEM
+### 2026-06-26 — SYSTEM
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** LIVE_POSTURE_VISIBILITY_INSUFFICIENT
@@ -324,7 +339,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-06-27 — BTC_RISK_DOMAIN
+### 2026-06-27 — BTC_RISK_DOMAIN
 
 **EVENT_TYPE:** ENGINE_PAUSED
 **REASON:** NON_APPROVED_LANE_ORDER_CAPABILITY_DETECTED
@@ -333,7 +348,7 @@ publication time. The two dates are intentionally different.
 
 ---
 
-## 2026-06-30 — SYSTEM
+### 2026-06-30 — SYSTEM
 
 **EVENT_TYPE:** FIX_COMPLETED
 **REASON:** ACCOUNT_ACTIVITY_DEADLINE_VISIBILITY_REQUIRED

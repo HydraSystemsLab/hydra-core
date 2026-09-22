@@ -3,11 +3,17 @@
 from __future__ import annotations
 
 import json
+import re
 import urllib.parse
 from datetime import datetime, timezone
 from pathlib import Path
 
 from jsonschema import Draft202012Validator, FormatChecker
+
+
+STRUCTURED_INDEX_START = "<!-- BEGIN GENERATED STRUCTURED EVENT INDEX -->"
+STRUCTURED_INDEX_END = "<!-- END GENERATED STRUCTURED EVENT INDEX -->"
+LEDGER_PATH = Path("governance/risk-event-ledger.md")
 
 
 def iter_published_events(root: Path) -> tuple[Path, ...]:
@@ -27,6 +33,83 @@ def iter_published_events(root: Path) -> tuple[Path, ...]:
 def load_event(path: Path) -> object:
     with path.open(encoding="utf-8") as handle:
         return json.load(handle)
+
+
+def load_published_event_instances(root: Path) -> tuple[tuple[Path, dict[str, object]], ...]:
+    """Load published event objects in their deterministic source-path order."""
+    instances: list[tuple[Path, dict[str, object]]] = []
+    for path in iter_published_events(root):
+        instance = load_event(path)
+        if not isinstance(instance, dict):
+            raise ValueError(f"{path.as_posix()}: event root must be an object")
+        instances.append((path, instance))
+    return tuple(instances)
+
+
+def _event_display_title(event_id: str) -> str:
+    stem = re.sub(r"^HRE-[0-9]{4}-[0-9]{2}-", "", event_id)
+    return stem.replace("_", "-").replace("-", " ").lower().capitalize()
+
+
+def _markdown_cell(value: object) -> str:
+    return " ".join(str(value).splitlines()).replace("|", r"\|")
+
+
+def _display_utc(value: object) -> str:
+    text = str(value)
+    return text[:-1].replace("T", " ") if text.endswith("Z") else text
+
+
+def render_structured_event_index(root: Path) -> str:
+    """Render the authoritative JSON records as the public Markdown index."""
+    lines = [
+        STRUCTURED_INDEX_START,
+        "",
+        "| Date (UTC) | Event | Public summary | Details |",
+        "| --- | --- | --- | --- |",
+    ]
+    for path, event in sorted(load_published_event_instances(root), key=_event_sort_key):
+        event_id = str(event["event_id"])
+        relative_json = path.relative_to(root).as_posix()
+        lines.append(
+            "| "
+            f"`{_display_utc(event['occurred_at'])}` | "
+            f"{_markdown_cell(_event_display_title(event_id))} | "
+            f"{_markdown_cell(event['public_summary'])} | "
+            f"[JSON](../{relative_json}) |"
+        )
+    lines.extend(("", STRUCTURED_INDEX_END))
+    return "\n".join(lines)
+
+
+def _structured_index_bounds(text: str) -> tuple[int, int]:
+    if text.count(STRUCTURED_INDEX_START) != 1 or text.count(STRUCTURED_INDEX_END) != 1:
+        raise ValueError("ledger must contain exactly one generated structured event index")
+    start = text.index(STRUCTURED_INDEX_START)
+    end = text.index(STRUCTURED_INDEX_END, start) + len(STRUCTURED_INDEX_END)
+    return start, end
+
+
+def write_structured_event_index(root: Path) -> None:
+    """Replace only the generated structured index block in the public ledger."""
+    ledger = root / LEDGER_PATH
+    text = ledger.read_text(encoding="utf-8")
+    start, end = _structured_index_bounds(text)
+    ledger.write_text(text[:start] + render_structured_event_index(root) + text[end:], encoding="utf-8")
+
+
+def check_structured_event_index(root: Path) -> list[str]:
+    """Report whether the rendered public index differs from authoritative JSON."""
+    ledger = root / LEDGER_PATH
+    try:
+        text = ledger.read_text(encoding="utf-8")
+        start, end = _structured_index_bounds(text)
+        expected = render_structured_event_index(root)
+    except (OSError, json.JSONDecodeError, KeyError, TypeError, ValueError):
+        return ["governance/risk-event-ledger.md: cannot render structured event index"]
+    if text[start:end] != expected:
+        return ["governance/risk-event-ledger.md: generated structured event index is stale"]
+    return []
 
 
 def validate_published_events(

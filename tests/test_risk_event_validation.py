@@ -187,6 +187,47 @@ class PublishedRiskEventTests(unittest.TestCase):
 
         self.assertEqual(self.findings(), [])
 
+    def test_renders_structured_index_in_chronological_order(self) -> None:
+        later = valid_event("HRE-2026-09-LATER-BOUNDARY-REPAIR")
+        later["occurred_at"] = "2026-09-22T07:07:21Z"
+        later["public_summary"] = "Later summary copied from the authoritative event."
+        earlier = valid_event("HRE-2026-07-EARLIER-RUNTIME-RETIREMENT")
+        earlier["occurred_at"] = "2026-07-09T20:14:28Z"
+        earlier["public_summary"] = "Earlier summary with a literal | delimiter."
+        self.write_published(later)
+        self.write_published(earlier)
+
+        rendered = validator.render_structured_event_index(self.root)
+
+        self.assertIn("| Date (UTC) | Event | Public summary | Details |", rendered)
+        self.assertLess(rendered.index("Earlier runtime retirement"), rendered.index("Later boundary repair"))
+        self.assertIn("2026-07-09 20:14:28", rendered)
+        self.assertIn("Earlier summary with a literal \\| delimiter.", rendered)
+        self.assertIn(
+            "[JSON](../risk-events/2026/HRE-2026-07-EARLIER-RUNTIME-RETIREMENT.json)",
+            rendered,
+        )
+
+    def test_structured_index_freshness_detects_and_repairs_drift(self) -> None:
+        self.write_published(valid_event("HRE-2026-07-CONTROL-REPAIR"))
+        ledger = self.root / "governance/risk-event-ledger.md"
+        ledger.parent.mkdir(parents=True)
+        ledger.write_text(
+            "# Ledger\n\n"
+            f"{validator.STRUCTURED_INDEX_START}\n"
+            "stale index\n"
+            f"{validator.STRUCTURED_INDEX_END}\n\n"
+            "## Legacy archive: February–June 2026\n",
+            encoding="utf-8",
+        )
+
+        self.assertIn("generated structured event index is stale", "\n".join(validator.check_structured_event_index(self.root)))
+
+        validator.write_structured_event_index(self.root)
+
+        self.assertEqual(validator.check_structured_event_index(self.root), [])
+        self.assertIn("A synthetic test record exercises", ledger.read_text(encoding="utf-8"))
+
 
 if __name__ == "__main__":
     unittest.main()
