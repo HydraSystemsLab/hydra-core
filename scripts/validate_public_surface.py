@@ -16,6 +16,11 @@ from pathlib import Path
 from typing import Iterable
 
 try:
+    from scripts.risk_event_validation import validate_published_events
+except ModuleNotFoundError:  # direct script execution
+    from risk_event_validation import validate_published_events
+
+try:
     import yaml
 except ImportError:  # pragma: no cover - exercised by dependency-failure path
     yaml = None
@@ -35,6 +40,7 @@ EXCLUDED_DIRS = {
     ".mypy_cache",
     ".pytest_cache",
     ".ruff_cache",
+    ".superpowers",
     ".venv",
     "__pycache__",
     "node_modules",
@@ -62,6 +68,7 @@ CANONICAL_FILES = (
     "examples/risk-events/README.md",
     "examples/risk-events/synthetic-duplicate-execution.json",
     "examples/risk-events/synthetic-model-authority-boundary.json",
+    "risk-events/README.md",
     "release-notes/v0.1.0-pre-alpha.1.md",
     ".github/PULL_REQUEST_TEMPLATE.md",
     ".github/ISSUE_TEMPLATE/config.yml",
@@ -429,6 +436,7 @@ def check_json_and_schemas(root: Path = ROOT) -> list[str]:
                     errors.append(f"{relative(path, root)}: recorded_at precedes occurred_at")
             except (KeyError, TypeError, ValueError):
                 pass
+    errors.extend(validate_published_events(root, risk_schema, formatter))
     return errors
 
 
