@@ -6,6 +6,10 @@ This file records repository-level public contract changes. Version semantics ar
 
 ### Added
 
+- plain-English front door in the README with reader paths for investors, traders and engineers
+- `overview/` pages for non-engineers: what Hydra is, how risk is controlled, track record policy, FAQ
+- Hydra Guard in the public surface registry and glossary, with a Guard versus Guardian naming note
+- founder and enquiries sections
 - canonical dated public operating posture in Markdown and JSON with a strict schema
 - public surface registry and planned Hydra Quant private-alpha contract
 - conceptual Hydra Control Room specification with explicit sanitization boundaries

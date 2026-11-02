@@ -1,22 +1,56 @@
 # Hydra Core
 
-Hydra Core is the public governance and failure-control specification for Hydra
-Systems trading infrastructure.
+**Hydra is automated trading infrastructure built around one idea: a trading
+system should be judged by how it fails, not only by how it makes money.**
 
-**Hydra Systems builds trading infrastructure for independent traders and small
-prop desks.** Core documents how that infrastructure constrains authority,
-contains failure, preserves evidence, and returns to service deliberately.
+Hydra Core is the public, documented front of Hydra Systems. It explains what
+Hydra is, how it controls risk, and what it records when something goes wrong.
+The trading strategies themselves stay private.
 
-[Formal specifications](docs-map.md) · [Current public posture](status/public-operating-posture.md) · [Private-alpha contract](product/hydra-quant-private-alpha.md) · [Security](SECURITY.md) · [Hydra Systems](https://hydrasystems.tech)
+[What Hydra is](overview/what-is-hydra.md) · [How risk is controlled](overview/how-risk-is-controlled.md) · [Track record policy](overview/track-record.md) · [FAQ](overview/faq.md) · [Current status](status/public-operating-posture.md) · [Hydra Systems](https://hydrasystems.tech)
 
-## Why Controlled Failure Matters
+## Choose Your Path
 
-Automated trading systems fail through stale state, duplicate action, ambiguous
-authority, broken continuity, and unsafe recovery as well as through incorrect
-decisions. Hydra Core defines the boundaries that keep those failures narrow,
-observable, and recoverable.
+| You are… | Start with | Then read |
+| --- | --- | --- |
+| An investor, partner or curious reader | [What Hydra is](overview/what-is-hydra.md) | [How risk is controlled](overview/how-risk-is-controlled.md), [Track record policy](overview/track-record.md), [FAQ](overview/faq.md) |
+| A trader | [Why trading bots fail](doctrine/why-most-bots-fail.md) | [How risk is controlled](overview/how-risk-is-controlled.md), [Public risk events](governance/risk-event-ledger.md) |
+| An engineer or reviewer | [System overview](architecture/system-overview.md) | [Control boundaries](architecture/control-boundaries.md), [State model](architecture/state-model.md), [Failure modes](governance/failure-modes.md), [Full index](docs-map.md) |
 
-The central invariant is:
+## Hydra In Plain English
+
+- **Rules, not feelings.** Every strategy is a fixed set of written rules that a
+  computer follows exactly. Nothing is traded on instinct or tips.
+- **Tested before trusted.** Rules are chosen on one period of historical data,
+  checked on a later period they were never chosen on, and checked once more
+  on sealed data. Costs are deliberately set higher than expected.
+- **Risk controls can say no.** A separate supervisory layer can block a trade,
+  stop trading for the day, or switch the system off. Strategies cannot
+  override it.
+- **When in doubt, stop.** Stale prices, missing data or a contradiction in the
+  system's own records stop new trades until a person reviews them.
+- **Failures are written down.** Incidents, including ones caught before any
+  harm, are recorded in a [public risk-event ledger](governance/risk-event-ledger.md)
+  with the private detail removed.
+
+## What We Publish And What We Don't
+
+| Published here | Kept private |
+| --- | --- |
+| How the system is structured and controlled | Strategy logic and parameters |
+| How failures are classified, contained and recovered | Account, broker and connection details |
+| Sanitized risk events | Logs, credentials and protected research |
+| The dated public status | Any performance figure not independently verified |
+
+Hydra Core makes no claim of profitability. Any future performance figures
+will be linked to independent, third-party verified records, never
+self-reported numbers. See the [track record policy](overview/track-record.md).
+
+## For Engineers
+
+Hydra separates decision generation, supervisory authority, execution
+validation, observability and recovery, so that no single component can
+authorize a trade on its own. The central invariant is:
 
 > Execution is eligible only when trust is `SAFE`, permission is `ARMED`,
 > lifecycle is `NORMAL`, the configured operating mode permits execution, and
@@ -25,46 +59,53 @@ The central invariant is:
 Eligibility is conditional, never an instruction. Missing or contradictory
 state fails closed.
 
-## System Hierarchy
-
-- **Hydra Systems** — the infrastructure operation and umbrella.
-- **Hydra Quant** — the proprietary systematic-trading platform under
-  development.
-- **Hydra Guardian** — the supervisory and risk authority within the system.
-- **Hydra Core** — the public governance and failure-control specification.
-
-The [Public Surface Registry](architecture/public-surface-registry.md) is the
-canonical classification of these named surfaces.
-
-## Formal Specifications
+Formal specifications:
 
 - [Control Boundaries](architecture/control-boundaries.md)
 - [Multi-Axis State Model](architecture/state-model.md)
-- [Failure Modes](governance/failure-modes.md)
-- [Threat Model](governance/threat-model.md)
+- [Failure Modes](governance/failure-modes.md) and [Threat Model](governance/threat-model.md)
 - [Public Evidence Policy](governance/public-evidence-policy.md)
 - [Risk Event Ledger and Schema](governance/risk-event-ledger.md)
 - [Operator and Recovery Expectations](operations/operator-runbook.md)
 - [Complete Documentation Index](docs-map.md)
 
-## Current Public Boundary
+## The Hydra Family
 
-Hydra Core remains pre-v1. Hydra Quant is in private-alpha preparation. Planned
-initial external access is read-only and shadow-only; public-user broker
-connection, order submission, and live execution remain disabled.
+- **Hydra Systems**: the operation and umbrella.
+- **Hydra Quant**: the private systematic-trading platform.
+- **Hydra Guardian**: the internal supervisory and risk authority inside Hydra
+  Quant. Not sold separately.
+- **Hydra Guard**: a separate, standalone risk-protection tool for MetaTrader 5
+  traders, in development. Guard is a product; Guardian is an internal
+  component. See the [Public Surface Registry](architecture/public-surface-registry.md).
+- **Hydra Core**: this repository, the public specification.
 
-The dated [Public Operating Posture](status/public-operating-posture.md) is the
-only source for changing availability and permission. When it expires,
-consumers must report `UNKNOWN/REVIEW_REQUIRED` rather than assume continuity.
+## Who Is Behind Hydra
 
-Public documents do not expose strategy logic, parameters, credentials,
-accounts, broker wiring, operational paths, logs, or protected research. They
-also do not establish profitability, availability, certification, or regulatory
-approval.
+Hydra Systems is founded and run by **Ibz**, an independent systematic trader
+and engineer based in the UK, who builds and operates Hydra with a small team of
+AI engineering assistants under human review and approval.
 
-## Repository Status
+## Enquiries
 
-No software release, tag, or reuse licence has been published. See the
-[Release Posture](governance/release-posture.md), [Versioning Policy](governance/versioning-policy.md),
-and [Contributing Guide](CONTRIBUTING.md) before relying on or proposing changes
-to this pre-v1 contract.
+Engineers, partners and investors can write to
+[audit@hydrasystems.tech](mailto:audit@hydrasystems.tech). Happy to discuss the
+architecture, risk controls, evidence standards and collaboration. Strategy
+logic, parameters and account details are not shared.
+
+## Status
+
+Hydra Core is pre-v1. Current availability and public-user permissions are
+defined only by the dated [Public Operating Posture](status/public-operating-posture.md).
+When that record expires, readers should treat availability as unknown rather
+than assume it continues.
+
+No software release, tag or reuse licence has been published. See the
+[Release Posture](governance/release-posture.md), [Versioning Policy](governance/versioning-policy.md)
+and [Contributing Guide](CONTRIBUTING.md).
+
+## Important Notice
+
+Trading leveraged products carries a high risk of loss. Nothing in this
+repository is investment advice, an offer, or a promise of returns. Past or
+simulated results do not indicate future results.
