@@ -61,6 +61,7 @@ when the public record was prepared and may be later.
 | `2026-09-22 07:02:21` | Maintenance transport recovery | Exact outage, inventory, complete history, terminal-request, risk-anchor, identity, and fresh-acknowledgment evidence supported same-day recovery. | [JSON](../risk-events/2026/HRE-2026-09-MAINTENANCE-TRANSPORT-RECOVERY.json) |
 | `2026-09-22 07:07:21` | Native sizing boundary repair | The enforced supervisor was corrected to evaluate the exact native volume candidate while a separate sizing suggestion remained shadow-only. | [JSON](../risk-events/2026/HRE-2026-09-NATIVE-SIZING-BOUNDARY-REPAIR.json) |
 | `2026-09-22 07:07:36` | Maintenance transport rearm | Following evidenced recovery, intended entry, management, and operator controls were restored with normal lifecycle and armed permission. | [JSON](../risk-events/2026/HRE-2026-09-MAINTENANCE-TRANSPORT-REARM.json) |
+| `2026-10-28 22:17:10` | Execution host heartbeat latch | A legacy execution host missed its heartbeat deadline and latched itself out of execution instead of continuing unsupervised; the account was flat. | [JSON](../risk-events/2026/HRE-2026-10-EXECUTION-HOST-HEARTBEAT-LATCH.json) |
 
 <!-- END GENERATED STRUCTURED EVENT INDEX -->
 
