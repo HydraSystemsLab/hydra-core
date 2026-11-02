@@ -62,6 +62,9 @@ when the public record was prepared and may be later.
 | `2026-09-22 07:07:21` | Native sizing boundary repair | The enforced supervisor was corrected to evaluate the exact native volume candidate while a separate sizing suggestion remained shadow-only. | [JSON](../risk-events/2026/HRE-2026-09-NATIVE-SIZING-BOUNDARY-REPAIR.json) |
 | `2026-09-22 07:07:36` | Maintenance transport rearm | Following evidenced recovery, intended entry, management, and operator controls were restored with normal lifecycle and armed permission. | [JSON](../risk-events/2026/HRE-2026-09-MAINTENANCE-TRANSPORT-REARM.json) |
 | `2026-10-28 22:17:10` | Execution host heartbeat latch | A legacy execution host missed its heartbeat deadline and latched itself out of execution instead of continuing unsupervised; the account was flat. | [JSON](../risk-events/2026/HRE-2026-10-EXECUTION-HOST-HEARTBEAT-LATCH.json) |
+| `2026-11-02 07:12:16` | Platform update hash hold | The trading platform updated itself automatically at startup; the build hash guard refused to log in or run the executor on the unapproved build. | [JSON](../risk-events/2026/HRE-2026-11-PLATFORM-UPDATE-HASH-HOLD.json) |
+| `2026-11-02 07:33:39` | Platform update requalified | The updated platform build was verified, the executor was recompiled cleanly and its offline and native checks passed before the new build was approved. | [JSON](../risk-events/2026/HRE-2026-11-PLATFORM-UPDATE-REQUALIFIED.json) |
+| `2026-11-02 08:04:41` | Stale quote floor refusal | During demo validation the executor refused a risk-floor check that carried a price several seconds old; the one-shot session fence stopped the run and no trade request was sent. | [JSON](../risk-events/2026/HRE-2026-11-STALE-QUOTE-FLOOR-REFUSAL.json) |
 
 <!-- END GENERATED STRUCTURED EVENT INDEX -->
 

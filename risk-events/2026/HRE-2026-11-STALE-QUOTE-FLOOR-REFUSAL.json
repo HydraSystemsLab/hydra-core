@@ -1,0 +1,35 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-11-stale-quote-floor-refusal",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-11-STALE-QUOTE-FLOOR-REFUSAL",
+  "occurred_at": "2026-11-02T08:04:41Z",
+  "recorded_at": "2026-11-02T10:45:00Z",
+  "scope": "PRIVATE_DEMO_EXECUTOR_VALIDATION",
+  "event_type": "ENGINE_PAUSED",
+  "reason_code": "QUOTE_STALE_AT_RISK_FLOOR_PROBE",
+  "action_code": "REQUEST_REFUSED_AND_SESSION_FENCED",
+  "public_summary": "During demo validation the executor refused a risk-floor check that carried a price several seconds old; the one-shot session fence stopped the run and no trade request was sent.",
+  "historical_context": "The test harness had consumed an older state snapshot while a fresher one was available. The harness now waits for a fresh authenticated state with price age under five seconds before every case, with regression tests reproducing this failure. The fenced session was not reused.",
+  "evidence": {
+    "tier": "DEMO_EXECUTION",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-11-02T08:04:41Z",
+    "tested_gate": "fresh quote required for risk-floor probe",
+    "limitations": [
+      "Protected operational evidence is withheld; this record states only the reviewed governance outcome.",
+      "Demo environment only; no broker order was submitted, so no execution outcome exists."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "after_state": {
+    "permission": "DISARMED",
+    "mode": "DEMO"
+  }
+}
