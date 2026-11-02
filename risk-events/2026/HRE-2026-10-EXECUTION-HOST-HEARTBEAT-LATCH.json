@@ -1,0 +1,34 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-10-execution-host-heartbeat-latch",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-10-EXECUTION-HOST-HEARTBEAT-LATCH",
+  "occurred_at": "2026-10-28T22:17:10Z",
+  "recorded_at": "2026-11-02T10:15:00Z",
+  "scope": "PRIVATE_LEGACY_EXECUTION_HOST",
+  "event_type": "DISARM",
+  "reason_code": "HEARTBEAT_DEADLINE_EXCEEDED",
+  "action_code": "PERSISTENT_FAILURE_LATCH_STOPPED_EXECUTION",
+  "public_summary": "A legacy execution host missed its heartbeat deadline and latched itself out of execution instead of continuing unsupervised; the account was flat.",
+  "historical_context": "The latch worked as designed, and a stale-publication alert was posted about six minutes later, but it did not reach the operator's attention; the stop was confirmed five days later during a read-only review. Guaranteed, tested delivery of execution-latch and stale-publication alerts, including an independent alarm if the monitor itself fails, is now a required launch gate for the successor executor. The legacy host was left stopped and is being retired rather than repaired. The cause of the late heartbeat response is not established.",
+  "evidence": {
+    "tier": "NOT_APPLICABLE",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-11-02T08:22:00Z",
+    "tested_gate": "execution host heartbeat deadline",
+    "limitations": [
+      "Protected operational evidence is withheld; this record states only the reviewed governance outcome.",
+      "The root cause of the delayed heartbeat response is unproven."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "after_state": {
+    "lifecycle": "RECOVERY_REQUIRED"
+  }
+}

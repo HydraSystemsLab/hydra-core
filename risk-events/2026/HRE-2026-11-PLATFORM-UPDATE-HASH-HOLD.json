@@ -1,0 +1,34 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-11-platform-update-hash-hold",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-11-PLATFORM-UPDATE-HASH-HOLD",
+  "occurred_at": "2026-11-02T07:12:16Z",
+  "recorded_at": "2026-11-02T10:45:00Z",
+  "scope": "PRIVATE_DEMO_EXECUTOR_VALIDATION",
+  "event_type": "ENGINE_PAUSED",
+  "reason_code": "TRADING_PLATFORM_BINARY_CHANGED",
+  "action_code": "LOGIN_AND_EXECUTION_HELD_PENDING_REQUALIFICATION",
+  "public_summary": "The trading platform updated itself automatically at startup; the build hash guard refused to log in or run the executor on the unapproved build.",
+  "historical_context": "The update arrived through the platform's own automatic update channel. No account login, order or execution authority was created while the build was unapproved.",
+  "evidence": {
+    "tier": "NOT_APPLICABLE",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-11-02T07:12:16Z",
+    "tested_gate": "approved platform build and hash",
+    "limitations": [
+      "Protected operational evidence is withheld; this record states only the reviewed governance outcome."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "after_state": {
+    "permission": "DISARMED",
+    "mode": "DEMO"
+  }
+}
