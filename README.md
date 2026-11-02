@@ -89,7 +89,7 @@ AI engineering assistants under human review and approval.
 ## Enquiries
 
 Engineers, partners and investors can write to
-[audit@hydrasystems.tech](mailto:audit@hydrasystems.tech). Happy to discuss the
+[hello@hydrasystems.tech](mailto:hello@hydrasystems.tech). Happy to discuss the
 architecture, risk controls, evidence standards and collaboration. Strategy
 logic, parameters and account details are not shared.
 
