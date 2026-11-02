@@ -10,7 +10,7 @@
   "reason_code": "HEARTBEAT_DEADLINE_EXCEEDED",
   "action_code": "PERSISTENT_FAILURE_LATCH_STOPPED_EXECUTION",
   "public_summary": "A legacy execution host missed its heartbeat deadline and latched itself out of execution instead of continuing unsupervised; the account was flat.",
-  "historical_context": "The latch worked as designed, but no operator alert fired: the stop was found five days later during a read-only review. Alerting on execution latches and stale publication is now a required launch gate for the successor executor. The legacy host was left stopped and is being retired rather than repaired. The cause of the late heartbeat response is not established.",
+  "historical_context": "The latch worked as designed, and a stale-publication alert was posted about six minutes later, but it did not reach the operator's attention; the stop was confirmed five days later during a read-only review. Guaranteed, tested delivery of execution-latch and stale-publication alerts, including an independent alarm if the monitor itself fails, is now a required launch gate for the successor executor. The legacy host was left stopped and is being retired rather than repaired. The cause of the late heartbeat response is not established.",
   "evidence": {
     "tier": "NOT_APPLICABLE",
     "disclosure": "PARTIAL",
