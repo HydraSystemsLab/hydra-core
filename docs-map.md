@@ -5,7 +5,15 @@ Systems trading infrastructure. Architecture defines durable roles and
 invariants; the dated posture alone defines changing availability and
 public-user permission.
 
-## Start Here
+## For Investors And The Public
+
+- [What Hydra Is](overview/what-is-hydra.md)
+- [How Risk Is Controlled](overview/how-risk-is-controlled.md)
+- [Track Record Policy](overview/track-record.md)
+- [Frequently Asked Questions](overview/faq.md)
+- [Why Trading Bots Fail](doctrine/why-most-bots-fail.md)
+
+## Start Here (Engineers)
 
 1. [README](README.md)
 2. [System Overview](architecture/system-overview.md)

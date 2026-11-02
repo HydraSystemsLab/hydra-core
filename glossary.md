@@ -46,6 +46,10 @@ Resolve missing, stale, invalid, or contradictory control state toward the restr
 
 Prospective decisions recorded as data arrive while order submission is disabled. Forward shadow is not execution evidence.
 
+## Guard
+
+Hydra Guard, a standalone risk-protection product for MetaTrader 5 traders, in development. Distinct from Hydra Guardian.
+
 ## Guardian
 
 Hydra Guardian, the independent supervisory and risk authority that governs private operation and may narrow permission or require recovery.
