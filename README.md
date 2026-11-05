@@ -33,6 +33,14 @@ The trading strategies themselves stay private.
   harm, are recorded in a [public risk-event ledger](governance/risk-event-ledger.md)
   with the private detail removed.
 
+## Products
+
+- **Hydra Guard** (in final testing): a MetaTrader 5 add-on that keeps an
+  account inside prop-firm rules. It tracks daily and maximum loss room,
+  enforces stop-losses and exposure caps, and locks trading before a limit is
+  breached. It does not trade or give signals. [About Hydra Guard](https://hydrasystems.tech/guard/)
+- **Hydra Quant**: the governed trading layer these documents describe. Private.
+
 ## What We Publish And What We Don't
 
 | Published here | Kept private |
