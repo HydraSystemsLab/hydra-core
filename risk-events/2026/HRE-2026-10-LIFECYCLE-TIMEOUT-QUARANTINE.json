@@ -1,0 +1,35 @@
+{
+  "$schema": "../../schemas/risk-event.schema.json",
+  "$id": "urn:hydra:risk-event:hre-2026-10-lifecycle-timeout-quarantine",
+  "schema_version": "1.0.0",
+  "event_id": "HRE-2026-10-LIFECYCLE-TIMEOUT-QUARANTINE",
+  "occurred_at": "2026-10-25T01:57:00Z",
+  "recorded_at": "2026-11-05T09:00:00Z",
+  "scope": "PRIVATE_LEGACY_SIMULATED_CAPITAL_EXECUTION",
+  "event_type": "DISARM",
+  "reason_code": "UNRESOLVED_ORDER_LIFECYCLE_TIMEOUT",
+  "action_code": "ENTRIES_DISABLED_AND_POSITION_CUSTODY_QUARANTINED",
+  "public_summary": "A legacy strategy service stopped itself after an order-lifecycle timeout it could not resolve, disabling new entries and freezing position tracking until reconciled; the simulated-capital account was flat.",
+  "historical_context": "The service is configured not to restart automatically, and it did not. It was identified during a read-only review on 4 November, which found the trading terminal connected and the account flat, with no strategy process submitting entries. The legacy service is being replaced by the successor executor rather than restarted. The cause of the lifecycle timeout is not established.",
+  "evidence": {
+    "tier": "NOT_APPLICABLE",
+    "disclosure": "PARTIAL",
+    "generated_at": "2026-11-04T15:42:22Z",
+    "tested_gate": "unresolved order-lifecycle timeout disables entries",
+    "limitations": [
+      "Protected operational evidence is withheld; this record states only the reviewed governance outcome.",
+      "The occurrence time is the recorded service stop to the minute; the root cause of the timeout is unproven."
+    ]
+  },
+  "public_evidence_refs": [
+    "../../governance/risk-event-ledger-policy.md",
+    "../../governance/failure-modes.md",
+    "../../operations/operator-runbook.md",
+    "../../architecture/control-boundaries.md"
+  ],
+  "current_authorization_disclaimer": "Historical event only; not current authorization.",
+  "after_state": {
+    "permission": "DISARMED",
+    "lifecycle": "RECOVERY_REQUIRED"
+  }
+}
