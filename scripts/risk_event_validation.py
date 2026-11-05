@@ -57,7 +57,25 @@ def _markdown_cell(value: object) -> str:
 
 def _display_utc(value: object) -> str:
     text = str(value)
-    return text[:-1].replace("T", " ") if text.endswith("Z") else text
+    if not text.endswith("Z"):
+        return text
+    # Whole seconds for readability; the JSON keeps the exact value.
+    return text[:-1].replace("T", " ").split(".", 1)[0]
+
+
+EVENT_TYPE_LABELS = {
+    "DISARM": "Safety stop",
+    "ENGINE_PAUSED": "Paused",
+    "REARM": "Restarted after checks",
+    "FIX_COMPLETED": "Fix",
+    "CONSTRAINT_VIOLATION": "Rule breach caught",
+    "MANUAL_INTERVENTION": "Manual action",
+    "RISK_LIMIT_BREACH": "Risk limit breach",
+}
+
+
+def _event_type_label(value: object) -> str:
+    return EVENT_TYPE_LABELS.get(str(value), str(value))
 
 
 def render_structured_event_index(root: Path) -> str:
@@ -65,8 +83,8 @@ def render_structured_event_index(root: Path) -> str:
     lines = [
         STRUCTURED_INDEX_START,
         "",
-        "| Date (UTC) | Event | Public summary | Details |",
-        "| --- | --- | --- | --- |",
+        "| Date (UTC) | Type | Event | What happened | Details |",
+        "| --- | --- | --- | --- | --- |",
     ]
     for path, event in sorted(load_published_event_instances(root), key=_event_sort_key):
         event_id = str(event["event_id"])
@@ -74,6 +92,7 @@ def render_structured_event_index(root: Path) -> str:
         lines.append(
             "| "
             f"`{_display_utc(event['occurred_at'])}` | "
+            f"{_markdown_cell(_event_type_label(event['event_type']))} | "
             f"{_markdown_cell(_event_display_title(event_id))} | "
             f"{_markdown_cell(event['public_summary'])} | "
             f"[JSON](../{relative_json}) |"

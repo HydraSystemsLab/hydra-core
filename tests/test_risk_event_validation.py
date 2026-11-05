@@ -199,7 +199,7 @@ class PublishedRiskEventTests(unittest.TestCase):
 
         rendered = validator.render_structured_event_index(self.root)
 
-        self.assertIn("| Date (UTC) | Event | Public summary | Details |", rendered)
+        self.assertIn("| Date (UTC) | Type | Event | What happened | Details |", rendered)
         self.assertLess(rendered.index("Earlier runtime retirement"), rendered.index("Later boundary repair"))
         self.assertIn("2026-07-09 20:14:28", rendered)
         self.assertIn("Earlier summary with a literal \\| delimiter.", rendered)

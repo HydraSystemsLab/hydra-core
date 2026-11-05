@@ -8,6 +8,27 @@ Corrections are appended or explicitly annotated; history is not silently rewrit
 
 This page contains published Structured V1 records backed by authoritative JSON and a preserved legacy Markdown archive. Neither format discloses current engine permission, public-user permission, a complete incident history, or a track record.
 
+## How To Read This Ledger
+
+Each row is a moment where a safety control did something worth recording:
+it stopped trading, refused an unsafe action, was repaired, or allowed trading
+to restart only after the evidence checked out. Most entries are the controls
+working as designed, not losses.
+
+| Type | Meaning |
+| --- | --- |
+| Safety stop | A control switched trading off because something could not be trusted. |
+| Paused | An engine or test run was halted before it could act. |
+| Restarted after checks | Trading was switched back on only after recovery evidence passed. |
+| Fix | A defect in a control was repaired and verified. |
+| Rule breach caught | A rule was broken and the breach was detected and contained. |
+| Manual action | A person intervened outside the automated path. |
+| Risk limit breach | A configured risk limit was exceeded. |
+
+Times are UTC. Click **JSON** for the full record, including what evidence
+supports it and what is withheld. Clusters of entries on the same day usually
+describe one incident: the stop, the investigation and the restart.
+
 ## When To Add An Entry
 
 Add an entry when a release or operational event changes any of the following:
@@ -41,30 +62,31 @@ when the public record was prepared and may be later.
 
 <!-- BEGIN GENERATED STRUCTURED EVENT INDEX -->
 
-| Date (UTC) | Event | Public summary | Details |
-| --- | --- | --- | --- |
-| `2026-07-09 20:14:28` | Stale runtime artifact retirement | Stale runtime artifacts were removed from operational authority and retained only as historical material. | [JSON](../risk-events/2026/HRE-2026-07-STALE-RUNTIME-ARTIFACT-RETIREMENT.json) |
-| `2026-07-11 09:39:48` | Private digital operational repair | Execution provenance, single-writer behavior, idempotency, and ambiguous-outcome retention were hardened. | [JSON](../risk-events/2026/HRE-2026-07-PRIVATE-DIGITAL-OPERATIONAL-REPAIR.json) |
-| `2026-07-25 09:08:11` | Risk plane nonrouting recovery | Risk-plane recovery was constrained to a non-routing state ineligible for execution and promotion. | [JSON](../risk-events/2026/HRE-2026-07-RISK-PLANE-NONROUTING-RECOVERY.json) |
-| `2026-08-26 11:02:17.026052` | Legacy runtime authority removed | A legacy execution-capable runtime was disabled and removed from operational authority. | [JSON](../risk-events/2026/HRE-2026-08-LEGACY-RUNTIME-AUTHORITY-REMOVED.json) |
-| `2026-08-27 11:43:13.799408` | Gateway timestamp integrity repair | Invalid backward source time was quarantined and normalized inside a read-only market-data scope. | [JSON](../risk-events/2026/HRE-2026-08-GATEWAY-TIMESTAMP-INTEGRITY-REPAIR.json) |
-| `2026-09-12 00:54:11` | Account bound guardian admission | Admission began requiring account-bound Guardian state, inventory, durable reservations, and explicit operator controls. | [JSON](../risk-events/2026/HRE-2026-09-ACCOUNT-BOUND-GUARDIAN-ADMISSION.json) |
-| `2026-09-15 07:38:11` | Heartbeat continuity invalidation | Source loss and observation gaps began invalidating same-day readiness while retaining their causes for recovery. | [JSON](../risk-events/2026/HRE-2026-09-HEARTBEAT-CONTINUITY-INVALIDATION.json) |
-| `2026-09-18 15:59:31` | Supervisory enforcement promotion | A supervisory evaluator moved from shadow observation to enforced admission veto while native sizing authority remained separate. | [JSON](../risk-events/2026/HRE-2026-09-SUPERVISORY-ENFORCEMENT-PROMOTION.json) |
-| `2026-09-20 15:47:13` | Risk policy constraint correction | Obsolete fixed constraints were retired while applicable proportional limits and historical risk latches remained enforced. | [JSON](../risk-events/2026/HRE-2026-09-RISK-POLICY-CONSTRAINT-CORRECTION.json) |
-| `2026-09-21 02:07:41` | Connection continuity disarm | Connection continuity ambiguity invalidated current readiness and required evidence-bound recovery. | [JSON](../risk-events/2026/HRE-2026-09-CONNECTION-CONTINUITY-DISARM.json) |
-| `2026-09-21 07:57:39` | Evidence bound connection recovery | Flat inventory, complete interval history, preserved risk anchors, identity, and a fresh native acknowledgment qualified the recovery decision. | [JSON](../risk-events/2026/HRE-2026-09-EVIDENCE-BOUND-CONNECTION-RECOVERY.json) |
-| `2026-09-21 14:07:41` | Response framing continuity disarm | Response-framing ambiguity created a separate continuity incident and invalidated current readiness. | [JSON](../risk-events/2026/HRE-2026-09-RESPONSE-FRAMING-CONTINUITY-DISARM.json) |
-| `2026-09-21 15:27:29` | Response framing recovery | A sealed receipt verified reconciliation and continuity recovery for the response-framing incident. | [JSON](../risk-events/2026/HRE-2026-09-RESPONSE-FRAMING-RECOVERY.json) |
-| `2026-09-21 16:00:00` | Shadow sizing authority violation | A shadow sizing suggestion incorrectly replaced the native candidate presented to an enforced admission identity check. | [JSON](../risk-events/2026/HRE-2026-09-SHADOW-SIZING-AUTHORITY-VIOLATION.json) |
-| `2026-09-21 23:23:25` | Maintenance transport disarm | An authorized listener pause caused a transport timeout and correctly forced evidence-bound recovery. | [JSON](../risk-events/2026/HRE-2026-09-MAINTENANCE-TRANSPORT-DISARM.json) |
-| `2026-09-22 07:02:21` | Maintenance transport recovery | Exact outage, inventory, complete history, terminal-request, risk-anchor, identity, and fresh-acknowledgment evidence supported same-day recovery. | [JSON](../risk-events/2026/HRE-2026-09-MAINTENANCE-TRANSPORT-RECOVERY.json) |
-| `2026-09-22 07:07:21` | Native sizing boundary repair | The enforced supervisor was corrected to evaluate the exact native volume candidate while a separate sizing suggestion remained shadow-only. | [JSON](../risk-events/2026/HRE-2026-09-NATIVE-SIZING-BOUNDARY-REPAIR.json) |
-| `2026-09-22 07:07:36` | Maintenance transport rearm | Following evidenced recovery, intended entry, management, and operator controls were restored with normal lifecycle and armed permission. | [JSON](../risk-events/2026/HRE-2026-09-MAINTENANCE-TRANSPORT-REARM.json) |
-| `2026-10-28 22:17:10` | Execution host heartbeat latch | A legacy execution host missed its heartbeat deadline and latched itself out of execution instead of continuing unsupervised; the account was flat. | [JSON](../risk-events/2026/HRE-2026-10-EXECUTION-HOST-HEARTBEAT-LATCH.json) |
-| `2026-11-02 07:12:16` | Platform update hash hold | The trading platform updated itself automatically at startup; the build hash guard refused to log in or run the executor on the unapproved build. | [JSON](../risk-events/2026/HRE-2026-11-PLATFORM-UPDATE-HASH-HOLD.json) |
-| `2026-11-02 07:33:39` | Platform update requalified | The updated platform build was verified, the executor was recompiled cleanly and its offline and native checks passed before the new build was approved. | [JSON](../risk-events/2026/HRE-2026-11-PLATFORM-UPDATE-REQUALIFIED.json) |
-| `2026-11-02 08:04:41` | Stale quote floor refusal | During demo validation the executor refused a risk-floor check that carried a price several seconds old; the one-shot session fence stopped the run and no trade request was sent. | [JSON](../risk-events/2026/HRE-2026-11-STALE-QUOTE-FLOOR-REFUSAL.json) |
+| Date (UTC) | Type | Event | What happened | Details |
+| --- | --- | --- | --- | --- |
+| `2026-07-09 20:14:28` | Fix | Stale runtime artifact retirement | Stale runtime artifacts were removed from operational authority and retained only as historical material. | [JSON](../risk-events/2026/HRE-2026-07-STALE-RUNTIME-ARTIFACT-RETIREMENT.json) |
+| `2026-07-11 09:39:48` | Fix | Private digital operational repair | Execution provenance, single-writer behavior, idempotency, and ambiguous-outcome retention were hardened. | [JSON](../risk-events/2026/HRE-2026-07-PRIVATE-DIGITAL-OPERATIONAL-REPAIR.json) |
+| `2026-07-25 09:08:11` | Fix | Risk plane nonrouting recovery | Risk-plane recovery was constrained to a non-routing state ineligible for execution and promotion. | [JSON](../risk-events/2026/HRE-2026-07-RISK-PLANE-NONROUTING-RECOVERY.json) |
+| `2026-08-26 11:02:17` | Manual action | Legacy runtime authority removed | A legacy execution-capable runtime was disabled and removed from operational authority. | [JSON](../risk-events/2026/HRE-2026-08-LEGACY-RUNTIME-AUTHORITY-REMOVED.json) |
+| `2026-08-27 11:43:13` | Fix | Gateway timestamp integrity repair | Invalid backward source time was quarantined and normalized inside a read-only market-data scope. | [JSON](../risk-events/2026/HRE-2026-08-GATEWAY-TIMESTAMP-INTEGRITY-REPAIR.json) |
+| `2026-09-12 00:54:11` | Fix | Account bound guardian admission | Admission began requiring account-bound Guardian state, inventory, durable reservations, and explicit operator controls. | [JSON](../risk-events/2026/HRE-2026-09-ACCOUNT-BOUND-GUARDIAN-ADMISSION.json) |
+| `2026-09-15 07:38:11` | Fix | Heartbeat continuity invalidation | Source loss and observation gaps began invalidating same-day readiness while retaining their causes for recovery. | [JSON](../risk-events/2026/HRE-2026-09-HEARTBEAT-CONTINUITY-INVALIDATION.json) |
+| `2026-09-18 15:59:31` | Manual action | Supervisory enforcement promotion | A supervisory evaluator moved from shadow observation to enforced admission veto while native sizing authority remained separate. | [JSON](../risk-events/2026/HRE-2026-09-SUPERVISORY-ENFORCEMENT-PROMOTION.json) |
+| `2026-09-20 15:47:13` | Manual action | Risk policy constraint correction | Obsolete fixed constraints were retired while applicable proportional limits and historical risk latches remained enforced. | [JSON](../risk-events/2026/HRE-2026-09-RISK-POLICY-CONSTRAINT-CORRECTION.json) |
+| `2026-09-21 02:07:41` | Safety stop | Connection continuity disarm | Connection continuity ambiguity invalidated current readiness and required evidence-bound recovery. | [JSON](../risk-events/2026/HRE-2026-09-CONNECTION-CONTINUITY-DISARM.json) |
+| `2026-09-21 07:57:39` | Fix | Evidence bound connection recovery | Flat inventory, complete interval history, preserved risk anchors, identity, and a fresh native acknowledgment qualified the recovery decision. | [JSON](../risk-events/2026/HRE-2026-09-EVIDENCE-BOUND-CONNECTION-RECOVERY.json) |
+| `2026-09-21 14:07:41` | Safety stop | Response framing continuity disarm | Response-framing ambiguity created a separate continuity incident and invalidated current readiness. | [JSON](../risk-events/2026/HRE-2026-09-RESPONSE-FRAMING-CONTINUITY-DISARM.json) |
+| `2026-09-21 15:27:29` | Fix | Response framing recovery | A sealed receipt verified reconciliation and continuity recovery for the response-framing incident. | [JSON](../risk-events/2026/HRE-2026-09-RESPONSE-FRAMING-RECOVERY.json) |
+| `2026-09-21 16:00:00` | Rule breach caught | Shadow sizing authority violation | A shadow sizing suggestion incorrectly replaced the native candidate presented to an enforced admission identity check. | [JSON](../risk-events/2026/HRE-2026-09-SHADOW-SIZING-AUTHORITY-VIOLATION.json) |
+| `2026-09-21 23:23:25` | Safety stop | Maintenance transport disarm | An authorized listener pause caused a transport timeout and correctly forced evidence-bound recovery. | [JSON](../risk-events/2026/HRE-2026-09-MAINTENANCE-TRANSPORT-DISARM.json) |
+| `2026-09-22 07:02:21` | Fix | Maintenance transport recovery | Exact outage, inventory, complete history, terminal-request, risk-anchor, identity, and fresh-acknowledgment evidence supported same-day recovery. | [JSON](../risk-events/2026/HRE-2026-09-MAINTENANCE-TRANSPORT-RECOVERY.json) |
+| `2026-09-22 07:07:21` | Fix | Native sizing boundary repair | The enforced supervisor was corrected to evaluate the exact native volume candidate while a separate sizing suggestion remained shadow-only. | [JSON](../risk-events/2026/HRE-2026-09-NATIVE-SIZING-BOUNDARY-REPAIR.json) |
+| `2026-09-22 07:07:36` | Restarted after checks | Maintenance transport rearm | Following evidenced recovery, intended entry, management, and operator controls were restored with normal lifecycle and armed permission. | [JSON](../risk-events/2026/HRE-2026-09-MAINTENANCE-TRANSPORT-REARM.json) |
+| `2026-10-25 01:57:00` | Safety stop | Lifecycle timeout quarantine | A legacy strategy service stopped itself after an order-lifecycle timeout it could not resolve, disabling new entries and freezing position tracking until reconciled; the simulated-capital account was flat. | [JSON](../risk-events/2026/HRE-2026-10-LIFECYCLE-TIMEOUT-QUARANTINE.json) |
+| `2026-10-28 22:17:10` | Safety stop | Execution host heartbeat latch | A legacy execution host missed its heartbeat deadline and latched itself out of execution instead of continuing unsupervised; the account was flat. | [JSON](../risk-events/2026/HRE-2026-10-EXECUTION-HOST-HEARTBEAT-LATCH.json) |
+| `2026-11-02 07:12:16` | Paused | Platform update hash hold | The trading platform updated itself automatically at startup; the build hash guard refused to log in or run the executor on the unapproved build. | [JSON](../risk-events/2026/HRE-2026-11-PLATFORM-UPDATE-HASH-HOLD.json) |
+| `2026-11-02 07:33:39` | Fix | Platform update requalified | The updated platform build was verified, the executor was recompiled cleanly and its offline and native checks passed before the new build was approved. | [JSON](../risk-events/2026/HRE-2026-11-PLATFORM-UPDATE-REQUALIFIED.json) |
+| `2026-11-02 08:04:41` | Paused | Stale quote floor refusal | During demo validation the executor refused a risk-floor check that carried a price several seconds old; the one-shot session fence stopped the run and no trade request was sent. | [JSON](../risk-events/2026/HRE-2026-11-STALE-QUOTE-FLOOR-REFUSAL.json) |
 
 <!-- END GENERATED STRUCTURED EVENT INDEX -->
 
